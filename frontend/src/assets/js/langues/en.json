@@ -59,8 +59,18 @@
 
       "privilegeEdit.titre": "Edit privilege",
       "privilegeIndex.btnEditer": "Edit",
-      "privilegeIndex.btnDeleter": "Delete"
-     
+      "privilegeIndex.btnDeleter": "Delete",
+
+      "dashC_salutation": "Hello",
+      "dashC_prenom": "Name",
+      "dashC_nom": "Family name",
+      "dashC_anniversaire": "Birthday",
+      "dashC_adresse": "Address",
+      "dashC_codePostal": "Postal code",
+      "dashC_telephone": "Phone",
+      "dashC_cellulaire": "Mobile",
+      "dashC_courriel": "E-mail",
+      "dashC_nom_utilisateur": "Username"
        
     }
   }
