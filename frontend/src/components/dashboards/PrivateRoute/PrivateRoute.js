@@ -1,18 +1,18 @@
-import { useContext } from "react";
-import { AppContext } from "../App/App";
-import { Navigate, Outlet } from "react-router-dom";
+import React, { useContext } from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
+import { AppContext } from '../../App/App';
 
+function PrivateRoute({ requiredPrivilege }) {
+    const { user } = useContext(AppContext);
 
-function PrivateRoute () {
-    const context = useContext(AppContext); 
-
-    if(context.isLogged) {
-        return <Outlet/>;
-    }else{
-        return <Navigate to="/"/>
+    console.log(user.usager.privilege_id);
+    
+    // Verifique se o usuário está logado e se tem o privilégio necessário
+    if (user.isLogged && requiredPrivilege.includes(user.usager.privilege_id)) {
+        return <Outlet />;
+    } else {
+        return <Navigate to="/" />;
     }
-
-   
 }
 
 export default PrivateRoute;

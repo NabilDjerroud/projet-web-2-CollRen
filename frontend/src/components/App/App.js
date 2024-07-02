@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import React, { useEffect, useState, useContext } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from "react-router-dom";
 import Accueil from "../Accueil/Accueil";
 import "./App.css";
 import Entete from '../partials/Entete/Entete';
@@ -16,6 +16,7 @@ import Bouton from '../partialsFormulaire/Bouton/Bouton';
 import PrivilegeEdit from '../dashboards/dashboardParts/PrivilegeEdit/PrivilegeEdit';
 import {jwtDecode} from 'jwt-decode';
 import DashboardClient from '../dashboards/DashboardClient/DashboardClient';
+import PrivateRoute from '../dashboards/PrivateRoute/PrivateRoute';
 
 export const AppContext = React.createContext();
 
@@ -26,7 +27,8 @@ const lngs = [
 
 function App() {
     const { t, i18n } = useTranslation();
-   
+    const [user, setUser] = useState({ isLogged: false, usager: {} });
+
     useEffect(() => {
         const savedLanguage = sessionStorage.getItem('langueChoisie') || localStorage.getItem('langueChoisie');
         if (savedLanguage) {
@@ -45,107 +47,126 @@ function App() {
         sessionStorage.setItem('langueChoisie', code);
     };
 
-    const btnTraduction =  lngs.map((lng, i) => ( <Bouton key={'langue_' + i} onClick={() => handleTrans(lng.code)}>{lng.native}</Bouton> ))
+    const btnTraduction = lngs.map((lng, i) => (
+        <Bouton key={'langue_' + i} onClick={() => handleTrans(lng.code)}>{lng.native}</Bouton>
+    ));
 
+    // Functions to handle login
+    useEffect(() => {
+        const estValide = jetonValide();
+        const userData = {
+            isLogged: estValide,
+            usager: {}
+        };
+        setUser(userData);
+    }, []);
 
-    //functions pour gérer le login
- 
-    const [user, setUser] = useState({isLogged: false, usager:{}})
-  
-    useEffect(()=>{
-      const estValide = jetonValide();
-      const userData ={
-        islogged:estValide,
-        usager:{}
-      }
-      setUser(userData);
-    },[])
-  
-    async function login(e){
+    async function login(e) {
       e.preventDefault();
       const form = e.target;
   
       const body = {
-        nom_utilisateur: form.nomUtilisateur.value,
-        mot_de_passe:form.mdp.value,
-        withCredentials:true
-      }
+          nom_utilisateur: form.nomUtilisateur.value,
+          mot_de_passe: form.mdp.value,
+          withCredentials: true
+      };
   
       const data = {
-        method: "POST",
-        headers:{
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify(body)
-      }
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify(body)
+      };
   
-      const reponse = await fetch(`http://localhost:5000/api/utilisateurs/login`, data);
+      const response = await fetch(`http://localhost:5000/api/utilisateurs/login`, data);
+  
+      if (response.ok) {
+          const token = await response.json();
 
-   
-      const token = await reponse.json();
-     
-      if(reponse.status === 200) {
-        const userData = {
-          isLogged: true,
-          usager:{}
-        }
-        setUser(userData);
-        console.log(token);
-        localStorage.setItem("user-token", token);
-        return { success: true, privId: token.utilisateur.privilege_id, userId: token.utilisateur.id,};
-      } else{
-        localStorage.removeItem("user-token");
-        return false
+console.log(token);
+
+          const decodedToken = jwtDecode(token.token);  
+          const userData = {
+              isLogged: true,
+              usager: {
+                  privilege_id: token.utilisateur.privilege_id,
+                  id: decodedToken.id
+              }
+          };
+          setUser(userData);
+          localStorage.setItem("user-token", token.token);
+          return { success: true, privId: token.utilisateur.privilege_id, userId: token.utilisateur.id };
+      } else {
+          localStorage.removeItem("user-token");
+          return { success: false };
       }
-    }
-  
-    function jetonValide(){
+  }  
+
+    function jetonValide() {
         try {
-          const token = localStorage.getItem("user-token"); 
-          const decode = jwtDecode(token);
-          if(token && Date.now() < decode.exp * 1000){
-            return true;
-          } else {
-            localStorage.removeItem("user-token");
-            return false;
-          }
+            const token = localStorage.getItem("user-token");
+            const decode = jwtDecode(token);
+            if (token && Date.now() < decode.exp * 1000) {
+                return true;
+            } else {
+                localStorage.removeItem("user-token");
+                return false;
+            }
         } catch (erreur) {
             localStorage.removeItem("user-token");
             return false;
-        } 
-      }
-  
-    function logout(){
-      const userData = {
-        isLogged: false,
-        usager:{}
-      }
-      setUser(userData);
-      localStorage.removeItem("user-token");
+        }
     }
 
+    function logout() {
+        const userData = {
+            isLogged: false,
+            usager: {}
+        };
+        setUser(userData);
+        localStorage.removeItem("user-token");
+    }
 
+  
     return (
-        <Router>
-            <div className='flex justify-end'> 
-                {btnTraduction}
-            </div>
+        <AppContext.Provider value={{user, logout}}>
+            <Router>
+                <div className='flex justify-end'>
+                    {btnTraduction}
+                </div>
 
-            <Entete t={t} />
-            <Routes>
-                <Route path='/' element={<Accueil t={t} />} />
-                <Route path='/apropos' element={<APropos t={t} />} />
-                <Route path='/admin' element={<DashboardAdmin t={t} />} />
-                <Route path='/client/:id' element={<DashboardClient t={t} />} />
-                <Route path='/login' element={<Login t={t}  user={user.usager} handleLogin={login} handleLogout={logout}/>} />
-                <Route path='/usercreate' element={<UserCreate t={t} />} />
-                <Route path='/user' element={<UserIndex t={t} />} />
-                <Route path="/user/:id" element={<UserShow t={t} />} />
-                <Route path="/privilege-create" element={<PrivilegeCreate t={t} />} />
-                <Route path="/privileges" element={<PrivilegeIndex t={t} changeLanguage={handleTrans} />} />
-                <Route path="/privilege-edit/:id" element={<PrivilegeEdit t={t} changeLanguage={handleTrans} />} />
-            </Routes>
-        </Router>
+                <Entete t={t} />
+                <Routes>
+                    <Route path='/' element={<Accueil t={t} />} />
+                    <Route path='/apropos' element={<APropos t={t} />} />
+
+                    <Route path='/admin' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/admin' element={<DashboardAdmin t={t} />} />
+                    </Route>
+
+                    <Route path='/client' element={<PrivateRoute requiredPrivilege={[1,2,3]} />}>
+                      <Route index element={<DashboardClient t={t} />} />
+                    </Route>
+
+                    <Route path='/user' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                      <Route path='/user' element={<UserIndex t={t} />} />
+                    </Route>
+
+                    <Route path='/user/:id' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                      <Route path="/user/:id" element={<UserShow t={t} />} />
+                    </Route>
+
+                    
+                    <Route path='/login' element={<Login t={t} user={user} handleLogin={login} handleLogout={logout} />} />
+                    <Route path='/usercreate' element={<UserCreate t={t} />} />
+
+                    <Route path="/privilege-create" element={<PrivilegeCreate t={t} />} />
+                    <Route path="/privileges" element={<PrivilegeIndex t={t} changeLanguage={handleTrans} />} />
+                    <Route path="/privilege-edit/:id" element={<PrivilegeEdit t={t} changeLanguage={handleTrans} />} />
+                </Routes>
+            </Router>
+        </AppContext.Provider>
     );
 }
 
