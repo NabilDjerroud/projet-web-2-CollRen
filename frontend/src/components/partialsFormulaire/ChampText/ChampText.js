@@ -1,7 +1,7 @@
 function ChampText({ label, type, placeholder, mandatory, onChange, value, name }) {
     return (
         <div className="text-field"> 
-            <label>
+            <label className="text-[#F5F5F5]">
                 {label}
             </label>
             <input 
@@ -11,7 +11,7 @@ function ChampText({ label, type, placeholder, mandatory, onChange, value, name 
                 type={type}
                 value={value}
                 name={name}
-                className="mb-4 p-2 appearance-none block w-full bg-gray-200 placeholder-gray-900 rounded border focus:border-teal-500" 
+                className="my-2 mb-6 p-3 appearance-none block w-full bg-[#f5f5f5]  placeholder:text-slate-300 rounded border focus:border-teal-500" 
             />
         </div>
     );

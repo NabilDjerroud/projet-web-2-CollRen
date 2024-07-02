@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from "react-router-dom";
+import React, { useEffect, useState} from 'react';
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Accueil from "../Accueil/Accueil";
 import "./App.css";
 import Entete from '../partials/Entete/Entete';
@@ -164,6 +164,8 @@ console.log(token);
                     <Route path="/privilege-create" element={<PrivilegeCreate t={t} />} />
                     <Route path="/privileges" element={<PrivilegeIndex t={t} changeLanguage={handleTrans} />} />
                     <Route path="/privilege-edit/:id" element={<PrivilegeEdit t={t} changeLanguage={handleTrans} />} />
+
+                    
                 </Routes>
             </Router>
         </AppContext.Provider>

@@ -74,7 +74,8 @@ function UserCreate({ t }) {
                 <h2 className="py-6">{t("CreateUser.soustitre")}</h2>
             </div>
 
-            <form onSubmit={createUser} className="w-10/12 sm:w-8/12 md:w-6/12 lg:w-5/12 xl:w-4/12 mb-6">
+            <div className='bg-[#F96C25] w-[30rem] rounded-2xl'>
+            <form onSubmit={createUser} className='my-4 p-4 rounded-2xl bg-[#21283B]'>
                 <ChampText
                     mandatory={true} 
                     label={t("CreateUser.prenom")}
@@ -131,6 +132,7 @@ function UserCreate({ t }) {
 
                 <Bouton type="submit">{t("CreateUser.btnSubmit")} </Bouton>
             </form>
+            </div>
         </main>
     );
 }

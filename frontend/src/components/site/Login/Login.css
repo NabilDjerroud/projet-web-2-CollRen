@@ -1,0 +1,13 @@
+.login-form{
+    background-image: url("http://localhost:3000/imgs/img_loginpage.jpg");
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 100%;
+    min-height: 100vh
+}
+
+.login-title {
+    color: var(--blanc);
+    font-weight: 900;
+}
