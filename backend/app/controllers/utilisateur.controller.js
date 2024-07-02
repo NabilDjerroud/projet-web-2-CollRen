@@ -160,6 +160,8 @@ exports.deleteAll = (req, res) => {
 exports.findParNomUtilisateur = async (req, res, next) => {
     const utilisateur = await Utilisateur.findOne({ where: { nom_utilisateur: req.body.nom_utilisateur } })
 
+    console.log(utilisateur);
+
     if (!utilisateur) {
         return res.status(400).send({
             message: 'Utilisateur non trouvé'
@@ -174,6 +176,8 @@ exports.findParNomUtilisateur = async (req, res, next) => {
     const token = jwt.sign({ id: utilisateur.id }, process.env.JWT_SECRET)
     // console.log(token)
     //withCredentials = true on the client side (http)
+    
+
     res.cookie('jwt', token, {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000

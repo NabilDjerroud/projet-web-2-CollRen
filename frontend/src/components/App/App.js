@@ -68,6 +68,7 @@ function App() {
       const body = {
         nom_utilisateur: form.nomUtilisateur.value,
         mot_de_passe:form.mdp.value,
+        withCredentials:true
       }
   
       const data = {
@@ -79,17 +80,19 @@ function App() {
       }
   
       const reponse = await fetch(`http://localhost:5000/api/utilisateurs/login`, data);
+
+   
       const token = await reponse.json();
-      
+     
       if(reponse.status === 200) {
         const userData = {
           isLogged: true,
           usager:{}
         }
         setUser(userData);
-        console.log(user);
-        localStorage.setItem("user-token", token.accessToken);
-        return { success: true, userId: token.id };
+        console.log(token);
+        localStorage.setItem("user-token", token);
+        return { success: true, privId: token.utilisateur.privilege_id, userId: token.utilisateur.id,};
       } else{
         localStorage.removeItem("user-token");
         return false

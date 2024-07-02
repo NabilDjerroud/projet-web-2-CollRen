@@ -5,23 +5,16 @@ function Login({ t, user, handleLogin, handleLogout }) {
 
     async function handleLoginWithRedirect(e) {
         const result = await handleLogin(e);
+
         if (result.success) {
+            const privId = result.privId;
             const userId = result.userId;
-            try {
-                const response = await fetch(`http://localhost:5000/api/utilisateurs/${userId}`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const user = await response.json();
-    
-                if ([3].includes(user.privilege_id)) {
+        
+                if (privId ===3) {
                     navigate(`/client/${userId}`);
                 } else {
                      navigate(`/admin`)
                 }
-            } catch (error) {
-                console.error('Erro ao buscar dados do usuário:', error);
-            }
         }
     }
 
