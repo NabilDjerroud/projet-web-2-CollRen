@@ -40,8 +40,8 @@ import CarburantCreate from '../voitures/CarburantCreate/CarburantCreate';
 export const AppContext = React.createContext();
 
 const lngs = [
-    { code: "en", native: "English" },
-    { code: "fr", native: "French" },
+    { code: "en", native: "EN" },
+    { code: "fr", native: "FR" },
 ];
 
 function App() {
