@@ -6,9 +6,6 @@ module.exports = (connex, Sequelize) => {
         }    
 
     });
-    
-    Privilege.associate = function (models) {
-        Privilege.hasMany(models.Utilisateur, { as: 'utilisateurs' })
-    };
+
     return Privilege
 }

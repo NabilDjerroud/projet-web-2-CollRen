@@ -37,7 +37,7 @@ require('./app/routes/carburant/carburant.routes')(app);
 require('./app/routes/motopropulseur/motopropulseur.routes')(app);
 require('./app/routes/transmission/transmission.routes')(app);
 require('./app/routes/constructeur/constructeur.routes')(app);
-require('./app/routes/model/model.routes')(app);
+require('./app/routes/modele/modele.routes')(app);
 require('./app/routes/image/image.routes')(app);
 require('./app/routes/mode_paiement/mode_paiement.routes')(app);
 require('./app/routes/voiture/voiture.routes')(app);

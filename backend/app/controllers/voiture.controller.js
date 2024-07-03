@@ -1,6 +1,16 @@
+const { Model } = require("sequelize");
 const db = require("../models");
 const Voiture = db.voitures;
 const Op = db.Sequelize.Op;
+const Modele = db.modeles
+const Transmission = db.transmissions
+const Corps = db.corps
+const Motopropulseur = db.motopropulseurs
+const Carburant = db.carburants
+const Image = db.images
+
+
+const Constructeur = require("../models/constructeur.model")
 
 // Create and Save a new Voiture
 exports.create = (req, res) => {
@@ -20,10 +30,12 @@ exports.create = (req, res) => {
 
 // Retrieve all Voitures from the database.
 exports.findAll = (req, res) => {
-    const title = req.query.title;
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
-    Voiture.findAll({ where: condition })
+
+    // var condition = constructeur ? { constructeur: { [Op.like]: `%${constructeur}%` } } : null;
+    // var condition = model ? { modele_id: { [Op.like]: `%${model}%` } } : null;
+
+    Voiture.findAll({ include: [{ model: Modele }, { model: Transmission }, { model: Corps }, { model: Motopropulseur }, { model: Carburant }, { model: Image }] })
         .then(data => {
             res.send(data);
         })

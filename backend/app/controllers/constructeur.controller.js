@@ -1,4 +1,5 @@
 const db = require("../models");
+const Modele = require("../models/modele.model");
 const Constructeur = db.constructeurs;
 const Op = db.Sequelize.Op;
 
@@ -20,10 +21,10 @@ exports.create = (req, res) => {
 
 // Retrieve all Constructeurs from the database.
 exports.findAll = (req, res) => {
-    const title = req.query.title;
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+    /*     const title = req.query.title;
+        var condition = title ? { title: { [Op.like]: `%${title}%` } } : null; */
 
-    Constructeur.findAll({ where: condition })
+    Constructeur.findAll({ include: db.modeles })
         .then(data => {
             res.send(data);
         })

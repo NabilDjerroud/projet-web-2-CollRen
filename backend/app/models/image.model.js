@@ -10,9 +10,9 @@ module.exports = (connex, Sequelize) => {
         voiture_id: {
             type: Sequelize.INTEGER,
             allowNull: false,
-            references: {         
+            references: {
                 model: 'voitures',
-                key: 'id'
+                key: 'id', allowNull: true
             }
         }
 
