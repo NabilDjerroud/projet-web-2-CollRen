@@ -4,7 +4,20 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        bleuFonce: '#21283B',
+        orange: '#F96C25',
+        grisFonce: '#868E9B',
+        grisPale: '#B8BBC4',
+        blanc: '#F5F5F5',
+      },
+      fontFamily: {
+        titre: ['Exo', 'sans-serif'],
+        soustitre: ['Droid Sans', 'sans-serif'],
+        paragraphe: ['Hind Madurai', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }
