@@ -23,8 +23,10 @@ exports.create = (req, res) => {
 
 // Retrieve all Models from the database.
 exports.findAll = (req, res) => {
-    /*     const title = req.query.title;
-        var condition = title ? { title: { [Op.like]: `%${title}%` } } : null; */
+    const title = req.query.title;
+    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+
+    console.log(condition);
 
     Modele.findAll({ include: [{ model: Constructeur }] })
         .then(data => {
