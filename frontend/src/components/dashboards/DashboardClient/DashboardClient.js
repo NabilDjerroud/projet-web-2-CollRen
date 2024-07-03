@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../../App/App';  
 import ChampText from '../../partialsFormulaire/ChampText/ChampText';
 import Bouton from '../../partialsFormulaire/Bouton/Bouton';
 
 const DashboardClient = ({ t }) => {
-  const { id } = useParams();
+  const { user } = useContext(AppContext); // Agora usamos o contexto para obter os dados do usuário
   const [clientData, setClientData] = useState(null);
   const [formData, setFormData] = useState({
     nom: '',
@@ -16,14 +17,14 @@ const DashboardClient = ({ t }) => {
     cellulaire: '',
     courriel: '',
     nom_utilisateur: '',
-    mot_de_passe: '',
+   
   });
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchClientData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/utilisateurs/${id}`, {
+        const response = await fetch(`http://localhost:5000/api/utilisateurs/${user.usager.id}`, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('user-token')}`,
@@ -52,8 +53,10 @@ const DashboardClient = ({ t }) => {
       }
     };
 
-    fetchClientData();
-  }, [id]);
+    if (user.isLogged) {
+      fetchClientData();
+    }
+  }, [user.isLogged, user.usager.id]); // Dependências atualizadas para reagir às mudanças em user
 
   const formatDateForInput = (dateString) => {
     if (!dateString) return '';
@@ -76,7 +79,7 @@ const DashboardClient = ({ t }) => {
     };
 
     try {
-      const response = await fetch(`http://localhost:5000/api/utilisateurs/${id}`, {
+      const response = await fetch(`http://localhost:5000/api/utilisateurs/${user.usager.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

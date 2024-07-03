@@ -1,4 +1,7 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Bouton from '../../partialsFormulaire/Bouton/Bouton';
+import ChampText from '../../partialsFormulaire/ChampText/ChampText';
+import './Login.css'
 
 function Login({ t, user, handleLogin, handleLogout }) {
     const navigate = useNavigate();
@@ -8,34 +11,29 @@ function Login({ t, user, handleLogin, handleLogout }) {
 
         if (result.success) {
             const privId = result.privId;
-            const userId = result.userId;
-        
-                if (privId ===3) {
-                    navigate(`/client/${userId}`);
-                } else {
-                     navigate(`/admin`)
-                }
+            
+            if (privId === 3) {
+                navigate(`/client`);
+            } else {
+                navigate(`/admin`);
+            }
         }
     }
-
+   
     return (
-        <main className="container mx-auto p-4 mt-12 bg-white flex flex-col items-center justify-center text-gray-700">
+        <main className="container mx-auto p-8 mt-12 flex flex-col items-center justify-center text-gray-700 login-form">
             <div className="w-10/12 sm:w-8/12 md:w-6/12 lg:w-5/12 xl:w-4/12 mb-4">
-                <h1 className="text-4xl font-semibold">{t("login.titre")}</h1>
+                <h1 className="login-title">{t("login.titre")}</h1>
             </div>
             
-            {user.isLogged ? 
-                (<div className='admin-link'>
-                    <NavLink to="/admin">Admin</NavLink>
-                    <button onClick={handleLogout} className='logout-form'>Déconnexion</button>
-                </div>)
-                :
-                (<form className='login-form' onSubmit={handleLoginWithRedirect}>
-                    <input type="text" name="nomUtilisateur" placeholder="Username" />
-                    <input type="password" name="mdp" placeholder="Password" />
-                    <button>Login</button>
-                </form>)
-            }
+            <div className='bg-[#F96C25] w-[40rem] rounded-2xl' >
+                <form className='my-4  p-12 rounded-2xl bg-[#21283B]' onSubmit={handleLoginWithRedirect}>
+                    <ChampText type="text" name="nomUtilisateur" placeholder={t("login.nomUtilisateur")} />
+                    <ChampText type="password" name="mdp" placeholder={t("login.mdp")} />
+                    <Bouton>Login</Bouton>
+                </form>
+            </div>
+            
         </main>
     );
 }
