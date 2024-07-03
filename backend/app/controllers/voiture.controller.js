@@ -29,20 +29,35 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all Voitures from the database.
+// exports.findAll = (req, res) => {
+//     const title = req.query.title;
+//     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+
+//     console.log("condition ", condition );
+
+//     Voiture.findAll({ where: condition })
+//         .then(data => {
+//             res.send(data);
+//             console.log("data", data);
+//         })
+//         .catch(err => {
+//             res.status(500).send({
+//                 message:
+//                     err.message || "Some error occurred while retrieving voitures."
+//             });
+//         });
+// };
+
 exports.findAll = (req, res) => {
-
-
-    // var condition = constructeur ? { constructeur: { [Op.like]: `%${constructeur}%` } } : null;
-    // var condition = model ? { modele_id: { [Op.like]: `%${model}%` } } : null;
-
-    Voiture.findAll({ include: [{ model: Modele }, { model: Transmission }, { model: Corps }, { model: Motopropulseur }, { model: Carburant }, { model: Image }] })
+    Voiture.findAll()
         .then(data => {
+            console.log("data", data); // Verifica os dados retornados
             res.send(data);
         })
         .catch(err => {
+            console.error("Erro ao buscar voitures:", err);
             res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving voitures."
+                message: err.message || "Ocorreu um erro ao recuperar os dados de voitures."
             });
         });
 };
