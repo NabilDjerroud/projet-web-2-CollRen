@@ -9,6 +9,7 @@ module.exports = app => {
 
     router.get('/logout', utilisateurs.logout)
 
+
     // Create a new Utilisateur
     router.post("/", utilisateurs.create);
 
@@ -26,6 +27,9 @@ module.exports = app => {
 
     // Delete all Utilisateurs
     //router.delete("/", utilisateurs.deleteAll);
+
+  
+
 
     app.use('/api/utilisateurs', router);
     

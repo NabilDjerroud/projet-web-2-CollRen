@@ -9,10 +9,10 @@
       "navItem.signup": "Sign up",
 
       "login.titre": "Welcome back!",
-      "login.courriel": "E-mail", 
+      "login.nomUtilisateur": "Username", 
       "login.mdp": "Password",
       "login.btn": "Log in" ,
-      "login.courrielPlaceHolder": "Please, enter your e-mail",
+      "login.nomUtilisateurPlaceHolder": "Please, enter your username",
       "login.mdpPlaceHolder": "Your password",
 
       "accueil.titre1": "25% OFF",
@@ -22,15 +22,17 @@
 
      
       "CreateUser.soustitre": "Be part of our car lovers community!",
-      "CreateUser.prenomLabel": "Name",
+      "CreateUser.prenom": "Name",
       "CreateUser.prenomPlaceHolder": "Inform your family name",
-      "CreateUser.nomLabel": "Family name",
+      "CreateUser.nom": "Family name",
       "CreateUser.nomPlaceHolder": "Inform your name",
-       "CreateUser.courrielLabel": "E-mail",
+       "CreateUser.courriel": "E-mail",
       "CreateUser.courrielPlaceHolder": "Inform your e-mail",
-       "CreateUser.mdpLabel": "Password",
+       "CreateUser.mdp": "Password",
       "CreateUser.mdpPlaceHolder": "Enter your password",
       "CreateUser.btnSubmit": "Save",
+      "CreateUser.nomUtilisateur": "Username",
+      "CreateUser.nomUtilisateurPlaceHolder": "Inform your username",
 
       "apropos.titre": "Welcome to Beaux Bazous",
       "apropos.soustitre": "Quality, Trust, and Personalized Service at the Heart of Every Transaction",
@@ -52,8 +54,23 @@
       "user.codepostal": "Postal Code",
       "user.telephone": "Phone",
       "user.cellulaire": "Mobile",
-      "user.privilege": "Privilege"
-     
+      "user.privilege": "Privilege",
+      "user.selectprivilege": "Select a privilege", 
+
+      "privilegeEdit.titre": "Edit privilege",
+      "privilegeIndex.btnEditer": "Edit",
+      "privilegeIndex.btnDeleter": "Delete",
+
+      "dashC_salutation": "Hello",
+      "dashC_prenom": "Name",
+      "dashC_nom": "Family name",
+      "dashC_anniversaire": "Birthday",
+      "dashC_adresse": "Address",
+      "dashC_codePostal": "Postal code",
+      "dashC_telephone": "Phone",
+      "dashC_cellulaire": "Mobile",
+      "dashC_courriel": "E-mail",
+      "dashC_nom_utilisateur": "Username"
        
     }
   }

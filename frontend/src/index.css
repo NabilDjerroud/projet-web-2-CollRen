@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/*Colors */
+
+@import url(./assets/css/colors.css);
+
 
 body {
   margin: 0;
