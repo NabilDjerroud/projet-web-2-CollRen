@@ -1,6 +1,7 @@
 const db = require("../models");
 const Carburant = db.carburants;
 const Op = db.Sequelize.Op;
+const Voitures = db.voitures
 
 // Create and Save a new Carburant
 exports.create = (req, res) => {
@@ -23,7 +24,7 @@ exports.findAll = (req, res) => {
     const title = req.query.title;
     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
-    Carburant.findAll({ where: condition })
+    Carburant.findAll({ include: [{ model: Voitures }] })
         .then(data => {
             res.send(data);
         })

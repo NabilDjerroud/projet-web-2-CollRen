@@ -1,29 +1,32 @@
 const db = require("../models");
-const Model = db.models;
+const constructeurModel = require("../models/constructeur.model");
+const Modele = db.modeles;
+const Constructeur = db.constructeurs;
+
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Model
 exports.create = (req, res) => {
 
     // Save Model in the database
-    Model.create(req.body)
+    Modele.create(req.body)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Model."
+                    err.message || "Some error occurred while creating the Modele."
             });
         });
 };
 
 // Retrieve all Models from the database.
 exports.findAll = (req, res) => {
-    const title = req.query.title;
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+    /*     const title = req.query.title;
+        var condition = title ? { title: { [Op.like]: `%${title}%` } } : null; */
 
-    Model.findAll({ where: condition })
+    Modele.findAll({ include: [{ model: Constructeur }] })
         .then(data => {
             res.send(data);
         })
@@ -39,7 +42,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
 
-    Model.findByPk(id)
+    Modele.findByPk(id)
         .then(data => {
             if (data) {
                 res.send(data);
@@ -60,7 +63,7 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
     const id = req.params.id;
 
-    Model.update(req.body, {
+    Modele.update(req.body, {
         where: { id: id }
     })
         .then(num => {
@@ -85,7 +88,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    Model.destroy({
+    Modele.destroy({
         where: { id: id }
     })
         .then(num => {
@@ -108,7 +111,7 @@ exports.delete = (req, res) => {
 
 // Delete all Models from the database.
 exports.deleteAll = (req, res) => {
-    Model.destroy({
+    Modele.destroy({
         where: {},
         truncate: false
     })

@@ -21,12 +21,36 @@ db.carburants = require('./carburant.model.js')(connex, Sequelize)
 db.motopropulseurs = require('./motopropulseur.model.js')(connex, Sequelize)
 db.transmissions = require('./transmission.model.js')(connex, Sequelize)
 db.constructeurs = require('./constructeur.model.js')(connex, Sequelize)
-db.models = require('./model.model.js')(connex, Sequelize)
+db.modeles = require('./modele.model.js')(connex, Sequelize)
 db.images = require('./image.model.js')(connex, Sequelize)
 db.mode_paiements = require('./mode_paiement.model.js')(connex, Sequelize)
 db.voitures = require('./voiture.model.js')(connex, Sequelize)
 db.commandes = require('./commande.model.js')(connex, Sequelize)
 // db.sig = require('./connexion.model.js')(connex, Sequelize)
+
+
+// Définition des relations
+db.modeles.belongsTo(db.constructeurs, { foreignKey: 'constructeur_id' })
+
+db.voitures.belongsTo(db.modeles, { foreignKey: 'modele_id' })
+
+db.constructeurs.hasMany(db.modeles, { foreignKey: 'constructeur_id' })
+
+db.transmissions.hasMany(db.voitures, { foreignKey: 'transmission_id' })
+
+db.voitures.belongsTo(db.transmissions, { foreignKey: 'transmission_id'})
+db.voitures.belongsTo(db.corps, { foreignKey: 'corp_id' })
+
+db.voitures.belongsTo(db.motopropulseurs, { foreignKey: 'motopropulseur_id'})
+db.voitures.belongsTo(db.carburants, { foreignKey: 'carburant_id'})
+db.carburants.hasMany(db.voitures, { foreignKey: 'carburant_id' })
+
+
+db.voitures.hasMany(db.images, { foreignKey: 'image_id' })
+db.privileges.hasMany(db.utilisateurs, { foreignKey: 'privilege_id' })
+db.utilisateurs.belongsTo(db.privileges, { foreignKey: 'privilege_id'})
+// db.villes.belongsTo(db.provinces, { foreignKey: 'province_Id', as: 'province' })
+
 
 
 module.exports = db

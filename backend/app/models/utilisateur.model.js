@@ -1,7 +1,6 @@
 // import { DataTypes } from '@sequelize/core';
 module.exports = (connex, Sequelize) => {
-/*     const queryInterface = connex.getQueryInterface();
-    queryInterface.addColumn('utilisateurs', 'token', { type: Sequelize.STRING }); */
+
     const Utilisateur = connex.define('utilisateur', {
         nom: {
             type: Sequelize.STRING
@@ -10,7 +9,7 @@ module.exports = (connex, Sequelize) => {
             type: Sequelize.STRING
         },
         anniversaire: {
-            type: Sequelize.DATE
+            type: Sequelize.DATEONLY
         },
         adresse: {
             type: Sequelize.STRING
@@ -42,16 +41,14 @@ module.exports = (connex, Sequelize) => {
         privilege_id: {
             type: Sequelize.INTEGER,
             allowNull: false,
-            references: {         // WorkingDays hasMany Users n:n
+            references: {
                 model: 'privileges',
-                key: 'id'
+                key: 'id', allowNull: true
             }
         }
 
     });
-    Utilisateur.associate = function (models) {
-        Utilisateur.belongsTo(models.Privilege, { foreignKey: 'privilege_id', as: 'privilege' })
-    };
-    
+
+
     return Utilisateur
 }

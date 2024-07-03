@@ -6,16 +6,14 @@ module.exports = (connex, Sequelize) => {
         },
         province_id: {
             type: Sequelize.INTEGER,
-            allowNull: false,
             references: {         // provinces hasMany ville n:n
                 model: 'provinces',
-                key: 'id'
+                key: 'id', 
+                allowNull: true
             }
         }
 
     });
-    Ville.associate = function (models) {
-        Ville.belongsTo(models.Province, { foreignKey: 'province_Id', as: 'province' })
-    };
+
     return Ville
 }

@@ -10,33 +10,33 @@ module.exports = (connex, Sequelize) => {
         mode_paiement_id: {
             type: Sequelize.INTEGER,
             allowNull: true,
-            references: {         // WorkingDays hasMany Users n:n
+            references: {
                 model: 'mode_paiements',
-                key: 'id'
+                key: 'id', allowNull:true 
             }
         },
         expdedition_id: {
             type: Sequelize.INTEGER,
             allowNull: true,
-            references: {         // WorkingDays hasMany Users n:n
+            references: {
                 model: 'expeditions',
-                key: 'id'
+                key: 'id', allowNull: true
             }
         },
         utilisateur_id: {
             type: Sequelize.INTEGER,
             allowNull: true,
-            references: {         // WorkingDays hasMany Users n:n
+            references: {
                 model: 'utilisateurs',
-                key: 'id'
+                key: 'id', allowNull: true
             }
         },
         statut_id: {
             type: Sequelize.INTEGER,
             allowNull: false,
-            references: {         // WorkingDays hasMany Users n:n
+            references: {
                 model: 'statuts',
-                key: 'id'
+                key: 'id', allowNull: true
             }
         },
 

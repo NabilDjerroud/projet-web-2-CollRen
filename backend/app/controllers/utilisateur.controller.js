@@ -2,6 +2,7 @@ const db = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
 const Utilisateur = db.utilisateurs;
+const Privilege = db.privileges;
 const Op = db.Sequelize.Op;
 const https = require('http')
 
@@ -57,7 +58,7 @@ exports.findAll = (req, res) => {
     /*     const title = req.query.title;
         var condition = title ? { title: { [Op.like]: `%${title}%` } } : null; */
 
-    Utilisateur.findAll(/* { where: condition } */)
+    Utilisateur.findAll({ include: [{ model: Privilege }] })
         .then(data => {
             res.send(data);
         })
