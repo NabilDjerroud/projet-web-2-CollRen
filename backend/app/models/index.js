@@ -23,9 +23,9 @@ db.transmissions = require('./transmission.model.js')(connex, Sequelize)
 db.constructeurs = require('./constructeur.model.js')(connex, Sequelize)
 db.models = require('./model.model.js')(connex, Sequelize)
 db.images = require('./image.model.js')(connex, Sequelize)
-db.voitures = require('./mode_paiement.model.js')(connex, Sequelize)
+db.mode_paiements = require('./mode_paiement.model.js')(connex, Sequelize)
 db.voitures = require('./voiture.model.js')(connex, Sequelize)
-db.voitures = require('./commande.model.js')(connex, Sequelize)
+db.commandes = require('./commande.model.js')(connex, Sequelize)
 // db.sig = require('./connexion.model.js')(connex, Sequelize)
 
 
