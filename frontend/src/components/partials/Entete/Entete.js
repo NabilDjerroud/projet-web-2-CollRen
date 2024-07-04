@@ -7,15 +7,19 @@ function Entete({ t}) {
 
     return (
 
-        <header className='flex items-center gap-[rem] justify-center my-4 '>
-           <Link to="/">
-                <div>
-                    <img src='\imgs\bazou_logo.png' alt='logo Beaux Bazou' className='w-[15rem] rounded-[10rem]'/>
-                </div>
-            </Link>
-            <Nav t={t}/>
+        <header className='bg-bleuFonce flex items-center gap-[rem] justify-around  '>
+           <div>
+               <Link to="/">
+                    <div>
+                        <img src='\imgs\bazou_logo.png' alt='logo Beaux Bazou' className='w-[15rem] rounded-[10rem]'/>
+                    </div>
+                </Link>
+           </div>
+            <div className='flex'>
+                <Nav t={t}/>
+            </div>
 
-            
+
         </header>
     );
 }

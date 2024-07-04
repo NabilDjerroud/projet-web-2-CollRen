@@ -39,9 +39,14 @@ import CarburantCreate from '../voitures/CarburantCreate/CarburantCreate';
 
 export const AppContext = React.createContext();
 
+import Politique from '../site/Politique/Politique';
+import Footer from '../partials/Footer/Footer';
+import Contact from '../site/Contact/Contact';
+
+
 const lngs = [
-    { code: "en", native: "English" },
-    { code: "fr", native: "French" },
+    { code: "en", native: "EN" },
+    { code: "fr", native: "FR" },
 ];
 
 function App() {
@@ -147,7 +152,6 @@ function App() {
                 <div className='flex justify-end'>
                     {btnTraduction}
                 </div>
-
                 <Entete t={t} />
                 <Routes>
                     <Route path='/' element={<Accueil t={t} />} />
@@ -249,8 +253,9 @@ function App() {
                     <Route path="/privilege-edit/:id" element={<PrivilegeEdit t={t} changeLanguage={handleTrans} />} />
 
                     <Route path='/voitures' element={<VoituresIndex t={t} />} />
-
+                    <Route path='/politique' element={<Politique t={t} />} />
                 </Routes>
+                    <Footer t={t}/>
             </Router>
         </AppContext.Provider>
     );

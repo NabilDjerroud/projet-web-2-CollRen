@@ -12,7 +12,7 @@ function Nav({ t }) {
     };
 
     return (
-        <nav className="flex font-sen text-gray-800">
+        <nav className="text-white bg-bleuFonce flex justify-evenly font-titre ">
             <Link to="/" className="py-2 px-6 flex text-lg">
                 {t("navItem.home")}
             </Link>
