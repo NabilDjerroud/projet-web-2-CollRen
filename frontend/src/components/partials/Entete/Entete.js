@@ -15,7 +15,7 @@ function Entete({ t}) {
                     </div>
                 </Link>
            </div>
-            <div>
+            <div className='flex'>
                 <Nav t={t}/>
             </div>
 
