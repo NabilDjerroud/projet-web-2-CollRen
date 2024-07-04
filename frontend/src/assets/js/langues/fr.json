@@ -46,7 +46,7 @@
      "apropos.p5": "Visitez-nous aujourd'hui chez Beaux Bazous et découvrez pourquoi nous sommes le choix préféré de ceux qui recherchent qualité, intégrité et service exceptionnel en matière de voitures d'occasion à Montréal.",
   
       "MenuDashboardAdmin.itemUser": "Utilisateurs",
-      "MenuDashboardAdmin.itemProduct": "Produits",
+      "MenuDashboardAdmin.itemProduct": "Voitures",
 
       "user.prenom": "Prènom",
       "user.nom": "Nom",
@@ -97,7 +97,19 @@
       "transmissionUpdate_titre": "Transmission - éditer",
       "transmissionCreate_titre": "Transmission - créer",
       "transmissionType_label": "Entrez un nouveau type de transmission",
-      "transmissionIndex_create": "Crèe un nouveau type de transmission"
+      "transmissionIndex_create": "Crèe un nouveau type de transmission",
+
+      "motopropulseurIndex_titre": "Motopropulseur",
+      "motopropulseurUpdate_titre": "Motopropulseur - éditer",
+      "motopropulseurCreate_titre": "Motopropulseur - créer",
+      "motopropulseurType_label": "Entrez un nouveau type de motopropulseur",
+      "motopropulseurIndex_create": "Crèe un nouveau type de motopropulseur",
+
+      "carburantIndex_titre": "Carburant",
+      "carburantUpdate_titre": "Carburant - éditer",
+      "carburantCreate_titre": "Carburant - créer",
+      "carburantType_label": "Entrez un nouveau type de carburant",
+      "carburantIndex_create": "Crèe un nouveau type de carburant"
        
 
 

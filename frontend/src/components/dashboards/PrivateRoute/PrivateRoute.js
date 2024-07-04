@@ -9,7 +9,7 @@ function PrivateRoute({ requiredPrivilege }) {
     if (user.isLogged && requiredPrivilege.includes(user.usager.privilege_id)) {
         return <Outlet />;
     } else {
-        return <Navigate to="/" />;
+        return <Navigate to="/login" />;
     }
 }
 

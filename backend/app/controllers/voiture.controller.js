@@ -28,26 +28,6 @@ exports.create = (req, res) => {
         });
 };
 
-// Retrieve all Voitures from the database.
-// exports.findAll = (req, res) => {
-//     const title = req.query.title;
-//     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-
-//     console.log("condition ", condition );
-
-//     Voiture.findAll({ where: condition })
-//         .then(data => {
-//             res.send(data);
-//             console.log("data", data);
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message:
-//                     err.message || "Some error occurred while retrieving voitures."
-//             });
-//         });
-// };
-
 exports.findAll = (req, res) => {
     Voiture.findAll()
         .then(data => {
