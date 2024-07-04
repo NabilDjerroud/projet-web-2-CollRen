@@ -113,7 +113,8 @@
       "carburantUpdate_titre": "Fuel - edit",
       "carburantCreate_titre": "Fuel - create",
       "carburantType_label": "Enter a new type of fuel",
-      "carburantIndex_create": "Create a new type of fuel"
+      "carburantIndex_create": "Create a new type of fuel",
+      "fetch": "http://localhost:5000/api/"
        
        
     }

@@ -10,7 +10,7 @@ function ConstructeurIndex({ t }) {
     useEffect(() => {
         const fetchConstructeurs = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/constructeurs');
+                const response = await fetch(`${t("fetch")}constructeurs`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -26,7 +26,7 @@ function ConstructeurIndex({ t }) {
 
     const handleDeleteConstructeur = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/constructeurs/${id}`, {
+            const response = await fetch(`${t("fetch")}constructeurs/${id}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {

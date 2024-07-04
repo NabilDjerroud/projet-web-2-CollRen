@@ -11,7 +11,7 @@ function TransmissionIndex({ t, changeLanguage }) {
         // Fonction pour récupérer les transmissions en fonction de la langue
         const fetchTransmissions = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/transmissions');
+                const response = await fetch(`${t("fetch")}transmissions`);
                 if (!response.ok) {
                     throw new Error(`Erreur HTTP! statut: ${response.status}`);
                 }
@@ -39,7 +39,7 @@ function TransmissionIndex({ t, changeLanguage }) {
 
     const handleDeleteTransmission = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/transmissions/${id}`, {
+            const response = await fetch(`${t("fetch")}transmissions/${id}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {
@@ -79,7 +79,7 @@ function TransmissionIndex({ t, changeLanguage }) {
                             <tr key={transmission.id}>
                                 <td className="px-6 py-4 whitespace-nowrap text-white">{transmission.type[language]}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <Link to={`/transmission-update/${transmission.id}`} 
+                                    <Link to={`/transmission-update/${transmission.id}`}
                                         className="bg-[#F96C25] hover:bg-[#868E9B] text-white font-bold py-2 px-4 rounded-full mx-[1rem]">
                                         {t("btnEditer")}
                                     </Link>

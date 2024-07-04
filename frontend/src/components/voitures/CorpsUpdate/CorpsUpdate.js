@@ -5,7 +5,7 @@ import ChampText from '../../partialsFormulaire/ChampText/ChampText';
 import Bouton from '../../partialsFormulaire/Bouton/Bouton';
 
 function CorpsUpdate({ t }) {
-    const { id } = useParams(); 
+    const { id } = useParams();
     const [formData, setFormData] = useState({
         corps_en: '',
         corps_fr: ''
@@ -15,7 +15,7 @@ function CorpsUpdate({ t }) {
     useEffect(() => {
         const fetchCorps = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/corps/${id}`);
+                const response = await fetch(`${t("fetch")}corps/${id}`);
                 if (!response.ok) {
                     throw new Error(`Erreur HTTP! statut: ${response.status}`);
                 }
@@ -57,7 +57,7 @@ function CorpsUpdate({ t }) {
         event.preventDefault();
 
         try {
-            const response = await fetch(`http://localhost:5000/api/corps/${id}`, {
+            const response = await fetch(`${t("fetch")}corps/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

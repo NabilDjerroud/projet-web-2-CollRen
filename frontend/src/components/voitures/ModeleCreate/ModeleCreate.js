@@ -13,7 +13,9 @@ function ModeleCreate({ t }) {
     useEffect(() => {
         const fetchConstructeurs = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/constructeurs');
+
+                const response = await fetch(`${t("fetch")}constructeurs`);
+
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -34,7 +36,9 @@ function ModeleCreate({ t }) {
         console.log('Selected Constructeur:', selectedConstructeur); // Log para depuração
 
         try {
-            const response = await fetch('http://localhost:5000/api/modeles', {
+
+            const response = await fetch(`${t("fetch")}modeles`, {
+
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -48,11 +52,13 @@ function ModeleCreate({ t }) {
 
             alert('Modèle créé avec succès !');
             navigate('/model');
+
         } catch (error) {
             console.error('Erreur lors de la création du modèle :', error);
             alert('Erreur lors de la création du modèle. Veuillez réessayer.');
         }
     };
+
 
     return (
         <div className="flex">

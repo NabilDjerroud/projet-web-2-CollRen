@@ -5,7 +5,7 @@ import ChampText from '../../../partialsFormulaire/ChampText/ChampText';
 import Bouton from '../../../partialsFormulaire/Bouton/Bouton';
 
 function PrivilegeEdit({ t }) {
-    const { id } = useParams(); 
+    const { id } = useParams();
     const [formData, setFormData] = useState({
         privilege_en: '',
         privilege_fr: ''
@@ -14,7 +14,7 @@ function PrivilegeEdit({ t }) {
     useEffect(() => {
         const fetchPrivilege = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/privileges/${id}`);
+                const response = await fetch(`${t("fetch")}privileges/${id}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -58,7 +58,7 @@ function PrivilegeEdit({ t }) {
         event.preventDefault();
 
         try {
-            const response = await fetch(`http://localhost:5000/api/privileges/${id}`, {
+            const response = await fetch(`${t("fetch")}privileges/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -110,7 +110,7 @@ function PrivilegeEdit({ t }) {
                     </div>
                     <div className="mb-3">
                         <ChampText
-                        label={"Privilege in French"}
+                            label={"Privilege in French"}
                             type="text"
                             className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
                             id="privilege_fr"

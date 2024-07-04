@@ -6,7 +6,7 @@ function UserIndex({ t }) {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/utilisateurs')
+        fetch(`${t("fetch")}utilisateurs`)
             .then(response => response.json())
             .then(data => {
                 setUsers(data)
@@ -50,7 +50,7 @@ function UserIndex({ t }) {
 
                                     <Link to={`/user/${user.id}`} > <button className="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out">Edit</button></Link>
 
-                                    
+
                                 </td>
                             </tr>
                         ))}

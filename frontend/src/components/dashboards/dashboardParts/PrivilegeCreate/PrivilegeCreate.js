@@ -27,7 +27,7 @@ function PrivilegeCreate({ t }) {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/api/privileges', {
+      const response = await fetch(`${t("fetch")}privileges`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

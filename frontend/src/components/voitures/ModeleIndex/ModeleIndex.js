@@ -10,7 +10,9 @@ function ModeleIndex({ t }) {
     useEffect(() => {
         const fetchModels = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/modeles');
+
+                const response = await fetch(`${t("fetch")}modeles`);
+
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -24,9 +26,12 @@ function ModeleIndex({ t }) {
         fetchModels();
     }, [language]);
 
+
+
     const handleDeleteModel = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/modeles/${id}`, {
+            const response = await fetch(`${t("fetch")}modeles/${id}`, {
+
                 method: 'DELETE',
             });
             if (!response.ok) {

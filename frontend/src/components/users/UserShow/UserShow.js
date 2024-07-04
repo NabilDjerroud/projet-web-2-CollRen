@@ -22,7 +22,7 @@ function UserShow({ t }) {
 
     useEffect(() => {
         // Fetch user data
-        fetch(`http://localhost:5000/api/utilisateurs/${id}`)
+        fetch(`${t("fetch")}utilisateurs/${id}`)
             .then(response => response.json())
             .then(data => {
                 setUser(data);
@@ -32,7 +32,7 @@ function UserShow({ t }) {
             });
 
         // Fetch privileges data
-        fetch('http://localhost:5000/api/privileges')
+        fetch(`${t("fetch")}privileges`)
             .then(response => response.json())
             .then(data => {
                 // Transforma a lista de privilégios em um objeto com chave sendo o id do privilégio
@@ -46,7 +46,7 @@ function UserShow({ t }) {
                 console.error("There was an error fetching the privileges!", error);
             });
 
-            
+
     }, [id]);
 
     const handleChange = (e) => {
@@ -59,33 +59,33 @@ function UserShow({ t }) {
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:5000/api/utilisateurs/${id}`, {
+        fetch(`${t("fetch")}utilisateurs/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(user),
         })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message);
-        })
-        .catch(error => {
-            console.error("There was an error updating the user!", error);
-        });
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error("There was an error updating the user!", error);
+            });
     };
 
     const handleDelete = () => {
-        fetch(`http://localhost:5000/api/utilisateurs/${id}`, {
+        fetch(`${t("fetch")}utilisateurs/${id}`, {
             method: 'DELETE',
         })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.message);
-        })
-        .catch(error => {
-            console.error("There was an error deleting the user!", error);
-        });
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error("There was an error deleting the user!", error);
+            });
     };
 
     return (
@@ -101,109 +101,109 @@ function UserShow({ t }) {
                         <div>
                             <label className="block text-sm font-medium text-gray-700">{t("user.prenom")}</label>
                             <ChampText
-                                type="text" 
-                                name="prenom" 
+                                type="text"
+                                name="prenom"
                                 value={user.prenom}
                                 onChange={handleChange}
-                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">{t("user.nom")}</label>
                             <ChampText
-                                type="text" 
-                                name="nom" 
+                                type="text"
+                                name="nom"
                                 value={user.nom}
                                 onChange={handleChange}
-                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">{t("user.anniversaire")}</label>
                             <ChampText
-                                type="date" 
-                                name="anniversaire" 
+                                type="date"
+                                name="anniversaire"
                                 value={user.anniversaire}
                                 onChange={handleChange}
-                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">{t("user.courriel")}</label>
                             <ChampText
-                                type="email" 
-                                name="courriel" 
+                                type="email"
+                                name="courriel"
                                 value={user.courriel}
                                 onChange={handleChange}
-                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">{t("user.adresse")}</label>
                             <ChampText
-                                type="text" 
-                                name="adresse" 
+                                type="text"
+                                name="adresse"
                                 value={user.adresse}
                                 onChange={handleChange}
-                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">{t("user.codepostal")}</label>
                             <ChampText
-                                type="text" 
-                                name="code_postal" 
+                                type="text"
+                                name="code_postal"
                                 value={user.code_postal}
                                 onChange={handleChange}
-                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">{t("user.telephone")}</label>
                             <ChampText
-                                type="text" 
-                                name="telephone" 
+                                type="text"
+                                name="telephone"
                                 value={user.telephone}
                                 onChange={handleChange}
-                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">{t("user.cellulaire")}</label>
                             <ChampText
-                                type="text" 
-                                name="cellulaire" 
+                                type="text"
+                                name="cellulaire"
                                 value={user.cellulaire}
                                 onChange={handleChange}
-                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">{t("user.privilege")}</label>
-                            <select 
-                                name="privilege_id"  
+                            <select
+                                name="privilege_id"
                                 onChange={handleChange}
                                 className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                             >
                                 <option value="">{t("user.selectprivilege")}</option>
                                 {privileges.map(privilege => (
-                                        <option key={privilege.id} value={privilege.id}>
-                                            {privilege.type[language]}
-                                        </option>
-                                    ))
+                                    <option key={privilege.id} value={privilege.id}>
+                                        {privilege.type[language]}
+                                    </option>
+                                ))
                                 }
                             </select>
                         </div>
                     </div>
                     <div className="mt-6 flex justify-end">
-                        <button 
-                            type="submit" 
+                        <button
+                            type="submit"
                             className="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out"
                         >
                             Update
                         </button>
-                        <button 
-                            type="button" 
+                        <button
+                            type="button"
                             onClick={handleDelete}
                             className="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out"
                         >

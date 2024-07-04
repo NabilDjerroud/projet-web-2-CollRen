@@ -11,7 +11,7 @@ function CarburantIndex({ t, changeLanguage }) {
         // Fonction pour récupérer les carburants en fonction de la langue
         const fetchCarburants = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/carburants');
+                const response = await fetch(`${t("fetch")}carburants`);
                 if (!response.ok) {
                     throw new Error(`Erreur HTTP! statut: ${response.status}`);
                 }
@@ -39,7 +39,7 @@ function CarburantIndex({ t, changeLanguage }) {
 
     const handleDeleteCarburant = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/carburants/${id}`, {
+            const response = await fetch(`${t("fetch")}carburants/${id}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {
@@ -78,7 +78,7 @@ function CarburantIndex({ t, changeLanguage }) {
                             <tr key={carburant.id}>
                                 <td className="px-6 py-4 whitespace-nowrap text-white">{carburant.type[language]}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <Link to={`/carburant-update/${carburant.id}`} 
+                                    <Link to={`/carburant-update/${carburant.id}`}
                                         className="bg-[#F96C25] hover:bg-[#868E9B] text-white font-bold py-2 px-4 rounded-full mx-[1rem]">
                                         {t("btnEditer")}
                                     </Link>

@@ -30,7 +30,7 @@ function MotopropulseurCreate({ t }) {
         };
 
         try {
-            const response = await fetch('http://localhost:5000/api/motopropulseurs', {
+            const response = await fetch(`${t("fetch")}motopropulseurs`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ function MotopropulseurCreate({ t }) {
             const data = await response.json();
             console.log('Succès:', data);
             alert('Motopropulseur créé avec succès!');
-            navigate('/motopropulseur'); 
+            navigate('/motopropulseur');
             setFormData({
                 motopropulseur_en: '',
                 motopropulseur_fr: ''

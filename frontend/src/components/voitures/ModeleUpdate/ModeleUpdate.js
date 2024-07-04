@@ -14,7 +14,9 @@ function ModeleUpdate({ t }) {
     useEffect(() => {
         const fetchConstructeurs = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/constructeurs');
+
+                const response = await fetch(`${t("fetch")}constructeurs`);
+
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -27,7 +29,9 @@ function ModeleUpdate({ t }) {
 
         const fetchModele = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/modeles/${id}`);
+
+                const response = await fetch(`${t("fetch")}modeles/${id}`);
+
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -49,7 +53,9 @@ function ModeleUpdate({ t }) {
         console.log('Selected Constructeur:', selectedConstructeur); // Log para depuração
 
         try {
-            const response = await fetch(`http://localhost:5000/api/modeles/${id}`, {
+
+            const response = await fetch(`${t("fetch")}modeles/${id}`, {
+
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

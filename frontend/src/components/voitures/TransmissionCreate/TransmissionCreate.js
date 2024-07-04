@@ -30,7 +30,7 @@ function TransmissionCreate({ t }) {
         };
 
         try {
-            const response = await fetch('http://localhost:5000/api/transmissions', {
+            const response = await fetch(`${t("fetch")}transmissions`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ function TransmissionCreate({ t }) {
             const data = await response.json();
             console.log('Succès:', data);
             alert('Transmission créée avec succès!');
-            navigate('/transmission'); 
+            navigate('/transmission');
             setFormData({
                 transmission_en: '',
                 transmission_fr: ''

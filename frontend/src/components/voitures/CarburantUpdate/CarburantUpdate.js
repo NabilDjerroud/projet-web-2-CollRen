@@ -5,7 +5,7 @@ import ChampText from '../../partialsFormulaire/ChampText/ChampText';
 import Bouton from '../../partialsFormulaire/Bouton/Bouton';
 
 function CarburantUpdate({ t }) {
-    const { id } = useParams(); 
+    const { id } = useParams();
     const [formData, setFormData] = useState({
         carburant_en: '',
         carburant_fr: ''
@@ -14,7 +14,7 @@ function CarburantUpdate({ t }) {
     useEffect(() => {
         const fetchCarburant = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/carburants/${id}`);
+                const response = await fetch(`${t("fetch")}carburants/${id}`);
                 if (!response.ok) {
                     throw new Error(`Erreur HTTP! statut: ${response.status}`);
                 }
@@ -56,7 +56,7 @@ function CarburantUpdate({ t }) {
         event.preventDefault();
 
         try {
-            const response = await fetch(`http://localhost:5000/api/carburants/${id}`, {
+            const response = await fetch(`${t("fetch")}carburants/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

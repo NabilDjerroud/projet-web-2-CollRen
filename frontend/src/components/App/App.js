@@ -1,5 +1,5 @@
-import React, { useEffect, useState} from 'react';
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Accueil from "../Accueil/Accueil";
 import "./App.css";
 import Entete from '../partials/Entete/Entete';
@@ -14,7 +14,7 @@ import PrivilegeCreate from '../dashboards/dashboardParts/PrivilegeCreate/Privil
 import PrivilegeIndex from '../dashboards/dashboardParts/PrivilegeIndex/PrivilegeIndex';
 import Bouton from '../partialsFormulaire/Bouton/Bouton';
 import PrivilegeEdit from '../dashboards/dashboardParts/PrivilegeEdit/PrivilegeEdit';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import DashboardClient from '../dashboards/DashboardClient/DashboardClient';
 import PrivateRoute from '../dashboards/PrivateRoute/PrivateRoute';
 import VoituresIndex from '../voitures/VoituresIndex/VoituresIndex';
@@ -58,7 +58,7 @@ function App() {
             const defaultLanguage = 'fr';
             i18n.changeLanguage(defaultLanguage);
             localStorage.setItem('langueChoisie', defaultLanguage);
-            sessionStorage.setItem('langueChoisie', defaultLanguage); 
+            sessionStorage.setItem('langueChoisie', defaultLanguage);
         }
 
         const token = localStorage.getItem('user-token');
@@ -95,13 +95,13 @@ function App() {
     async function login(e) {
         e.preventDefault();
         const form = e.target;
-    
+
         const body = {
             nom_utilisateur: form.nomUtilisateur.value,
             mot_de_passe: form.mdp.value,
             withCredentials: true
         };
-    
+
         const data = {
             method: "POST",
             headers: {
@@ -109,13 +109,14 @@ function App() {
             },
             body: JSON.stringify(body)
         };
-    
-        const response = await fetch(`http://localhost:5000/api/utilisateurs/login`, data);
-    
+
+        // const response = await fetch(`${t("fetch")}utilisateurs/login`, data);
+        const response = await fetch(`${t("fetch")}utilisateurs/login`, data);
+
         if (response.ok) {
             const token = await response.json();
 
-            const decodedToken = jwtDecode(token.token);  
+            const decodedToken = jwtDecode(token.token);
             const userData = {
                 isLogged: true,
                 usager: {
@@ -142,9 +143,9 @@ function App() {
         localStorage.removeItem("user-token");
     }
 
-  
+
     return (
-        <AppContext.Provider value={{user, logout}}>
+        <AppContext.Provider value={{ user, logout }}>
             <Router>
                 <div className='flex justify-end'>
                     {btnTraduction}
@@ -154,94 +155,94 @@ function App() {
                     <Route path='/' element={<Accueil t={t} />} />
                     <Route path='/apropos' element={<APropos t={t} />} />
 
-                    <Route path='/admin' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                    <Route path='/admin' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
                         <Route path='/admin' element={<DashboardAdmin t={t} />} />
                     </Route>
 
-                    <Route path='/model' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
-                        <Route path='/model' element={<ModeleIndex t={t}  />} />
+                    <Route path='/model' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                        <Route path='/model' element={<ModeleIndex t={t} />} />
                     </Route>
-                    <Route path='/model-edit' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
-                        <Route path='/model-edit/:id' element={<ModeleUpdate t={t}   />} />
+                    <Route path='/model-edit' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                        <Route path='/model-edit/:id' element={<ModeleUpdate t={t} />} />
                     </Route>
 
                     <Route path='/model-create' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
                         <Route path='/model-create' element={<ModeleCreate t={t}  />} />
                     </Route>
-                    <Route path='/constructeur' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
-                        <Route path='/constructeur' element={<ConstructeurIndex t={t}   />} />
+                    <Route path='/constructeur' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                        <Route path='/constructeur' element={<ConstructeurIndex t={t} />} />
                     </Route>
 
-                    <Route path='/constructeur-edit/:id' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
-                        <Route path='/constructeur-edit/:id' element={<ConstructeurUpdate t={t}   />} />
+                    <Route path='/constructeur-edit/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                        <Route path='/constructeur-edit/:id' element={<ConstructeurUpdate t={t} />} />
                     </Route>
 
-                    <Route path='/constructeur-create' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
-                        <Route path='/constructeur-create' element={<ConstructeurCreate t={t}   />} />
+                    <Route path='/constructeur-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                        <Route path='/constructeur-create' element={<ConstructeurCreate t={t} />} />
                     </Route>
 
-                    <Route path='/corps' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
-                        <Route path='/corps' element={<CorpsIndex t={t}  changeLanguage={handleTrans}  />} />
+                    <Route path='/corps' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                        <Route path='/corps' element={<CorpsIndex t={t} changeLanguage={handleTrans} />} />
                     </Route>
 
-                    <Route path='/corps-create' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
-                        <Route path='/corps-create' element={<CorpsCreate t={t}  changeLanguage={handleTrans}  />} />
+                    <Route path='/corps-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                        <Route path='/corps-create' element={<CorpsCreate t={t} changeLanguage={handleTrans} />} />
                     </Route>
 
-                    <Route path='/corps-update/:id' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                    <Route path='/corps-update/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
                         <Route path='/corps-update/:id' element={<CorpsUpdate t={t} />} />
                     </Route>
-    
-                    <Route path='/transmission' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+
+                    <Route path='/transmission' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
                         <Route path='/transmission' element={<TransmissionIndex t={t} changeLanguage={handleTrans} />} />
                     </Route>
 
-                    <Route path='/transmission-create' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
-                        <Route path='/transmission-create' element={<TransmissionCreate t={t}  changeLanguage={handleTrans}  />} />
+                    <Route path='/transmission-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                        <Route path='/transmission-create' element={<TransmissionCreate t={t} changeLanguage={handleTrans} />} />
                     </Route>
 
-                    <Route path='/transmission-update/:id' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                    <Route path='/transmission-update/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
                         <Route path='/transmission-update/:id' element={<TransmissionUpdate t={t} />} />
                     </Route>
 
-                    <Route path='/motopropulseur' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                    <Route path='/motopropulseur' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
                         <Route path='/motopropulseur' element={<MotopropulseurIndex t={t} changeLanguage={handleTrans} />} />
                     </Route>
 
-                    <Route path='/motopropulseur-create' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
-                        <Route path='/motopropulseur-create' element={<MotopropulseurCreate t={t}  changeLanguage={handleTrans}  />} />
+                    <Route path='/motopropulseur-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                        <Route path='/motopropulseur-create' element={<MotopropulseurCreate t={t} changeLanguage={handleTrans} />} />
                     </Route>
 
-                    <Route path='/motopropulseur-update/:id' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                    <Route path='/motopropulseur-update/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
                         <Route path='/motopropulseur-update/:id' element={<MotopropulseurUpdate t={t} />} />
                     </Route>
 
-                    <Route path='/carburant' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                    <Route path='/carburant' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
                         <Route path='/carburant' element={<CarburantIndex t={t} changeLanguage={handleTrans} />} />
                     </Route>
 
-                    <Route path='/carburant-create' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
-                        <Route path='/carburant-create' element={<CarburantCreate t={t}  changeLanguage={handleTrans}  />} />
+                    <Route path='/carburant-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                        <Route path='/carburant-create' element={<CarburantCreate t={t} changeLanguage={handleTrans} />} />
                     </Route>
 
-                    <Route path='/carburant-update/:id' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                    <Route path='/carburant-update/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
                         <Route path='/carburant-update/:id' element={<CarburantUpdate t={t} />} />
                     </Route>
 
 
-                    <Route path='/client' element={<PrivateRoute requiredPrivilege={[1,2,3]} />}>
-                      <Route index element={<DashboardClient t={t} />} />
+                    <Route path='/client' element={<PrivateRoute requiredPrivilege={[1, 2, 3]} />}>
+                        <Route index element={<DashboardClient t={t} />} />
                     </Route>
 
-                    <Route path='/user' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
-                      <Route path='/user' element={<UserIndex t={t} />} />
+                    <Route path='/user' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                        <Route path='/user' element={<UserIndex t={t} />} />
                     </Route>
 
-                    <Route path='/user/:id' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
-                      <Route path="/user/:id" element={<UserShow t={t} />} />
+                    <Route path='/user/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                        <Route path="/user/:id" element={<UserShow t={t} />} />
                     </Route>
 
-                    
+
                     <Route path='/login' element={<Login t={t} user={user} handleLogin={login} handleLogout={logout} />} />
                     <Route path='/usercreate' element={<UserCreate t={t} />} />
 
@@ -253,7 +254,7 @@ function App() {
                     <Route path='/politique' element={<Politique t={t} />} />
                     <Route path='/contact' element={<Contact t={t} />} />
                 </Routes>
-                    <Footer t={t}/>
+                <Footer t={t} />
             </Router>
         </AppContext.Provider>
     );
