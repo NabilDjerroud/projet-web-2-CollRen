@@ -7,8 +7,5 @@ module.exports = (connex, Sequelize) => {
 
     });
 
-    Province.associate = function (models) {
-        Province.hasMany(models.Ville, { as: 'villes' })
-    };
     return Province
 }
