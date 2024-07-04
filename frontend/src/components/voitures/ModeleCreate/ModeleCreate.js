@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import MenuDashboardAdmin from '../../dashboards/MenuDashboardAdmin/MenuDashboardAdmin';
 import ChampText from '../../partialsFormulaire/ChampText/ChampText';
@@ -7,9 +7,31 @@ import Bouton from '../../partialsFormulaire/Bouton/Bouton';
 function ModeleCreate({ t }) {
     const navigate = useNavigate();
     const [type, setType] = useState('');
+    const [constructeurs, setConstructeurs] = useState([]);
+    const [selectedConstructeur, setSelectedConstructeur] = useState('');
 
+    useEffect(() => {
+        const fetchConstructeurs = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/constructeurs');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                setConstructeurs(data);
+            } catch (error) {
+                console.error('Error fetching constructeurs:', error);
+            }
+        };
+
+        fetchConstructeurs();
+    }, []);
+
+    
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        console.log('Selected Constructeur:', selectedConstructeur); // Log para depuração
 
         try {
             const response = await fetch(`${t("fetch")}modeles`, {
@@ -17,7 +39,7 @@ function ModeleCreate({ t }) {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ type })
+                body: JSON.stringify({ type, constructeur_id: selectedConstructeur })
             });
 
             if (!response.ok) {
@@ -25,6 +47,7 @@ function ModeleCreate({ t }) {
             }
 
             alert('Modèle créé avec succès !');
+            navigate('/model');
             navigate('/model');
         } catch (error) {
             console.error('Erreur lors de la création du modèle :', error);
@@ -40,7 +63,7 @@ function ModeleCreate({ t }) {
             </div>
 
             <div className='flex flex-col '>
-                <h2 className="mx-[4rem] mt-24">{t("modeleCreate_titre")}</h2>
+                <h1 className="mx-[4rem] mt-24 text-[#21283B]">{t("modeleCreate_titre")}</h1>
                 <div className="w-[120%] mx-[4rem] mt-12 bg-[#F96C25] rounded-lg">
                     <form onSubmit={handleSubmit} className="p-3 bg-[#21283B] rounded-lg">
                         <div className="mb-3">
@@ -52,7 +75,27 @@ function ModeleCreate({ t }) {
                                 onChange={(e) => setType(e.target.value)}
                             />
                         </div>
-
+                        <div className="mb-3">
+                            <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="constructeur">
+                                {t("constructeur_label")}
+                            </label>
+                            <select
+                                id="constructeur"
+                                className="block appearance-none w-full bg-white border border-gray-200 text-gray-800 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                value={selectedConstructeur}
+                                onChange={(e) => {
+                                    console.log('Selected Value:', e.target.value); // Log para depuração
+                                    setSelectedConstructeur(e.target.value);
+                                }}
+                            >
+                                <option value="">{t("selectConstructeur")}</option>
+                                {constructeurs.map((constructeur) => (
+                                    <option key={constructeur.id} value={constructeur.id}>
+                                        {constructeur.type}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
 
                         <Bouton
                             type="submit"
