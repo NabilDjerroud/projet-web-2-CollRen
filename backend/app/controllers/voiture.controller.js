@@ -32,12 +32,15 @@ exports.findAll = (req, res) => {
     // var condition = modele ? { modele_id: { [Op.like]: `%${model}%` } } : null;
 
     // api/voitures/?modele_id=27&transmission_id=1&motopropulseur_id=1&carburant_id=1&corp_id=2
+
+    //Début de la section des filtres par fonctions
     const queryCarburant = req.query.carburant_id;
     const queryConstructeur = req.query.constructeur_id;
     const queryCorp = req.query.corp_id;
     const queryModele = req.query.modele_id;
     const queryMotopropulseur = req.query.motopropulseur_id;
     const queryTransmission = req.query.transmission_id;
+
 
     var condition = {}
     condition.carburant = {}
@@ -46,6 +49,7 @@ exports.findAll = (req, res) => {
     condition.modele = {}
     condition.motopropulseur = {}
     condition.transmission = {}
+    condition.date = {}
 
     queryCarburant ? condition.carburant.id = queryCarburant : null;
     queryConstructeur ? condition.constructeur.id = queryConstructeur : null;
@@ -54,7 +58,23 @@ exports.findAll = (req, res) => {
     queryMotopropulseur ? condition.motopropulseur.id = queryMotopropulseur : null;
     queryTransmission ? condition.transmission.id = queryTransmission : null;
 
+    //Fin de la section des filtres par fonctions
+
+    //var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+
+    // Filtres par date (année de fabrication)
+    const queryDateMin = req.query.datemin;
+    const queryDateMax = req.query.datemax;
+    const queryDateIs = req.query.dateis;
+
+    queryDateMin ? condition.date.datemin = queryDateMin : condition.date.datemin = 0;
+    queryDateMax ? condition.date.datemax = queryDateMax : condition.date.datemax = 2999;
+    queryDateIs ? condition.date.datemax = condition.date.datemin = req.query.dateis : undefined;
+
+    var dateCondition = { date: { [Op.between]: [condition.date.datemin, condition.date.datemax] } }
+
     Voiture.findAll({
+        where: dateCondition,
         include:
             [
                 { model: Carburant, where: condition.carburant },
@@ -65,9 +85,9 @@ exports.findAll = (req, res) => {
                 { model: Transmission, where: condition.transmission },
                 { model: Image }
             ]
+
     })
         .then(data => {
-            console.log("data", data); // Verifica os dados retornados
             res.send(data);
         })
         .catch(err => {

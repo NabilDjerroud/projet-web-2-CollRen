@@ -49,6 +49,8 @@ db.carburants.hasMany(db.voitures, { foreignKey: 'carburant_id' })
 db.voitures.hasMany(db.images, { foreignKey: 'image_id' })
 db.privileges.hasMany(db.utilisateurs, { foreignKey: 'privilege_id' })
 db.utilisateurs.belongsTo(db.privileges, { foreignKey: 'privilege_id'})
+
+// Province.hasMany(models.Ville, { as: 'villes' })
 // db.villes.belongsTo(db.provinces, { foreignKey: 'province_Id', as: 'province' })
 
 
