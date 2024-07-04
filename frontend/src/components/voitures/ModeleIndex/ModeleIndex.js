@@ -10,7 +10,7 @@ function ModeleIndex({ t }) {
     useEffect(() => {
         const fetchModels = async () => {
             try {
-                const response = await fetch(`${t("fetch")}models`);
+                const response = await fetch(`${t("fetch")}modeles`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
