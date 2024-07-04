@@ -17,6 +17,25 @@ import PrivilegeEdit from '../dashboards/dashboardParts/PrivilegeEdit/PrivilegeE
 import {jwtDecode} from 'jwt-decode';
 import DashboardClient from '../dashboards/DashboardClient/DashboardClient';
 import PrivateRoute from '../dashboards/PrivateRoute/PrivateRoute';
+import VoituresIndex from '../voitures/VoituresIndex/VoituresIndex';
+import ModeleIndex from '../voitures/ModeleIndex/ModeleIndex';
+import ModeleUpdate from '../voitures/ModeleUpdate/ModeleUpdate';
+import ModeleCreate from '../voitures/ModeleCreate/ModeleCreate';
+import ConstructeurIndex from '../voitures/ConstructeurIndex/ConstructeurIndex';
+import ConstructeurUpdate from '../voitures/ConstructeurUpdate/ConstructeurUpdate';
+import ConstructeurCreate from '../voitures/ContructteurCreate/ConstructeurCreate';
+import CorpsIndex from '../voitures/CorpsIndex/CorpsIndex';
+import CorpsCreate from '../voitures/CorpsCreate/CorpsCreate';
+import CorpsUpdate from '../voitures/CorpsUpdate/CorpsUpdate';
+import TransmissionCreate from '../voitures/TransmissionCreate/TransmissionCreate';
+import TransmissionUpdate from '../voitures/TransmissionUpdate/TransmissionUpdate';
+import TransmissionIndex from '../voitures/TransmissionIndex/TransmissionIndex';
+import MotopropulseurIndex from '../voitures/MotopropulseurIndex/MotopropulseurIndex';
+import MotopropulseurCreate from '../voitures/MotopropulseurCreate/MotopropulseurCreate';
+import MotopropulseurUpdate from '../voitures/MotopropulseurUpdate/MotopropulseurUpdate';
+import CarburantIndex from '../voitures/CarburantIndex/CarburantIndex';
+import CarburantUpdate from '../voitures/CarburantUpdate/CarburantUpdate';
+import CarburantCreate from '../voitures/CarburantCreate/CarburantCreate';
 
 export const AppContext = React.createContext();
 
@@ -39,6 +58,23 @@ function App() {
             localStorage.setItem('langueChoisie', defaultLanguage);
             sessionStorage.setItem('langueChoisie', defaultLanguage); 
         }
+
+        const token = localStorage.getItem('user-token');
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            if (Date.now() < decodedToken.exp * 1000) {
+                setUser({
+                    isLogged: true,
+                    usager: {
+                        privilege_id: decodedToken.privilege_id,
+                        id: decodedToken.id
+                    }
+                });
+            } else {
+                localStorage.removeItem('user-token');
+            }
+        }
+
     }, [i18n]);
 
     const handleTrans = (code) => {
@@ -52,72 +88,48 @@ function App() {
     ));
 
     // Functions to handle login
-    useEffect(() => {
-        const estValide = jetonValide();
-        const userData = {
-            isLogged: estValide,
-            usager: {}
-        };
-        setUser(userData);
-    }, []);
+
 
     async function login(e) {
-      e.preventDefault();
-      const form = e.target;
-  
-      const body = {
-          nom_utilisateur: form.nomUtilisateur.value,
-          mot_de_passe: form.mdp.value,
-          withCredentials: true
-      };
-  
-      const data = {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json"
-          },
-          body: JSON.stringify(body)
-      };
-  
-      const response = await fetch(`http://localhost:5000/api/utilisateurs/login`, data);
-  
-      if (response.ok) {
-          const token = await response.json();
+        e.preventDefault();
+        const form = e.target;
+    
+        const body = {
+            nom_utilisateur: form.nomUtilisateur.value,
+            mot_de_passe: form.mdp.value,
+            withCredentials: true
+        };
+    
+        const data = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        };
+    
+        const response = await fetch(`http://localhost:5000/api/utilisateurs/login`, data);
+    
+        if (response.ok) {
+            const token = await response.json();
 
-console.log(token);
-
-          const decodedToken = jwtDecode(token.token);  
-          const userData = {
-              isLogged: true,
-              usager: {
-                  privilege_id: token.utilisateur.privilege_id,
-                  id: decodedToken.id
-              }
-          };
-          setUser(userData);
-          localStorage.setItem("user-token", token.token);
-          return { success: true, privId: token.utilisateur.privilege_id, userId: token.utilisateur.id };
-      } else {
-          localStorage.removeItem("user-token");
-          return { success: false };
-      }
-  }  
-
-    function jetonValide() {
-        try {
-            const token = localStorage.getItem("user-token");
-            const decode = jwtDecode(token);
-            if (token && Date.now() < decode.exp * 1000) {
-                return true;
-            } else {
-                localStorage.removeItem("user-token");
-                return false;
-            }
-        } catch (erreur) {
+            const decodedToken = jwtDecode(token.token);  
+            const userData = {
+                isLogged: true,
+                usager: {
+                    privilege_id: token.utilisateur.privilege_id,
+                    id: decodedToken.id
+                }
+            };
+            setUser(userData);
+            localStorage.setItem("user-token", token.token);
+            return { success: true, privId: token.utilisateur.privilege_id, userId: token.utilisateur.id };
+        } else {
             localStorage.removeItem("user-token");
-            return false;
+            return { success: false };
         }
     }
+
 
     function logout() {
         const userData = {
@@ -145,6 +157,77 @@ console.log(token);
                         <Route path='/admin' element={<DashboardAdmin t={t} />} />
                     </Route>
 
+                    <Route path='/model' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/model' element={<ModeleIndex t={t}  />} />
+                    </Route>
+                    <Route path='/model-edit' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/model-edit/:id' element={<ModeleUpdate t={t}   />} />
+                    </Route>
+
+                    <Route path='/model-create' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/model-create' element={<ModeleCreate t={t}   />} />
+                    </Route>
+                    <Route path='/constructeur' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/constructeur' element={<ConstructeurIndex t={t}   />} />
+                    </Route>
+
+                    <Route path='/constructeur-edit/:id' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/constructeur-edit/:id' element={<ConstructeurUpdate t={t}   />} />
+                    </Route>
+
+                    <Route path='/constructeur-create' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/constructeur-create' element={<ConstructeurCreate t={t}   />} />
+                    </Route>
+
+                    <Route path='/corps' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/corps' element={<CorpsIndex t={t}  changeLanguage={handleTrans}  />} />
+                    </Route>
+
+                    <Route path='/corps-create' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/corps-create' element={<CorpsCreate t={t}  changeLanguage={handleTrans}  />} />
+                    </Route>
+
+                    <Route path='/corps-update/:id' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/corps-update/:id' element={<CorpsUpdate t={t} />} />
+                    </Route>
+    
+                    <Route path='/transmission' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/transmission' element={<TransmissionIndex t={t} changeLanguage={handleTrans} />} />
+                    </Route>
+
+                    <Route path='/transmission-create' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/transmission-create' element={<TransmissionCreate t={t}  changeLanguage={handleTrans}  />} />
+                    </Route>
+
+                    <Route path='/transmission-update/:id' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/transmission-update/:id' element={<TransmissionUpdate t={t} />} />
+                    </Route>
+
+                    <Route path='/motopropulseur' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/motopropulseur' element={<MotopropulseurIndex t={t} changeLanguage={handleTrans} />} />
+                    </Route>
+
+                    <Route path='/motopropulseur-create' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/motopropulseur-create' element={<MotopropulseurCreate t={t}  changeLanguage={handleTrans}  />} />
+                    </Route>
+
+                    <Route path='/motopropulseur-update/:id' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/motopropulseur-update/:id' element={<MotopropulseurUpdate t={t} />} />
+                    </Route>
+
+                    <Route path='/carburant' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/carburant' element={<CarburantIndex t={t} changeLanguage={handleTrans} />} />
+                    </Route>
+
+                    <Route path='/carburant-create' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/carburant-create' element={<CarburantCreate t={t}  changeLanguage={handleTrans}  />} />
+                    </Route>
+
+                    <Route path='/carburant-update/:id' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/carburant-update/:id' element={<CarburantUpdate t={t} />} />
+                    </Route>
+
+
                     <Route path='/client' element={<PrivateRoute requiredPrivilege={[1,2,3]} />}>
                       <Route index element={<DashboardClient t={t} />} />
                     </Route>
@@ -165,7 +248,8 @@ console.log(token);
                     <Route path="/privileges" element={<PrivilegeIndex t={t} changeLanguage={handleTrans} />} />
                     <Route path="/privilege-edit/:id" element={<PrivilegeEdit t={t} changeLanguage={handleTrans} />} />
 
-                    
+                    <Route path='/voitures' element={<VoituresIndex t={t} />} />
+
                 </Routes>
             </Router>
         </AppContext.Provider>

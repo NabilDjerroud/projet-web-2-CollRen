@@ -20,6 +20,10 @@
       "accueil.titre3": "For limited time only!",
       "accueil.btnCta": "Shop now",
 
+      "btnEditer": "Edit",
+      "btnDeleter": "Delete",
+      "btnSubmit": "Save",
+
      
       "CreateUser.soustitre": "Be part of our car lovers community!",
       "CreateUser.prenom": "Name",
@@ -44,7 +48,7 @@
       
 
       "MenuDashboardAdmin.itemUser": "Users",
-      "MenuDashboardAdmin.itemProduct": "Products",
+      "MenuDashboardAdmin.itemProduct": "Cars",
 
       "user.prenom": "Name",
       "user.nom": "Family name",
@@ -70,7 +74,45 @@
       "dashC_telephone": "Phone",
       "dashC_cellulaire": "Mobile",
       "dashC_courriel": "E-mail",
-      "dashC_nom_utilisateur": "Username"
+      "dashC_nom_utilisateur": "Username",
+      
+      "modeleIndex_titre": "Models",
+      "modeleUpdate_titre": "Model - edit",
+      "modeleCreate_titre": "Model - create",
+      "modeleType_label": "Enter the type",
+      "modelIndex_create": "Create a new model",
+
+      "constructeurIndex_titre": "Brands",
+      "constructeurUpdate_titre": "Brand - edit",
+      "constructeurCreate_titre": "Brand - create",
+      "constructeurType_label": "Enter a new brand",
+      "constructeurIndex_create": "Create a new brand",
+
+      
+      "corpsIndex_titre": "Body styles",
+      "corpsUpdate_titre": "Body style - edit",
+      "corpsCreate_titre": "Body style - create",
+      "corpsType_label": "Enter a new body style",
+      "corpsIndex_create": "Create a new body style",
+      
+      "transmissionIndex_titre": "Transmission",
+      "transmissionUpdate_titre": "Transmission - edit",
+      "transmissionCreate_titre": "Transmission - create",
+      "transmissionType_label": "Enter a new type de transmission",
+      "transmissionIndex_create": "Create a new type of transmission",
+
+      "motopropulseurIndex_titre": "Engine",
+      "motopropulseurUpdate_titre": "Engine - edit",
+      "motopropulseurCreate_titre": "Engine - create",
+      "motopropulseurType_label": "Enter a new type of engine",
+      "motopropulseurIndex_create": "Create a new type of engine",
+
+      "carburantIndex_titre": "Fuel",
+      "carburantUpdate_titre": "Fuel - edit",
+      "carburantCreate_titre": "Fuel - create",
+      "carburantType_label": "Enter a new type of fuel",
+      "carburantIndex_create": "Create a new type of fuel"
+       
        
     }
   }

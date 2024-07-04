@@ -5,6 +5,10 @@
      "navItem.apropos": "À propos",
      "navItem.home": "Accueil",
      "navItem.signup": "S'inscrire",
+
+     "btnEditer": "Éditer",
+     "btnDeleter": "Éffacer",
+     "btnSubmit": "Soumettre",
      
      "login.titre": "Bienvenue à nouveau!", 
      "login.courriel": "Courriel", 
@@ -42,7 +46,7 @@
      "apropos.p5": "Visitez-nous aujourd'hui chez Beaux Bazous et découvrez pourquoi nous sommes le choix préféré de ceux qui recherchent qualité, intégrité et service exceptionnel en matière de voitures d'occasion à Montréal.",
   
       "MenuDashboardAdmin.itemUser": "Utilisateurs",
-      "MenuDashboardAdmin.itemProduct": "Produits",
+      "MenuDashboardAdmin.itemProduct": "Voitures",
 
       "user.prenom": "Prènom",
       "user.nom": "Nom",
@@ -68,7 +72,45 @@
       "dashC_telephone": "Phone",
       "dashC_cellulaire": "Cellulaire",
       "dashC_courriel": "Courriel",
-      "dashC_nom_utilisateur": "Nom d'utilisateur"
+      "dashC_nom_utilisateur": "Nom d'utilisateur",
+
+      "modeleIndex_titre": "Modèles",
+      "modeleUpdate_titre": "Modèle - éditer",
+      "modeleCreate_titre": "Modèle - créer",
+      "modeleType_label": "Entrez le type",
+      "modelIndex_create": "Crèe un nouveau modèle",
+
+      "constructeurIndex_titre": "Constructeurs",
+      "constructeurUpdate_titre": "Constructeur - éditer",
+      "constructeurCreate_titre": "Constructeur - créer",
+      "constructeurType_label": "Entrez le type",
+      "constructeurIndex_create": "Crèe un nouveau constructeur",
+
+      
+      "corpsIndex_titre": "Corps",
+      "corpsUpdate_titre": "Corps - éditer",
+      "corpsCreate_titre": "Corps - créer",
+      "corpsType_label": "Entrez le type de corps",
+      "corpsIndex_create": "Crèe un nouveau type de corps",
+
+      "transmissionIndex_titre": "Transmission",
+      "transmissionUpdate_titre": "Transmission - éditer",
+      "transmissionCreate_titre": "Transmission - créer",
+      "transmissionType_label": "Entrez un nouveau type de transmission",
+      "transmissionIndex_create": "Crèe un nouveau type de transmission",
+
+      "motopropulseurIndex_titre": "Motopropulseur",
+      "motopropulseurUpdate_titre": "Motopropulseur - éditer",
+      "motopropulseurCreate_titre": "Motopropulseur - créer",
+      "motopropulseurType_label": "Entrez un nouveau type de motopropulseur",
+      "motopropulseurIndex_create": "Crèe un nouveau type de motopropulseur",
+
+      "carburantIndex_titre": "Carburant",
+      "carburantUpdate_titre": "Carburant - éditer",
+      "carburantCreate_titre": "Carburant - créer",
+      "carburantType_label": "Entrez un nouveau type de carburant",
+      "carburantIndex_create": "Crèe un nouveau type de carburant"
+       
 
 
     }
