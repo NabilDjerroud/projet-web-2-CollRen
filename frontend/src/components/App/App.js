@@ -18,6 +18,8 @@ import { jwtDecode } from 'jwt-decode';
 import DashboardClient from '../dashboards/DashboardClient/DashboardClient';
 import PrivateRoute from '../dashboards/PrivateRoute/PrivateRoute';
 import VoituresIndex from '../voitures/VoituresIndex/VoituresIndex';
+import VoituresCreate from '../voitures/VoituresCreate/VoituresCreate';
+import VoituresUpdate from '../voitures/VoituresUpdate/VoituresUpdate';
 import ModeleIndex from '../voitures/ModeleIndex/ModeleIndex';
 import ModeleUpdate from '../voitures/ModeleUpdate/ModeleUpdate';
 import ModeleCreate from '../voitures/ModeleCreate/ModeleCreate';
@@ -229,6 +231,18 @@ function App() {
                         <Route path='/carburant-update/:id' element={<CarburantUpdate t={t} />} />
                     </Route>
 
+                    <Route path='/voitures' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/voitures' element={<VoituresIndex t={t} changeLanguage={handleTrans} />} />
+                    </Route>
+
+                    <Route path='/voiture-create' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/voiture-create' element={<VoituresCreate t={t}  changeLanguage={handleTrans}  />} />
+                    </Route>
+
+                    <Route path='/voiture-update/:id' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                        <Route path='/voiture-update/:id' element={<VoituresUpdate t={t}  changeLanguage={handleTrans} />} />
+                    </Route>
+
 
                     <Route path='/client' element={<PrivateRoute requiredPrivilege={[1, 2, 3]} />}>
                         <Route index element={<DashboardClient t={t} />} />
@@ -250,7 +264,6 @@ function App() {
                     <Route path="/privileges" element={<PrivilegeIndex t={t} changeLanguage={handleTrans} />} />
                     <Route path="/privilege-edit/:id" element={<PrivilegeEdit t={t} changeLanguage={handleTrans} />} />
 
-                    <Route path='/voitures' element={<VoituresIndex t={t} />} />
                     <Route path='/politique' element={<Politique t={t} />} />
                     <Route path='/contact' element={<Contact t={t} />} />
                 </Routes>
