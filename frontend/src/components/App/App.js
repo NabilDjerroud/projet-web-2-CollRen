@@ -36,14 +36,11 @@ import MotopropulseurUpdate from '../voitures/MotopropulseurUpdate/Motopropulseu
 import CarburantIndex from '../voitures/CarburantIndex/CarburantIndex';
 import CarburantUpdate from '../voitures/CarburantUpdate/CarburantUpdate';
 import CarburantCreate from '../voitures/CarburantCreate/CarburantCreate';
-
-export const AppContext = React.createContext();
-
 import Politique from '../site/Politique/Politique';
 import Footer from '../partials/Footer/Footer';
 import Contact from '../site/Contact/Contact';
 
-
+export const AppContext = React.createContext();
 const lngs = [
     { code: "en", native: "EN" },
     { code: "fr", native: "FR" },
@@ -254,6 +251,7 @@ function App() {
 
                     <Route path='/voitures' element={<VoituresIndex t={t} />} />
                     <Route path='/politique' element={<Politique t={t} />} />
+                    <Route path='/contact' element={<Contact t={t} />} />
                 </Routes>
                     <Footer t={t}/>
             </Router>
