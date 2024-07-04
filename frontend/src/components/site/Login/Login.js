@@ -56,9 +56,9 @@ function Login({ t }) {
 =======
         <main className="main-background">
             <div className="form-container">
-                <h1 className="text-4xl font-semibold">{t("login.titre")}</h1>
+                <h1 className="text-4xl font-titre font-bold">{t("login.titre")}</h1>
                 <form onSubmit={login} className="form-inner">
-                    <div>
+                    <div className="font-soustitre">
                         <ChampText
                             label={t("login.courriel")}
                             type="email"
@@ -68,7 +68,7 @@ function Login({ t }) {
                             required
                         />
                     </div>
-                    <div>
+                    <div className="font-soustitre">
                         <ChampText
                             label={t("login.mdp")}
                             type="password"
@@ -79,7 +79,7 @@ function Login({ t }) {
                         />
                     </div>
                     <div className="flex justify-center">
-                        <button type="submit" className="orange-button">{t("login.btn")}</button>
+                        <button type="submit" className="orange-button font-soustitre">{t("login.btn")}</button>
                     </div>
                 </form>
             </div>

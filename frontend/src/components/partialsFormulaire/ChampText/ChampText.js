@@ -1,6 +1,6 @@
 function ChampText({ label, type, placeholder, mandatory, onChange, value, name }) {
     return (
-        <div className="text-field"> 
+        <div className="text-field font-soustitre"> 
             <label className="text-[#F5F5F5]">
                 {label}
             </label>
