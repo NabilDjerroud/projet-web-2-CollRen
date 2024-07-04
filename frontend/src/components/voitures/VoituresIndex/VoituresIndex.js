@@ -68,7 +68,6 @@ function VoitureIndex({ t, changeLanguage }) {
         try {
             const response = await fetch(`http://localhost:5000/api/voitures/${id}`, {
                 method: 'DELETE',
->>>>>>> 44f5777 (Créer pages Voiture (côté admin))
             });
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
