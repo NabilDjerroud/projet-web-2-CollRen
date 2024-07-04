@@ -2,15 +2,14 @@ const { Model } = require("sequelize");
 const db = require("../models");
 const Voiture = db.voitures;
 const Op = db.Sequelize.Op;
-const Modele = db.modeles
-const Transmission = db.transmissions
-const Corps = db.corps
-const Motopropulseur = db.motopropulseurs
+
 const Carburant = db.carburants
+const Constructeur = db.constructeurs
+const Corp = db.corps
 const Image = db.images
-
-
-const Constructeur = require("../models/constructeur.model")
+const Modele = db.modeles
+const Motopropulseur = db.motopropulseurs
+const Transmission = db.transmissions
 
 // Create and Save a new Voiture
 exports.create = (req, res) => {
@@ -29,7 +28,44 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-    Voiture.findAll()
+    // var condition = constructeur ? { constructeur: { [Op.like]: `%${constructeur}%` } } : null;
+    // var condition = modele ? { modele_id: { [Op.like]: `%${model}%` } } : null;
+
+    // api/voitures/?modele_id=27&transmission_id=1&motopropulseur_id=1&carburant_id=1&corp_id=2
+    const queryCarburant = req.query.carburant_id;
+    const queryConstructeur = req.query.constructeur_id;
+    const queryCorp = req.query.corp_id;
+    const queryModele = req.query.modele_id;
+    const queryMotopropulseur = req.query.motopropulseur_id;
+    const queryTransmission = req.query.transmission_id;
+
+    var condition = {}
+    condition.carburant = {}
+    condition.constructeur = {}
+    condition.corp = {}
+    condition.modele = {}
+    condition.motopropulseur = {}
+    condition.transmission = {}
+
+    queryCarburant ? condition.carburant.id = queryCarburant : null;
+    queryConstructeur ? condition.constructeur.id = queryConstructeur : null;
+    queryCorp ? condition.corp.id = queryCorp : null;
+    queryModele ? condition.modele.id = queryModele : null;
+    queryMotopropulseur ? condition.motopropulseur.id = queryMotopropulseur : null;
+    queryTransmission ? condition.transmission.id = queryTransmission : null;
+
+    Voiture.findAll({
+        include:
+            [
+                { model: Carburant, where: condition.carburant },
+                /* { model: Constructeur, where: condition.constructeur }, */ // {"message":"constructeur is not associated to voiture!"}
+                { model: Corp, where: condition.corp },
+                { model: Modele, where: condition.modele },
+                { model: Motopropulseur, where: condition.motopropulseur },
+                { model: Transmission, where: condition.transmission },
+                { model: Image }
+            ]
+    })
         .then(data => {
             console.log("data", data); // Verifica os dados retornados
             res.send(data);
