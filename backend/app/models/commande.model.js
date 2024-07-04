@@ -15,7 +15,7 @@ module.exports = (connex, Sequelize) => {
                 key: 'id', allowNull:true 
             }
         },
-        expdedition_id: {
+        expedition_id: {
             type: Sequelize.INTEGER,
             allowNull: true,
             references: {
