@@ -16,13 +16,13 @@ function Nav({ t }) {
             <Link to="/" className="py-2 px-6 flex text-lg">
                 {t("navItem.home")}
             </Link>
-            <a href="/" className="py-2 px-6 flex color-red text-lg">
+            <a href="/voitures" className="py-2 px-6 flex color-red text-lg">
                 {t("navItem.catalogue")}
             </a>
             <Link to="/apropos" className="py-2 px-6 flex text-lg">
                 {t("navItem.apropos")}
             </Link>
-            <a href="#" className="py-2 px-6 flex text-lg">
+            <a href="/contact" className="py-2 px-6 flex text-lg">
                 Contact
             </a>
             {

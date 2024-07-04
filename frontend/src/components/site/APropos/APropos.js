@@ -29,6 +29,8 @@ function APropos({ t }) {
                         <p className="font-paragraphe mb-6 text-lg leading-7 text-coolGray-500">{t("apropos.p1")}</p>
                         <p className="font-paragraphe mb-6 text-lg leading-7 text-coolGray-500">{t("apropos.p2")}</p>
                         <p className="font-paragraphe mb-6 text-lg leading-7 text-coolGray-500">{t("apropos.p3")}</p>
+                        <p className="font-paragraphe mb-6 text-lg leading-7 text-coolGray-500">{t("apropos.p4")}</p>
+                        <p className="font-paragraphe mb-6 text-lg leading-7 text-coolGray-500">{t("apropos.p5")}</p>
                     </div>
                     <div className="w-full lg:w-1/2 px-4">
                     <div className="border-4 border-orange border-opacity-45 rounded-3xl overflow-hidden">
@@ -46,6 +48,8 @@ function APropos({ t }) {
                         <p className="font-paragraphe mb-6 text-lg leading-7 text-coolGray-500">{t("apropos.p1")}</p>
                         <p className="font-paragraphe mb-6 text-lg leading-7 text-coolGray-500">{t("apropos.p2")}</p>
                         <p className="font-paragraphe mb-6 text-lg leading-7 text-coolGray-500">{t("apropos.p3")}</p>
+                        <p className="font-paragraphe mb-6 text-lg leading-7 text-coolGray-500">{t("apropos.p4")}</p>
+                        <p className="font-paragraphe mb-6 text-lg leading-7 text-coolGray-500">{t("apropos.p5")}</p>
                     </div>
                   </div>
                         <div className="max-w-2xl mx-auto mt-12">
