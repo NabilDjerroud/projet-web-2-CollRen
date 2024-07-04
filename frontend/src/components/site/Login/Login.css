@@ -1,4 +1,16 @@
+.login-form{
+    background-image: url("http://localhost:3000/imgs/img_loginpage.jpg");
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    width: 100%;
+    min-height: 100vh
+}
 
+.login-title {
+    color: var(--blanc);
+    font-weight: 900;
+}
 /* Login.css */
 .main-background {
     background-image: url('/public/imgs/bluecar.jpg');
@@ -45,18 +57,4 @@ h1 {
     color: white;
     text-align: center;
     margin-bottom: 1rem;
-}
-
-.login-form{
-    background-image: url("http://localhost:3000/imgs/img_loginpage.jpg");
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
-    width: 100%;
-    min-height: 100vh
-}
-
-.login-title {
-    color: var(--blanc);
-    font-weight: 900;
 }
