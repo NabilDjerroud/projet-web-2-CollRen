@@ -11,7 +11,7 @@ function MotopropulseurIndex({ t, changeLanguage }) {
         // Fonction pour récupérer les motopropulseurs en fonction de la langue
         const fetchMotopropulseurs = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/motopropulseurs');
+                const response = await fetch(`${t("fetch")}motopropulseurs`);
                 if (!response.ok) {
                     throw new Error(`Erreur HTTP! statut: ${response.status}`);
                 }
@@ -39,7 +39,7 @@ function MotopropulseurIndex({ t, changeLanguage }) {
 
     const handleDeleteMotopropulseur = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/motopropulseurs/${id}`, {
+            const response = await fetch(`${t("fetch")}motopropulseurs/${id}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {
@@ -78,7 +78,7 @@ function MotopropulseurIndex({ t, changeLanguage }) {
                             <tr key={motopropulseur.id}>
                                 <td className="px-6 py-4 whitespace-nowrap text-white">{motopropulseur.type[language]}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <Link to={`/motopropulseur-update/${motopropulseur.id}`} 
+                                    <Link to={`/motopropulseur-update/${motopropulseur.id}`}
                                         className="bg-[#F96C25] hover:bg-[#868E9B] text-white font-bold py-2 px-4 rounded-full mx-[1rem]">
                                         {t("btnEditer")}
                                     </Link>

@@ -5,7 +5,7 @@ import ChampText from '../../partialsFormulaire/ChampText/ChampText';
 import Bouton from '../../partialsFormulaire/Bouton/Bouton';
 
 function MotopropulseurUpdate({ t }) {
-    const { id } = useParams(); 
+    const { id } = useParams();
     const [formData, setFormData] = useState({
         motopropulseur_en: '',
         motopropulseur_fr: ''
@@ -14,7 +14,7 @@ function MotopropulseurUpdate({ t }) {
     useEffect(() => {
         const fetchMotopropulseur = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/motopropulseurs/${id}`);
+                const response = await fetch(`${t("fetch")}motopropulseurs/${id}`);
                 if (!response.ok) {
                     throw new Error(`Erreur HTTP! statut: ${response.status}`);
                 }
@@ -56,7 +56,7 @@ function MotopropulseurUpdate({ t }) {
         event.preventDefault();
 
         try {
-            const response = await fetch(`http://localhost:5000/api/motopropulseurs/${id}`, {
+            const response = await fetch(`${t("fetch")}motopropulseurs/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

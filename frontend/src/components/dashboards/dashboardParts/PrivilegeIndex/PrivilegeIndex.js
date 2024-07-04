@@ -6,12 +6,12 @@ function PrivilegeIndex({ t, changeLanguage }) {
     const [privileges, setPrivileges] = useState([]);
     const [language, setLanguage] = useState(localStorage.getItem('langueChoisie'));
 
-   
+
     useEffect(() => {
         // Function to fetch privileges based on language
         const fetchPrivileges = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/privileges');
+                const response = await fetch(`${t("fetch")}privileges`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -41,7 +41,7 @@ function PrivilegeIndex({ t, changeLanguage }) {
     // Function to handle privilege deletion
     const handleDeletePrivilege = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/privileges/${id}`, {
+            const response = await fetch(`${t("fetch")}privileges/${id}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {
@@ -88,7 +88,7 @@ function PrivilegeIndex({ t, changeLanguage }) {
                                         onClick={() => handleDeletePrivilege(privilege.id)}
                                         className="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out"
                                     >
-                                         {t("privilegeIndex.btnDeleter")}
+                                        {t("privilegeIndex.btnDeleter")}
                                     </button>
                                 </td>
                             </tr>

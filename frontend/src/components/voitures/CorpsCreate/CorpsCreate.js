@@ -30,7 +30,7 @@ function CorpsCreate({ t }) {
         };
 
         try {
-            const response = await fetch('http://localhost:5000/api/corps', {
+            const response = await fetch(`${t("fetch")}corps`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ function CorpsCreate({ t }) {
             const data = await response.json();
             console.log('Succès:', data);
             alert('Corps créé avec succès!');
-            navigate('/corps'); 
+            navigate('/corps');
             setFormData({
                 corps_en: '',
                 corps_fr: ''

@@ -12,7 +12,7 @@ function ConstructeurUpdate({ t }) {
     useEffect(() => {
         const fetchConstructeur = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/constructeurs/${id}`);
+                const response = await fetch(`${t("fetch")}constructeurs/${id}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -35,7 +35,7 @@ function ConstructeurUpdate({ t }) {
         event.preventDefault();
 
         try {
-            const response = await fetch(`http://localhost:5000/api/constructeurs/${id}`, {
+            const response = await fetch(`${t("fetch")}constructeurs/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -60,7 +60,7 @@ function ConstructeurUpdate({ t }) {
                 <MenuDashboardAdmin t={t} />
             </div>
 
-            <div className='flex flex-col '> 
+            <div className='flex flex-col '>
                 <h2 className="mx-[4rem] mt-24">{t("constructeurUpdate_titre")}</h2>
                 <div className="w-[120%] mx-[4rem] mt-12 bg-[#F96C25] rounded-lg">
                     <form onSubmit={handleSubmit} className="p-3 bg-[#21283B] rounded-lg">

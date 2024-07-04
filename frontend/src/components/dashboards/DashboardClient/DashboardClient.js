@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from '../../App/App';  
+import { AppContext } from '../../App/App';
 import ChampText from '../../partialsFormulaire/ChampText/ChampText';
 import Bouton from '../../partialsFormulaire/Bouton/Bouton';
 
@@ -17,14 +17,14 @@ const DashboardClient = ({ t }) => {
     cellulaire: '',
     courriel: '',
     nom_utilisateur: '',
-   
+
   });
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchClientData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/utilisateurs/${user.usager.id}`, {
+        const response = await fetch(`${t("fetch")}utilisateurs/${user.usager.id}`, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('user-token')}`,
@@ -79,7 +79,7 @@ const DashboardClient = ({ t }) => {
     };
 
     try {
-      const response = await fetch(`http://localhost:5000/api/utilisateurs/${user.usager.id}`, {
+      const response = await fetch(`${t("fetch")}utilisateurs/${user.usager.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

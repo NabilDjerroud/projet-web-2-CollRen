@@ -5,13 +5,13 @@ import ChampText from '../../partialsFormulaire/ChampText/ChampText';
 import Bouton from '../../partialsFormulaire/Bouton/Bouton';
 
 function ModeleUpdate({ t }) {
-    const { id } = useParams(); 
+    const { id } = useParams();
     const [type, setType] = useState('');
 
     useEffect(() => {
         const fetchModel = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/models/${id}`);
+                const response = await fetch(`${t("fetch")}modeles/${id}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -36,7 +36,7 @@ function ModeleUpdate({ t }) {
         event.preventDefault();
 
         try {
-            const response = await fetch(`http://localhost:5000/api/models/${id}`, {
+            const response = await fetch(`${t("fetch")}modeles/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -63,7 +63,7 @@ function ModeleUpdate({ t }) {
                 <MenuDashboardAdmin t={t} />
             </div>
 
-            <div className='flex flex-col '> 
+            <div className='flex flex-col '>
                 <h2 className="mx-[4rem] mt-24">{t("modeleUpdate_titre")}</h2>
                 <div className="w-[120%] mx-[4rem] mt-12 bg-[#F96C25] rounded-lg">
                     <form onSubmit={handleSubmit} className="p-3 bg-[#21283B] rounded-lg">

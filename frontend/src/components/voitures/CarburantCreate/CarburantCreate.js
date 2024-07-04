@@ -30,7 +30,7 @@ function CarburantCreate({ t }) {
         };
 
         try {
-            const response = await fetch('http://localhost:5000/api/carburants', {
+            const response = await fetch(`${t("fetch")}carburants`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ function CarburantCreate({ t }) {
             const data = await response.json();
             console.log('Succès:', data);
             alert('Carburant créé avec succès!');
-            navigate('/carburant'); 
+            navigate('/carburant');
             setFormData({
                 carburant_en: '',
                 carburant_fr: ''

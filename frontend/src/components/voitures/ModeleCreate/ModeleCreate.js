@@ -12,7 +12,7 @@ function ModeleCreate({ t }) {
         event.preventDefault();
 
         try {
-            const response = await fetch(`http://localhost:5000/api/models`, {
+            const response = await fetch(`${t("fetch")}modeles`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -25,21 +25,21 @@ function ModeleCreate({ t }) {
             }
 
             alert('Modèle créé avec succès !');
-            navigate('/model'); 
+            navigate('/model');
         } catch (error) {
             console.error('Erreur lors de la création du modèle :', error);
             alert('Erreur lors de la création du modèle. Veuillez réessayer.');
         }
     };
 
-   
+
     return (
         <div className="flex">
             <div>
                 <MenuDashboardAdmin t={t} />
             </div>
 
-            <div className='flex flex-col '> 
+            <div className='flex flex-col '>
                 <h2 className="mx-[4rem] mt-24">{t("modeleCreate_titre")}</h2>
                 <div className="w-[120%] mx-[4rem] mt-12 bg-[#F96C25] rounded-lg">
                     <form onSubmit={handleSubmit} className="p-3 bg-[#21283B] rounded-lg">
@@ -52,7 +52,7 @@ function ModeleCreate({ t }) {
                                 onChange={(e) => setType(e.target.value)}
                             />
                         </div>
-                   
+
 
                         <Bouton
                             type="submit"

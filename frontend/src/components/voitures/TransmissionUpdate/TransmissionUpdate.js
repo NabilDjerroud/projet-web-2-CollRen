@@ -5,7 +5,7 @@ import ChampText from '../../partialsFormulaire/ChampText/ChampText';
 import Bouton from '../../partialsFormulaire/Bouton/Bouton';
 
 function TransmissionUpdate({ t }) {
-    const { id } = useParams(); 
+    const { id } = useParams();
     const [formData, setFormData] = useState({
         transmission_en: '',
         transmission_fr: ''
@@ -14,7 +14,7 @@ function TransmissionUpdate({ t }) {
     useEffect(() => {
         const fetchTransmission = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/transmissions/${id}`);
+                const response = await fetch(`${t("fetch")}transmissions/${id}`);
                 if (!response.ok) {
                     throw new Error(`Erreur HTTP! statut: ${response.status}`);
                 }
@@ -56,7 +56,7 @@ function TransmissionUpdate({ t }) {
         event.preventDefault();
 
         try {
-            const response = await fetch(`http://localhost:5000/api/transmissions/${id}`, {
+            const response = await fetch(`${t("fetch")}transmissions/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

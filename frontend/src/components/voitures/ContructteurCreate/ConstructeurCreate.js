@@ -13,7 +13,7 @@ function ConstructeurCreate({ t }) {
         event.preventDefault();
 
         try {
-            const response = await fetch(`http://localhost:5000/api/constructeurs`, {
+            const response = await fetch(`${t("fetch")}constructeurs`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -26,7 +26,7 @@ function ConstructeurCreate({ t }) {
             }
 
             alert('Constructeur créé avec succès !');
-            navigate('/constructeur'); 
+            navigate('/constructeur');
         } catch (error) {
             console.error('Erreur lors de la création du constructeur :', error);
             alert('Erreur lors de la création du constructeur. Veuillez réessayer.');
@@ -39,7 +39,7 @@ function ConstructeurCreate({ t }) {
                 <MenuDashboardAdmin t={t} />
             </div>
 
-            <div className='flex flex-col '> 
+            <div className='flex flex-col '>
                 <h2 className="mx-[4rem] mt-24">{t("constructeurCreate_titre")}</h2>
                 <div className="w-[120%] mx-[4rem] mt-12 bg-[#F96C25] rounded-lg">
                     <form onSubmit={handleSubmit} className="p-3 bg-[#21283B] rounded-lg">

@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import MenuDashboardAdmin from '../../dashboards/MenuDashboardAdmin/MenuDashboardAdmin';
 import Bouton from '../../partialsFormulaire/Bouton/Bouton';
 
-function ModeleIndex({ t}) {
+function ModeleIndex({ t }) {
     const [models, setModels] = useState([]);
     const [language, setLanguage] = useState(localStorage.getItem('langueChoisie'));
 
     useEffect(() => {
         const fetchmodels = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/models');
+                const response = await fetch(`${t("fetch")}models`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -25,11 +25,11 @@ function ModeleIndex({ t}) {
         fetchmodels();
     }, [language]);
 
-  
+
 
     const handleDeleteModel = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/models/${id}`, {
+            const response = await fetch(`${t("fetch")}modeles/${id}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {

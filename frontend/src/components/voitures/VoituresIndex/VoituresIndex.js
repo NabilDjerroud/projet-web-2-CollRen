@@ -5,7 +5,7 @@ function VoituresIndex({ t }) {
     const [voitures, setVoitures] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/voitures')
+        axios.get(`${t("fetch")}api/voitures`)
             .then(response => {
                 setVoitures(response.data);
                 console.log(response.data);
