@@ -50,6 +50,20 @@ db.voitures.hasMany(db.images, { foreignKey: 'image_id' })
 db.privileges.hasMany(db.utilisateurs, { foreignKey: 'privilege_id' })
 db.utilisateurs.belongsTo(db.privileges, { foreignKey: 'privilege_id'})
 
+// expedition_id , utilisateur_id , statut_id
+
+db.commandes.belongsTo(db.mode_paiements, { foreignKey: 'mode_paiement_id' })
+db.mode_paiements.hasMany(db.commandes, { foreignKey: 'mode_paiement_id' })
+
+db.commandes.belongsTo(db.expeditions, { foreignKey: 'expedition_id' })
+db.expeditions.hasMany(db.commandes, { foreignKey: 'expedition_id' })
+
+db.commandes.belongsTo(db.utilisateurs, { foreignKey: 'utilisateur_id' })
+db.utilisateurs.hasMany(db.commandes, { foreignKey: 'utilisateur_id' })
+
+db.commandes.belongsTo(db.statuts, { foreignKey: 'statut_id' })
+db.statuts.hasMany(db.commandes, { foreignKey: 'statut_id' })
+
 // Province.hasMany(models.Ville, { as: 'villes' })
 // db.villes.belongsTo(db.provinces, { foreignKey: 'province_Id', as: 'province' })
 

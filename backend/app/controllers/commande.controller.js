@@ -1,5 +1,9 @@
 const db = require("../models");
 const Commande = db.commandes;
+const ModePaiement = db.mode_paiements;
+const Expedition = db.expeditions;
+const Utilisateur = db.utilisateurs;
+const Statut = db.statuts;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Commande
@@ -30,7 +34,15 @@ exports.findAll = (req, res) => {
     const title = req.query.title;
     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
-    Commande.findAll({ where: condition })
+    Commande.findAll({
+        include:
+        [
+                { model: ModePaiement },
+                { model: Expedition },
+                { model: Utilisateur },
+                { model: Statut },
+        ]
+    })
         .then(data => {
             res.send(data);
         })
