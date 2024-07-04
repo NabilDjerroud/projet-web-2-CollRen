@@ -78,9 +78,6 @@ function Accueil({ t }) {
                         </div>
                 </section>
             </div>
-            <div>
-                <Footer t={t} />
-            </div>
         </div>
     );
 }
