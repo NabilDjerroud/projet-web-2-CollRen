@@ -41,6 +41,7 @@ export const AppContext = React.createContext();
 
 import Politique from '../site/Politique/Politique';
 import Footer from '../partials/Footer/Footer';
+import Contact from '../site/Contact/Contact';
 
 
 const lngs = [
