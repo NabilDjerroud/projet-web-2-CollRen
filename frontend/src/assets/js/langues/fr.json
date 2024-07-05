@@ -45,8 +45,15 @@
      "apropos.p4": "De plus, chez Beaux Bazous, nous attachons une grande importance aux relations à long terme avec nos clients. Nous offrons un soutien continu et des services d'entretien après-vente pour assurer que votre voiture continue de vous offrir des performances exceptionnelles au fil des ans.",
      "apropos.p5": "Visitez-nous aujourd'hui chez Beaux Bazous et découvrez pourquoi nous sommes le choix préféré de ceux qui recherchent qualité, intégrité et service exceptionnel en matière de voitures d'occasion à Montréal.",
   
+     "menuDashboardAdmin_voiture": "Voiture - gérer les détails", 
       "MenuDashboardAdmin.itemUser": "Utilisateurs",
       "MenuDashboardAdmin.itemProduct": "Voitures",
+      "MenuDashboardAdmin_voiture_carburant": "Carburant",
+      "MenuDashboardAdmin_voiture_constructeur": "Constructeur",
+      "MenuDashboardAdmin_voiture_corps": "Corps",
+      "MenuDashboardAdmin_voiture_modele": "Modèle",
+      "MenuDashboardAdmin_voiture_motopropulseur": "Motopropulseur",
+      "MenuDashboardAdmin_voiture_transmission": "Transmission",
 
       "user.prenom": "Prènom",
       "user.nom": "Nom",

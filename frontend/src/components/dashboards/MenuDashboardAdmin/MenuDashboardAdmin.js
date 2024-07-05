@@ -130,7 +130,7 @@ function MenuDashboardAdmin ({t}) {
                         </svg>
     
                         <span>
-                            Voitures
+                            {t("menuDashboardAdmin_voiture")}
                         </span>
                     </span>
                     <svg className="w-5 h-5 text-gray-500 transition group-open:rotate-90" xmlns="http://www.w3.org/2000/svg"
@@ -143,13 +143,12 @@ function MenuDashboardAdmin ({t}) {
     
                 <article className="px-4 pb-4">
                     <ul className="flex flex-col gap-1 pl-2">
-                        <li><Link to="">Ajouter une voiture</Link></li>
-                        <li><Link to="/carburant">Carburant</Link></li>
-                        <li><Link to="/constructeur">Constructeur</Link></li>
-                        <li><Link to="/corps">Corps</Link></li>
-                        <li><Link to="/model">Modèle</Link></li>
-                        <li><Link to="/motopropulseur">Motopropulseur</Link></li>
-                        <li><Link to="/transmission">Transmission</Link></li>
+                        <li><Link to="/carburant">{t("MenuDashboardAdmin_voiture_carburant")}</Link></li>
+                        <li><Link to="/constructeur">{t("MenuDashboardAdmin_voiture_constructeur")}</Link></li>
+                        <li><Link to="/corps">{t("MenuDashboardAdmin_voiture_corps")}</Link></li>
+                        <li><Link to="/model">{t("MenuDashboardAdmin_voiture_modele")}</Link></li>
+                        <li><Link to="/motopropulseur">{t("MenuDashboardAdmin_voiture_motopropulseur")}</Link></li>
+                        <li><Link to="/transmission">{t("MenuDashboardAdmin_voiture_transmission")}</Link></li>
                     </ul>
                 </article>
     

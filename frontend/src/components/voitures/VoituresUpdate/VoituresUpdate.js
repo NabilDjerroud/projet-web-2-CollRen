@@ -280,7 +280,7 @@ function VoitureUpdate({ t }) {
                             type="submit"
                             className="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-blue-600 text-white hover:bg-blue-600"
                         >
-                            {t("UpdateVoiture.btnSubmit")}
+                            {t("btnSubmit")}
                         </Bouton>
                     </form>
                 </div>
