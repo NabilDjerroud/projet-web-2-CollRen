@@ -1,19 +1,33 @@
+const { log } = require("console");
 const db = require("../models");
 const Image = db.images;
 const Op = db.Sequelize.Op;
+const multer = require("multer");
+
+
+
 
 // Create and Save a new Image
 exports.create = (req, res) => {
 
+console.log("estou no create image");
+console.log(req.body);
+console.log(req.files);
+
     // Save Image in the database
-    Image.create(req.body)
+    const imagesData = req.files.map(file => ({
+        voiture_id: req.query.voiture_id, // ou use req.body.voiture_id, se estiver no corpo da requisição
+        filename: file.filename,
+        chemin: file.path
+    }));
+
+    Image.bulkCreate(imagesData)
         .then(data => {
-            res.send(data);
+            res.status(200).json({ message: 'Images uploaded and saved successfully!', data });
         })
         .catch(err => {
             res.status(500).send({
-                message:
-                    err.message || "Some error occurred while creating the Image."
+                message: err.message || "Some error occurred while creating the Image."
             });
         });
 };
@@ -122,3 +136,4 @@ exports.deleteAll = (req, res) => {
             });
         });
 };
+

@@ -1,6 +1,6 @@
 // import { DataTypes } from '@sequelize/core';
 module.exports = (connex, Sequelize) => {
-    const Image = connex.define('images', {
+    const Image = connex.define('image', {
         est_principale: {
             type: Sequelize.TINYINT
         },
