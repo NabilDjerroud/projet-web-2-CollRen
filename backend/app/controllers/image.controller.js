@@ -5,8 +5,6 @@ const Op = db.Sequelize.Op;
 const multer = require("multer");
 
 
-
-
 // Create and Save a new Image
 exports.create = (req, res) => {
 
