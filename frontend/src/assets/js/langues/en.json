@@ -46,9 +46,15 @@
       "apropos.p4": "Furthermore, at Beaux Bazous, we place great importance on long-term relationships with our customers. We offer ongoing support and aftersales maintenance services to ensure your car continues to deliver exceptional performance over the years.",
       "apropos.p5": "Visit us today at Beaux Bazous and discover why we are the preferred choice for those seeking quality, integrity, and exceptional service in used cars in Montreal.",
       
-
+      "menuDashboardAdmin_voiture": "Car - manage details", 
       "MenuDashboardAdmin.itemUser": "Users",
       "MenuDashboardAdmin.itemProduct": "Cars",
+      "MenuDashboardAdmin_voiture_carburant": "Fuel",
+      "MenuDashboardAdmin_voiture_constructeur": "Brand",
+      "MenuDashboardAdmin_voiture_corps": "Body style",
+      "MenuDashboardAdmin_voiture_modele": "Models",
+      "MenuDashboardAdmin_voiture_motopropulseur": "Engine",
+      "MenuDashboardAdmin_voiture_transmission": "Transmission",
 
       "user.prenom": "Name",
       "user.nom": "Family name",
@@ -120,7 +126,35 @@
       "voitureUpdate_titre": "Car - edit",
       "voitureCreate_titre": "Car - create",
       "voitureType_label": "Enter a new car",
-      "voitureIndex_create": "Create a new car"
+      "voitureIndex_create": "Create a new car",
 
+      "voituretableau_Modele" : "Model",
+      "voituretableau_Constructeur" : "Brand",
+      "voituretableau_Corps" : "Body style",
+      "voituretableau_Transmission" : "Transmission",
+      "voituretableau_Motopropulseur" : "Engine",
+      "voituretableau_Carburant" : "Fuel",
+      "voituretableau_Prix" : "Price",
+       
+      "voitureCreate_date_label": "Year",
+      "voitureCreate_date_placeholder": "Car's launch year",
+      "voitureCreate_description_label_en": "Enter a description in English",
+      "voitureCreate_description_label_fr": "Enter a description in French",
+      "voitureCreate_description_placeholder_en": "Enter a description",
+      "voitureCreate_description_placeholder_fr": "Enter a description",
+      "voitureCreate_prix_label": "Price",
+      "voitureCreate_prix_placeholder": "Enter a price",
+      "voitureCreate_modele_label": "Model",
+      "voitureCreate_select_modele": "Select a model",
+      "voitureCreate_transmission_label": "Transmission",
+      "voitureCreate_select_transmission": "Select a transmission",
+      "voitureCreate_motopropulseur_label": "Engine",
+      "voitureCreate_select_motopropulseur": "Select an engine",
+      "voitureCreate_corps_label": "Body style",
+      "voitureCreate_select_corps": "Select a body style",
+      "voitureCreate_carburant_label": "Fuel",
+      "voitureCreate_select_carburant": "Select a fuel"
+  
+      
     }
   }
