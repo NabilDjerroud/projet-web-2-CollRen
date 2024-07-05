@@ -27,7 +27,7 @@ function VoitureUpdate({ t }) {
     useEffect(() => {
         const fetchVoiture = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/voitures/${id}`);
+                const response = await fetch(`${t("fetch")}voitures/${id}`);
                 if (!response.ok) {
                     throw new Error(`Erreur HTTP ! statut : ${response.status}`);
                 }
@@ -49,11 +49,11 @@ function VoitureUpdate({ t }) {
         const fetchOptions = async () => {
             try {
                 const [modelesRes, transmissionsRes, motopropulseursRes, carburantsRes, corpsRes] = await Promise.all([
-                    fetch('http://localhost:5000/api/modeles'),
-                    fetch('http://localhost:5000/api/transmissions'),
-                    fetch('http://localhost:5000/api/motopropulseurs'),
-                    fetch('http://localhost:5000/api/carburants'),
-                    fetch('http://localhost:5000/api/corps')
+                    fetch(`${t("fetch")}modeles`),
+                    fetch(`${ t("fetch") }transmissions`),
+                    fetch(`${t("fetch")}motopropulseurs`),
+                    fetch(`${ t("fetch") }carburants`),
+                    fetch(`${t("fetch")}corps`)
                 ]);
 
                 if (!modelesRes.ok || !transmissionsRes.ok || !motopropulseursRes.ok || !carburantsRes.ok || !corpsRes.ok) {
@@ -112,7 +112,7 @@ function VoitureUpdate({ t }) {
         const description = JSON.stringify({ en: descriptionEn, fr: descriptionFr });
 
         try {
-            const response = await fetch(`http://localhost:5000/api/voitures/${id}`, {
+            const response = await fetch(`${t("fetch")}voitures/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

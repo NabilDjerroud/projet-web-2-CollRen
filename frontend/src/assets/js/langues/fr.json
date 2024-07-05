@@ -18,6 +18,11 @@
      "login.courrielPlaceHolder": "SVP, entrez votre courriel", 
      "login.mdpPlaceHolder":  "Votre mot de passe",
 
+     "barreRecheche.placeHolder":  "Ex. Ford Mustang",
+     "barreRecheche.titre":  "Recherche",
+
+
+
      "accueil.titre1": "25% de rabais",
      "accueil.titre2": "Spécial d'été",
      "accueil.titre3": "Pour une durée limitée!",
@@ -118,7 +123,7 @@
       "carburantCreate_titre": "Carburant - créer",
       "carburantType_label": "Entrez un nouveau type de carburant",
       "carburantIndex_create": "Crèe un nouveau type de carburant",
-      "fetch": "http://localhost:5000/api/",
+      "fetch": "http://localhost:5001/api/",
       
       "voitureIndex_titre": "Liste de voitures",
       "voitureUpdate_titre": "Voiture - éditer",

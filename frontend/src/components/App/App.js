@@ -41,7 +41,6 @@ import CarburantCreate from '../voitures/CarburantCreate/CarburantCreate';
 import Politique from '../site/Politique/Politique';
 import Footer from '../partials/Footer/Footer';
 import Contact from '../site/Contact/Contact';
-import VoituresCreate from '../voitures/VoituresCreate/VoituresCreate';
 import Catalogue from '../site/Catalogue/Catalogue';
 
 
@@ -171,8 +170,8 @@ function App() {
                         <Route path='/model-edit/:id' element={<ModeleUpdate t={t} />} />
                     </Route>
 
-                    <Route path='/model-create' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
-                        <Route path='/model-create' element={<ModeleCreate t={t}  />} />
+                    <Route path='/model-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                        <Route path='/model-create' element={<ModeleCreate t={t} />} />
                     </Route>
                     <Route path='/constructeur' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
                         <Route path='/constructeur' element={<ConstructeurIndex t={t} />} />
@@ -234,16 +233,16 @@ function App() {
                         <Route path='/carburant-update/:id' element={<CarburantUpdate t={t} />} />
                     </Route>
 
-                    <Route path='/voitures' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
+                    <Route path='/voitures' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
                         <Route path='/voitures' element={<VoituresIndex t={t} changeLanguage={handleTrans} />} />
                     </Route>
 
-                    <Route path='/voiture-create' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
-                        <Route path='/voiture-create' element={<VoituresCreate t={t}  changeLanguage={handleTrans}  />} />
+                    <Route path='/voiture-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                        <Route path='/voiture-create' element={<VoituresCreate t={t} changeLanguage={handleTrans} />} />
                     </Route>
 
-                    <Route path='/voiture-update/:id' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
-                        <Route path='/voiture-update/:id' element={<VoituresUpdate t={t}  changeLanguage={handleTrans} />} />
+                    <Route path='/voiture-update/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                        <Route path='/voiture-update/:id' element={<VoituresUpdate t={t} changeLanguage={handleTrans} />} />
                     </Route>
                     
 
@@ -261,7 +260,7 @@ function App() {
                     </Route>
 
 
-                    <Route path='/login' element={<Login t={t} user={user} handleLogin={login} handleLogout={logout} />} />
+                    <Route path='/login' element={<Login t={t} user={user} handlew={login} handleLogout={logout} />} />
                     <Route path='/usercreate' element={<UserCreate t={t} />} />
 
                     <Route path="/privilege-create" element={<PrivilegeCreate t={t} />} />
