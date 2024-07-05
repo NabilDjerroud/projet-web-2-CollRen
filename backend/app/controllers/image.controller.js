@@ -8,15 +8,11 @@ const multer = require("multer");
 // Create and Save a new Image
 exports.create = (req, res) => {
 
-console.log("estou no create image");
-console.log(req.body);
-console.log(req.files);
-
-    // Save Image in the database
+    // Salvar informações das imagens no banco de dados
     const imagesData = req.files.map(file => ({
-        voiture_id: req.query.voiture_id, // ou use req.body.voiture_id, se estiver no corpo da requisição
+        voiture_id: req.query.voiture_id,
         filename: file.filename,
-        chemin: file.path
+        chemin: file.filename // Armazenando apenas o nome do arquivo com a extensão
     }));
 
     Image.bulkCreate(imagesData)

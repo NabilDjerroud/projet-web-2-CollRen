@@ -13,21 +13,13 @@ const Transmission = db.transmissions
 
 // Create and Save a new Voiture
 exports.create = (req, res) => {
-    console.log("xxxxxxxxxxx");
-    console.log(req.body);
-    console.log("xxxxxxxxxxx");
-    // console.log(res);
 
     // Save Voiture in the database
     Voiture.create(req.body)
         .then(data => {
-            console.log("yyyyyyyyyyyy");
-            console.log(data);
             res.send(data);
         })
         .catch(err => {
-            console.log("zzzzzz");
-            console.log(err);
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while creating the Voiture."
@@ -35,48 +27,7 @@ exports.create = (req, res) => {
         });
 };
 
-// exports.create = (req, res) => {
 
-//     console.log("xxxxxxxx");
-//     console.log(req.body);
-    
-//     upload(req, res, async function (err) {
-//         if (err) {
-//             return res.status(400).send({ message: err.message });
-//         }
-
-//         try {
-//             const { date, description, prix, modele_id, transmission_id, motopropulseur_id, carburant_id, corp_id } = req.body;
-
-//             // Criar a Voiture no banco de dados
-//             const voiture = await Voiture.create({
-//                 date,
-//                 description,
-//                 prix,
-//                 modele_id,
-//                 transmission_id,
-//                 motopropulseur_id,
-//                 carburant_id,
-//                 corp_id
-//             });
-
-//             // Salvar informações das imagens no banco de dados
-//             if (req.files && req.files.length > 0) {
-//                 const images = req.files.map(file => ({
-//                     voiture_id: voiture.id,
-//                     filename: file.filename,
-//                     path: file.path
-//                 }));
-//                 await Image.bulkCreate(images);
-//             }
-
-//             res.status(201).json({ message: 'Voiture et images créées avec succès !', voiture });
-//         } catch (error) {
-//             console.log(error);
-//             res.status(500).json({ message: 'Erreur lors de la création de la voiture.', error: error.message });
-//         }
-//     });
-// };
 
 
 exports.findAll = (req, res) => {
