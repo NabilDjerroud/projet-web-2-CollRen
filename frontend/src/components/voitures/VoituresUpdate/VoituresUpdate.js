@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import MenuDashboardAdmin from '../../dashboards/MenuDashboardAdmin/MenuDashboardAdmin';
 import ChampText from '../../partialsFormulaire/ChampText/ChampText';
 import ChampTextArea from '../../partialsFormulaire/ChampTextArea/ChampTextArea';
 import Bouton from '../../partialsFormulaire/Bouton/Bouton';
 
-function VoitureCreate({ t }) {
+function VoitureUpdate({ t }) {
     const navigate = useNavigate();
+    const { id } = useParams();
     const [date, setDate] = useState('');
     const [descriptionEn, setDescriptionEn] = useState('');
     const [descriptionFr, setDescriptionFr] = useState('');
@@ -24,6 +25,27 @@ function VoitureCreate({ t }) {
     const language = localStorage.getItem('langueChoisie') || 'en';
 
     useEffect(() => {
+        const fetchVoiture = async () => {
+            try {
+                const response = await fetch(`http://localhost:5000/api/voitures/${id}`);
+                if (!response.ok) {
+                    throw new Error(`Erreur HTTP ! statut : ${response.status}`);
+                }
+                const data = await response.json();
+                setDate(data.date);
+                setDescriptionEn(JSON.parse(data.description).en);
+                setDescriptionFr(JSON.parse(data.description).fr);
+                setPrix(data.prix);
+                setSelectedModele(data.modele_id);
+                setSelectedTransmission(data.transmission_id);
+                setSelectedMotopropulseur(data.motopropulseur_id);
+                setSelectedCarburant(data.carburant_id);
+                setSelectedCorp(data.corp_id);
+            } catch (error) {
+                console.error('Erreur lors de la récupération de la voiture :', error);
+            }
+        };
+
         const fetchOptions = async () => {
             try {
                 const [modelesRes, transmissionsRes, motopropulseursRes, carburantsRes, corpsRes] = await Promise.all([
@@ -80,8 +102,9 @@ function VoitureCreate({ t }) {
             }
         };
 
+        fetchVoiture();
         fetchOptions();
-    }, []);
+    }, [id]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -89,8 +112,8 @@ function VoitureCreate({ t }) {
         const description = JSON.stringify({ en: descriptionEn, fr: descriptionFr });
 
         try {
-            const response = await fetch('http://localhost:5000/api/voitures', {
-                method: 'POST',
+            const response = await fetch(`http://localhost:5000/api/voitures/${id}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -110,11 +133,11 @@ function VoitureCreate({ t }) {
                 throw new Error(`Erreur HTTP ! statut : ${response.status}`);
             }
 
-            alert('Voiture créée avec succès !');
+            alert('Voiture mise à jour avec succès !');
             navigate('/voitures');
         } catch (error) {
-            console.error('Erreur lors de la création de la voiture :', error);
-            alert('Erreur lors de la création de la voiture. Veuillez réessayer.');
+            console.error('Erreur lors de la mise à jour de la voiture :', error);
+            alert('Erreur lors de la mise à jour de la voiture. Veuillez réessayer.');
         }
     };
 
@@ -125,21 +148,19 @@ function VoitureCreate({ t }) {
             </div>
 
             <div className='flex flex-col w-[40%] mx-[3rem] mt-24 mb-[4rem]'>
-                <h2 className="mx-[4rem]">{t("voitureCreate_titre")}</h2>
+                <h2 className="mx-[4rem]">{t("voitureUpdate_titre")}</h2>
                 <div className="w-full mx-[4rem] mt-12 bg-[#F96C25] rounded-lg">
                     <form onSubmit={handleSubmit} className="p-3 bg-[#21283B] rounded-lg">
                         <div>
-                           <label className='text-[#f5f5f5]'></label>
+                            <label className="text-[#F5F5F5]">{t("date_label")}</label>
                             <input
-                                label={t("date_label")}
                                 type="number"
                                 placeholder={t("date_placeholder")}
                                 mandatory={true}
                                 onChange={(e) => setDate(e.target.value)}
                                 value={date}
                                 name="date"
-                                className='my-2 mb-6 p-3 block bg-[#f5f5f5]  placeholder:text-slate-300 rounded border focus:border-teal-500'
-
+                                className="my-2 mb-6 p-3 block bg-[#f5f5f5] placeholder:text-slate-300 rounded border focus:border-teal-500"
                             />
                         </div>
                         <ChampTextArea
@@ -259,7 +280,7 @@ function VoitureCreate({ t }) {
                             type="submit"
                             className="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-blue-600 text-white hover:bg-blue-600"
                         >
-                            {t("CreateUser.btnSubmit")}
+                            {t("UpdateVoiture.btnSubmit")}
                         </Bouton>
                     </form>
                 </div>
@@ -268,4 +289,4 @@ function VoitureCreate({ t }) {
     );
 }
 
-export default VoitureCreate;
+export default VoitureUpdate;
