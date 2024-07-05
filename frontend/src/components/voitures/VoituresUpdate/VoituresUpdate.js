@@ -152,10 +152,10 @@ function VoitureUpdate({ t }) {
                 <div className="w-full mx-[4rem] mt-12 bg-[#F96C25] rounded-lg">
                     <form onSubmit={handleSubmit} className="p-3 bg-[#21283B] rounded-lg">
                         <div>
-                            <label className="text-[#F5F5F5]">{t("date_label")}</label>
+                            <label className="text-[#F5F5F5]">{t("voitureCreate_date_label")}</label>
                             <input
                                 type="number"
-                                placeholder={t("date_placeholder")}
+                                placeholder={t("voitureCreate_date_placeholder")}
                                 mandatory={true}
                                 onChange={(e) => setDate(e.target.value)}
                                 value={date}
@@ -164,23 +164,23 @@ function VoitureUpdate({ t }) {
                             />
                         </div>
                         <ChampTextArea
-                            label={t("description_label_en")}
+                            label={t("voitureCreate_description_label_en")}
                             content={descriptionEn}
                             whenChanged={setDescriptionEn}
                             mandatory={true}
-                            placeholder={t("description_placeholder_en")}
+                            placeholder={t("voitureCreate_description_placeholder_en")}
                         />
                         <ChampTextArea
-                            label={t("description_label_fr")}
+                            label={t("voitureCreate_description_label_fr")}
                             content={descriptionFr}
                             whenChanged={setDescriptionFr}
                             mandatory={true}
-                            placeholder={t("description_placeholder_fr")}
+                            placeholder={t("voitureCreate_description_placeholder_fr")}
                         />
                         <ChampText
-                            label={t("prix_label")}
+                            label={t("voitureCreate_prix_label")}
                             type="number"
-                            placeholder={t("prix_placeholder")}
+                            placeholder={t("voitureCreate_prix_placeholder")}
                             mandatory={true}
                             onChange={(e) => setPrix(e.target.value)}
                             value={prix}
@@ -188,7 +188,7 @@ function VoitureUpdate({ t }) {
                         />
                         <div className="mb-3">
                             <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="modele">
-                                {t("modele_label")}
+                                {t("voitureCreate_modele_label")}
                             </label>
                             <select
                                 id="modele"
@@ -196,7 +196,7 @@ function VoitureUpdate({ t }) {
                                 value={selectedModele}
                                 onChange={(e) => setSelectedModele(e.target.value)}
                             >
-                                <option value="">{t("select_modele")}</option>
+                                <option value="">{t("voitureCreate_select_modele")}</option>
                                 {modeles.map((modele) => (
                                     <option key={modele.id} value={modele.id}>
                                         {modele.type[language]}
@@ -206,7 +206,7 @@ function VoitureUpdate({ t }) {
                         </div>
                         <div className="mb-3">
                             <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="transmission">
-                                {t("transmission_label")}
+                                {t("voitureCreate_transmission_label")}
                             </label>
                             <select
                                 id="transmission"
@@ -214,7 +214,7 @@ function VoitureUpdate({ t }) {
                                 value={selectedTransmission}
                                 onChange={(e) => setSelectedTransmission(e.target.value)}
                             >
-                                <option value="">{t("select_transmission")}</option>
+                                <option value="">{t("voitureCreate_select_transmission")}</option>
                                 {transmissions.map((transmission) => (
                                     <option key={transmission.id} value={transmission.id}>
                                         {transmission.type[language]}
@@ -224,7 +224,7 @@ function VoitureUpdate({ t }) {
                         </div>
                         <div className="mb-3">
                             <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="motopropulseur">
-                                {t("motopropulseur_label")}
+                                {t("voitureCreate_motopropulseur_label")}
                             </label>
                             <select
                                 id="motopropulseur"
@@ -232,7 +232,7 @@ function VoitureUpdate({ t }) {
                                 value={selectedMotopropulseur}
                                 onChange={(e) => setSelectedMotopropulseur(e.target.value)}
                             >
-                                <option value="">{t("select_motopropulseur")}</option>
+                                <option value="">{t("voitureCreate_select_motopropulseur")}</option>
                                 {motopropulseurs.map((motopropulseur) => (
                                     <option key={motopropulseur.id} value={motopropulseur.id}>
                                         {motopropulseur.type[language]}
@@ -242,7 +242,7 @@ function VoitureUpdate({ t }) {
                         </div>
                         <div className="mb-3">
                             <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="carburant">
-                                {t("carburant_label")}
+                                {t("voitureCreate_carburant_label")}
                             </label>
                             <select
                                 id="carburant"
@@ -250,7 +250,7 @@ function VoitureUpdate({ t }) {
                                 value={selectedCarburant}
                                 onChange={(e) => setSelectedCarburant(e.target.value)}
                             >
-                                <option value="">{t("select_carburant")}</option>
+                                <option value="">{t("voitureCreate_select_carburant")}</option>
                                 {carburants.map((carburant) => (
                                     <option key={carburant.id} value={carburant.id}>
                                         {carburant.type[language]}
@@ -260,7 +260,7 @@ function VoitureUpdate({ t }) {
                         </div>
                         <div className="mb-3">
                             <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="corp">
-                                {t("corp_label")}
+                                {t("voitureCreate_corps_label")}
                             </label>
                             <select
                                 id="corp"
@@ -268,7 +268,7 @@ function VoitureUpdate({ t }) {
                                 value={selectedCorp}
                                 onChange={(e) => setSelectedCorp(e.target.value)}
                             >
-                                <option value="">{t("select_corp")}</option>
+                                <option value="">{t("voitureCreate_select_corps")}</option>
                                 {corps.map((corp) => (
                                     <option key={corp.id} value={corp.id}>
                                         {corp.type[language]}

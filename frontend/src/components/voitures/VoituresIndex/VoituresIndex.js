@@ -106,13 +106,13 @@ function VoitureIndex({ t, changeLanguage }) {
                         <tr>
                             <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">Date</th>
                             <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">Description</th>
-                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">Prix</th>
-                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">Modèle</th>
-                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">Constructeur</th>
-                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">Transmission</th>
-                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">Motopropulseur</th>
-                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">Carburant</th>
-                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">Corp</th>
+                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Prix" )}</th>
+                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Modele" )}</th>
+                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Constructeur" )}</th>
+                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Transmission" )}</th>
+                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Motopropulseur" )}</th>
+                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Carburant" )}</th>
+                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Corps" )}</th>
                             <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">Action</th>
                         </tr>
                     </thead>

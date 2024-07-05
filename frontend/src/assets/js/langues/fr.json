@@ -117,7 +117,36 @@
       "voitureUpdate_titre": "Voiture - éditer",
       "voitureCreate_titre": "Voiture - créer",
       "voitureType_label": "Entrez une nouvelle voiture",
-      "voitureIndex_create": "Créez une nouvelle voiture"
+      "voitureIndex_create": "Créez une nouvelle voiture",
+      "voituretableau_Modele" : "Model",
+      "voituretableau_Constructeur" : "Constructeur",
+      "voituretableau_Corps" : "Corps",
+      "voituretableau_Transmission" : "Transmission",
+      "voituretableau_Motopropulseur" : "Motopropulseur",
+      "voituretableau_Carburant" : "Carburant",
+      "voituretableau_Prix" : "Prix",
+
+        "voitureCreate_date_label": "Année",
+        "voitureCreate_date_placeholder": "Année de lancement",
+        "voitureCreate_description_label_en": "Entrez une description en Anglais",
+        "voitureCreate_description_label_fr": "Entrez une description en Français",
+        "voitureCreate_description_placeholder_en": "Entrez la description",
+        "voitureCreate_description_placeholder_fr": "Entrez la description",
+        "voitureCreate_prix_label": "Prix",
+        "voitureCreate_prix_placeholder": "Entrez le prix",
+        "voitureCreate_modele_label": "Modèle",
+        "voitureCreate_select_modele": "Selectionez un modèle",
+        "voitureCreate_transmission_label": "Transmission",
+        "voitureCreate_select_transmission": "Selectionez un type de transmission",
+        "voitureCreate_motopropulseur_label": "Motopropulseur",
+        "voitureCreate_select_motopropulseur": "Selectionez un type de motopropulseur",
+        "voitureCreate_corps_label": "Corps",
+        "voitureCreate_select_corps": "Selectionez un type de corps",
+        "voitureCreate_carburant_label": "Carburant",
+        "voitureCreate_select_carburant": "Selectionez un type de carburant"
+   
+
+
        
 
 
