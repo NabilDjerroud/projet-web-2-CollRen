@@ -41,7 +41,6 @@ import CarburantCreate from '../voitures/CarburantCreate/CarburantCreate';
 import Politique from '../site/Politique/Politique';
 import Footer from '../partials/Footer/Footer';
 import Contact from '../site/Contact/Contact';
-import VoituresCreate from '../voitures/VoituresCreate/VoituresCreate';
 import Catalogue from '../site/Catalogue/Catalogue';
 
 

@@ -12,7 +12,7 @@ function VoitureIndex({ t, changeLanguage }) {
 
         const fetchVoitures = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/voitures');
+                const response = await fetch(`${t("fetch")}voitures`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -44,7 +44,7 @@ function VoitureIndex({ t, changeLanguage }) {
 
         const fetchModeles = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/modeles');
+                const response = await fetch(`${t("fetch")}modeles`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -66,7 +66,7 @@ function VoitureIndex({ t, changeLanguage }) {
 
     const handleDeleteVoiture = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/voitures/${id}`, {
+            const response = await fetch(`${t("fetch")}voitures/${id}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {
