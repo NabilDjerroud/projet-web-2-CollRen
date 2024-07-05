@@ -1,6 +1,7 @@
 import React from 'react';
 import Footer from "../partials/Footer/Footer";
 import "./Accueil.css";
+import BarreRecherche from "../site/BarreRecherche/BarreRecherche";
 
 function Accueil({ t }) {
     return (
@@ -22,6 +23,12 @@ function Accueil({ t }) {
                 </section>
                 <section className="other-section bg-gray-200 py-10">
                     <div className="container mx-auto">
+
+                        {/* Insertion de la barre de recherche ici */}
+
+                        <BarreRecherche t={t} />
+
+
                         <h2 className="text-3xl font-bold text-center text-gray-800">Vos préférences pour le véhicule ?</h2>
                         <div className="mt-8 flex justify-center">
                             <form className="flex space-x-4">
@@ -75,7 +82,7 @@ function Accueil({ t }) {
                                 <p className="text-lg font-bold">Voiture à moins de 25000$</p>
                             </div>
                         </div>
-                        </div>
+                    </div>
                 </section>
             </div>
         </div>

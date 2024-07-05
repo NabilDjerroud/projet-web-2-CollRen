@@ -15,6 +15,9 @@
       "login.nomUtilisateurPlaceHolder": "Please, enter your username",
       "login.mdpPlaceHolder": "Your password",
 
+      "barreRecheche.placeHolder": "Ex. Ford Mustang",
+      "barreRecheche.titre": "Search",
+
       "accueil.titre1": "25% OFF",
       "accueil.titre2": "SUMMER SALE",
       "accueil.titre3": "For limited time only!",
@@ -120,7 +123,7 @@
       "carburantCreate_titre": "Fuel - create",
       "carburantType_label": "Enter a new type of fuel",
       "carburantIndex_create": "Create a new type of fuel",
-      "fetch": "http://localhost:5000/api/",
+      "fetch": "http://localhost:5001/api/",
        
       "voitureIndex_titre": "Car list",
       "voitureUpdate_titre": "Car - edit",
