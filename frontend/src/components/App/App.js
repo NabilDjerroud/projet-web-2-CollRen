@@ -42,6 +42,7 @@ import Politique from '../site/Politique/Politique';
 import Footer from '../partials/Footer/Footer';
 import Contact from '../site/Contact/Contact';
 import VoituresCreate from '../voitures/VoituresCreate/VoituresCreate';
+import Catalogue from '../site/Catalogue/Catalogue';
 
 
 export const AppContext = React.createContext();
@@ -269,6 +270,9 @@ function App() {
 
                     <Route path='/politique' element={<Politique t={t} />} />
                     <Route path='/contact' element={<Contact t={t} />} />
+
+                    <Route path='/catalogue' element={<Catalogue t={t} />} />
+
                 </Routes>
                 <Footer t={t} />
             </Router>

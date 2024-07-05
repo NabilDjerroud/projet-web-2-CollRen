@@ -1,0 +1,21 @@
+.filter-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 300px;
+    background-color: white;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 10;
+    overflow-y: auto;
+}
+
+.filter-panel.open {
+    transform: translateX(0);
+}
+
+.filter-panel.closed {
+    transform: translateX(-100%);
+}
