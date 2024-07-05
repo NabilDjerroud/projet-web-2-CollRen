@@ -10,7 +10,7 @@
     color: white;
 }
 
-.form-container {
+/* .form-container {
     background-color: rgba(29, 53, 87, 0.9);
     border-top: 8px solid orange;
     border-bottom: 8px solid orange;
@@ -18,7 +18,7 @@
     padding: 2rem;
     width: 90%;
     max-width: 500px;
-}
+} */
 
 .form-inner {
     display: flex;

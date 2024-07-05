@@ -68,68 +68,69 @@ function UserCreate({ t }) {
         e.target.reset();
     }
 
+
     return (
         <main className="main-background ">
             <div className="form-container ">
                 <h1 className="text-4xl  font-titre font-bold">{t("CreateUser.soustitre")}</h1>
-                <div className='bg-[#F96C25] w-[30rem] rounded-2xl'>
-                    <form onSubmit={createUser} className='my-4 p-4 rounded-2xl bg-[#21283B]'>
+                <div className='rounded-2xl'>
+                    <form onSubmit={createUser} className='my-4 p-4 rounded-2xl'>
                         <ChampText
-                            mandatory={true} 
-                            label={t("CreateUser.prenom")}
-                            type="text"
-                            name="prenom"
-                            placeholder={t("CreateUser.prenomPlaceHolder")}
-                            value={prenom} 
-                            onChange={handleChange}
-                        />
+                                mandatory={true} 
+                                label={t("CreateUser.prenom")}
+                                type="text"
+                                name="prenom"
+                                placeholder={t("CreateUser.prenomPlaceHolder")}
+                                value={prenom} 
+                                onChange={handleChange}
+                            />
 
-                        <ChampText
-                            mandatory={true} 
-                            label={t("CreateUser.nom")}
-                            type="text"
-                            name="nom"
-                            placeholder={t("CreateUser.nomPlaceHolder")}
-                            value={nom} 
-                            onChange={handleChange}
-                        />
+                            <ChampText
+                                mandatory={true} 
+                                label={t("CreateUser.nom")}
+                                type="text"
+                                name="nom"
+                                placeholder={t("CreateUser.nomPlaceHolder")}
+                                value={nom} 
+                                onChange={handleChange}
+                            />
 
-                        <ChampText
-                            mandatory={true} 
-                            label={t("CreateUser.nomUtilisateur")}
-                            type="text"
-                            name="nomUtilisateur"
-                            placeholder={t("CreateUser.nomUtilisateurPlaceHolder")}
-                            value={nomUtilisateur} 
-                            onChange={handleChange}
-                        />
+                            <ChampText
+                                mandatory={true} 
+                                label={t("CreateUser.nomUtilisateur")}
+                                type="text"
+                                name="nomUtilisateur"
+                                placeholder={t("CreateUser.nomUtilisateurPlaceHolder")}
+                                value={nomUtilisateur} 
+                                onChange={handleChange}
+                            />
 
-                        <ChampText
-                            mandatory={true} 
-                            label={t("CreateUser.courriel")}
-                            type="email"
-                            name="courriel"
-                            placeholder={t("CreateUser.courrielPlaceHolder")}
-                            value={courriel} 
-                            onChange={handleChange}
-                        />
-                                
-                        <ChampText
-                            mandatory={true} 
-                            label={t("CreateUser.mdp")}
-                            type="password"
-                            name="mdp"
-                            placeholder={t("CreateUser.mdpPlaceHolder")}
-                            value={mdp} 
-                            onChange={handleChange}
-                        />
+                            <ChampText
+                                mandatory={true} 
+                                label={t("CreateUser.courriel")}
+                                type="email"
+                                name="courriel"
+                                placeholder={t("CreateUser.courrielPlaceHolder")}
+                                value={courriel} 
+                                onChange={handleChange}
+                            />
+                                    
+                            <ChampText
+                                mandatory={true} 
+                                label={t("CreateUser.mdp")}
+                                type="password"
+                                name="mdp"
+                                placeholder={t("CreateUser.mdpPlaceHolder")}
+                                value={mdp} 
+                                onChange={handleChange}
+                            />
 
-                    
+                        
 
-                        {error && <p className="text-red-500">{error}</p>}
+                            {error && <p className="text-red-500">{error}</p>}
 
-                        <Bouton type="submit">{t("CreateUser.btnSubmit")} </Bouton>
-                    </form>
+                            <Bouton type="submit">{t("CreateUser.btnSubmit")} </Bouton>
+                        </form>
                 </div>
             </div>
         </main>

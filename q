@@ -1,4 +1,4 @@
-[33mcommit 03536520d4d31553e31e1bddfa8c12788e4688e5[m[33m ([m[1;36mHEAD -> [m[1;32mstyle-nav[m[33m)[m
+[33mcommit 03536520d4d31553e31e1bddfa8c12788e4688e5[m[33m ([m[1;36m -> [m[1;32mstyle-nav[m[33m)[m
 Author: NabilDjerroud <nabil.djerroud93@hotmail.com>
 Date:   Thu Jul 4 02:35:48 2024 -0400
 

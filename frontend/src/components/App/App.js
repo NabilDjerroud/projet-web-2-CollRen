@@ -41,6 +41,9 @@ import CarburantCreate from '../voitures/CarburantCreate/CarburantCreate';
 import Politique from '../site/Politique/Politique';
 import Footer from '../partials/Footer/Footer';
 import Contact from '../site/Contact/Contact';
+import VoituresCreate from '../voitures/VoituresCreate/VoituresCreate';
+import Catalogue from '../site/Catalogue/Catalogue';
+
 
 export const AppContext = React.createContext();
 const lngs = [
@@ -242,6 +245,7 @@ function App() {
                     <Route path='/voiture-update/:id' element={<PrivateRoute requiredPrivilege={[1,2]} />}>
                         <Route path='/voiture-update/:id' element={<VoituresUpdate t={t}  changeLanguage={handleTrans} />} />
                     </Route>
+                    
 
 
                     <Route path='/client' element={<PrivateRoute requiredPrivilege={[1, 2, 3]} />}>
@@ -266,6 +270,9 @@ function App() {
 
                     <Route path='/politique' element={<Politique t={t} />} />
                     <Route path='/contact' element={<Contact t={t} />} />
+
+                    <Route path='/catalogue' element={<Catalogue t={t} />} />
+
                 </Routes>
                 <Footer t={t} />
             </Router>

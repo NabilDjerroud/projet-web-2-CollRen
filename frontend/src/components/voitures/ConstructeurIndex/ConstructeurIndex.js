@@ -50,7 +50,7 @@ function ConstructeurIndex({ t }) {
             </div>
 
             <div className="w-[30%] mx-[4rem] mt-24">
-                <h1>{t("constructeurIndex_titre")}</h1>
+                <h1 className='text-bleuFonce'>{t("constructeurIndex_titre")}</h1>
 
                 <Link to={"/constructeur-create"}><p className='my-[1rem]'>+ {t("constructeurIndex_create")}</p></Link>
 
