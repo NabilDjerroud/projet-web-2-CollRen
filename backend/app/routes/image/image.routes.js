@@ -22,5 +22,7 @@ module.exports = app => {
     // Delete all Images
     router.delete("/", images.deleteAll);
 
+    router.put("/:id/est_principale", images.updateEstPrincipale);
+
     app.use('/api/images', router);
 };
