@@ -27,6 +27,9 @@ exports.create = (req, res) => {
         });
 };
 
+
+
+
 exports.findAll = (req, res) => {
     // var condition = constructeur ? { constructeur: { [Op.like]: `%${constructeur}%` } } : null;
     // var condition = modele ? { modele_id: { [Op.like]: `%${model}%` } } : null;
@@ -83,7 +86,7 @@ exports.findAll = (req, res) => {
                 { model: Modele, where: condition.modele },
                 { model: Motopropulseur, where: condition.motopropulseur },
                 { model: Transmission, where: condition.transmission },
-                // { model: Image }
+                { model: Image }
             ]
 
     })

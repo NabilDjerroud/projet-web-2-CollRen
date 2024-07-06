@@ -37,16 +37,18 @@ db.voitures.belongsTo(db.modeles, { foreignKey: 'modele_id' })
 db.constructeurs.hasMany(db.modeles, { foreignKey: 'constructeur_id' })
 
 db.transmissions.hasMany(db.voitures, { foreignKey: 'transmission_id' })
-
 db.voitures.belongsTo(db.transmissions, { foreignKey: 'transmission_id'})
+
 db.voitures.belongsTo(db.corps, { foreignKey: 'corp_id' })
 
 db.voitures.belongsTo(db.motopropulseurs, { foreignKey: 'motopropulseur_id'})
+
 db.voitures.belongsTo(db.carburants, { foreignKey: 'carburant_id'})
 db.carburants.hasMany(db.voitures, { foreignKey: 'carburant_id' })
 
+db.images.belongsTo(db.voitures, { foreignKey: 'voiture_id' })
+db.voitures.hasMany(db.images, { foreignKey: 'voiture_id' })
 
-db.voitures.hasMany(db.images, { foreignKey: 'image_id' })
 db.privileges.hasMany(db.utilisateurs, { foreignKey: 'privilege_id' })
 db.utilisateurs.belongsTo(db.privileges, { foreignKey: 'privilege_id'})
 

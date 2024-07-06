@@ -1,10 +1,11 @@
 module.exports = app => {
     const images = require("../../controllers/image.controller.js");
-
-    var router = require("express").Router();
+    const express = require("express");
+    const router = express.Router();
+    const upload = require('../../config/multerConfig.js');
 
     // Create a new Image
-    router.post("/", images.create);
+    router.post('/', upload.array('voiture_imgs', 15), images.create);
 
     // Retrieve all Images
     router.get("/", images.findAll);
@@ -12,10 +13,10 @@ module.exports = app => {
     // Retrieve a single Image with id
     router.get("/:id", images.findOne);
 
-    // Update a Image with id
+    // Update an Image with id
     router.put("/:id", images.update);
 
-    // Delete a Image with id
+    // Delete an Image with id
     router.delete("/:id", images.delete);
 
     // Delete all Images
