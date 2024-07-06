@@ -27,9 +27,6 @@ exports.create = (req, res) => {
         });
 };
 
-
-
-
 exports.findAll = (req, res) => {
     // var condition = constructeur ? { constructeur: { [Op.like]: `%${constructeur}%` } } : null;
     // var condition = modele ? { modele_id: { [Op.like]: `%${model}%` } } : null;
