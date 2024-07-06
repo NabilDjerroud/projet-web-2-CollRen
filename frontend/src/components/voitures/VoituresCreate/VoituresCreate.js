@@ -21,6 +21,7 @@ function VoitureCreate({ t }) {
     const [selectedCarburant, setSelectedCarburant] = useState('');
     const [corps, setCorps] = useState([]);
     const [selectedCorp, setSelectedCorp] = useState('');
+    const [images, setImages] = useState([]);
     const language = localStorage.getItem('langueChoisie') || 'en';
 
     useEffect(() => {
@@ -83,6 +84,10 @@ function VoitureCreate({ t }) {
         fetchOptions();
     }, []);
 
+    const handleImageChange = (event) => {
+        setImages([...event.target.files]);
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -96,7 +101,7 @@ function VoitureCreate({ t }) {
                 },
                 body: JSON.stringify({
                     date,
-                    description,
+                    description:description,
                     prix,
                     modele_id: selectedModele,
                     transmission_id: selectedTransmission,
@@ -106,15 +111,32 @@ function VoitureCreate({ t }) {
                 })
             });
 
-            if (!response.ok) {
-                throw new Error(`Erreur HTTP ! statut : ${response.status}`);
+            if (!voitureResponse.ok) {
+                throw new Error(`Erreur HTTP ! statut : ${voitureResponse.status}`);
             }
 
-            alert('Voiture créée avec succès !');
+            const voitureData = await voitureResponse.json();
+
+             // Envoye les images
+            const formData = new FormData();
+            images.forEach((image) => {
+                formData.append('voiture_imgs', image);
+            });
+            
+            const imageResponse = await fetch(`http://localhost:5000/api/images?voiture_id=${voitureData.id}`, {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (!imageResponse.ok) {
+                throw new Error(`Erreur HTTP lors du téléversement des images ! statut : ${imageResponse.status}`);
+            }
+
+            alert('Voiture et images créées avec succès !');
             navigate('/voitures');
         } catch (error) {
-            console.error('Erreur lors de la création de la voiture :', error);
-            alert('Erreur lors de la création de la voiture. Veuillez réessayer.');
+            console.error('Erreur lors de la création de la voiture ou du téléversement des images :', error);
+            alert('Erreur lors de la création de la voiture ou du téléversement des images. Veuillez réessayer.');
         }
     };
 
@@ -127,9 +149,9 @@ function VoitureCreate({ t }) {
             <div className='flex flex-col w-[40%] mx-[3rem] mt-24 mb-[4rem]'>
                 <h2 className="mx-[4rem]">{t("voitureCreate_titre")}</h2>
                 <div className="w-full mx-[4rem] mt-12 bg-[#F96C25] rounded-lg">
-                    <form onSubmit={handleSubmit} className="p-3 bg-[#21283B] rounded-lg">
+                    <form onSubmit={handleSubmit} className="p-3 bg-[#21283B] rounded-lg" enctype='multipart/form-data'>
                         <div>
-                           <label className='text-[#f5f5f5]'>{t("voitureCreate_date_label")}</label>
+                            <label className='text-[#f5f5f5]'>{t("voitureCreate_date_label")}</label>
                             <input
                                 type="number"
                                 placeholder={t("voitureCreate_date_placeholder")}
@@ -138,7 +160,6 @@ function VoitureCreate({ t }) {
                                 value={date}
                                 name="date"
                                 className='my-2 mb-6 p-3 block bg-[#f5f5f5]  placeholder:text-slate-300 rounded border focus:border-teal-500'
-
                             />
                         </div>
                         <ChampTextArea
@@ -253,6 +274,18 @@ function VoitureCreate({ t }) {
                                     </option>
                                 ))}
                             </select>
+                        </div>
+                        <div className="mb-3">
+                            <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="images">
+                                {t("voitureCreate_images_label")}
+                            </label>
+                            <input
+                                type="file"
+                                id="images"
+                                multiple
+                                onChange={handleImageChange}
+                                className="block appearance-none w-full bg-white border border-gray-200 text-gray-800 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            />
                         </div>
                         <Bouton
                             type="submit"
