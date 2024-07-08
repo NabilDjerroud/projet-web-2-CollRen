@@ -96,7 +96,6 @@ function App() {
 
     // Functions to handle login
 
-
     async function login(e) {
         e.preventDefault();
         const form = e.target;
@@ -116,7 +115,7 @@ function App() {
         };
 
         // const response = await fetch(`${t("fetch")}utilisateurs/login`, data);
-        const response = await fetch(`${t("fetch")}utilisateurs/login`, data);
+        const response = await fetch(`http://localhost:5000/api/utilisateurs/login`, data);
 
         if (response.ok) {
             const token = await response.json();
@@ -262,7 +261,7 @@ function App() {
                     </Route>
 
 
-                    <Route path='/login' element={<Login t={t} user={user} handlew={login} handleLogout={logout} />} />
+                    <Route path='/login' element={<Login t={t} user={user} handleLogin={login} />} />
                     <Route path='/usercreate' element={<UserCreate t={t} />} />
 
                     <Route path="/privilege-create" element={<PrivilegeCreate t={t} />} />

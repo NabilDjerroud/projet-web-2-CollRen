@@ -4,7 +4,7 @@ import Bouton from '../../partialsFormulaire/Bouton/Bouton';
 import ChampText from '../../partialsFormulaire/ChampText/ChampText';
 import './Login.css'
 
-function Login({ t, user, handleLogin, handleLogout }) {
+function Login({ t, handleLogin }) {
     const navigate = useNavigate();
 
     async function handleLoginWithRedirect(e) {
