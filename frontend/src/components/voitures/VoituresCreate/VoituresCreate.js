@@ -94,7 +94,8 @@ function VoitureCreate({ t }) {
         const description = JSON.stringify({ en: descriptionEn, fr: descriptionFr });
 
         try {
-            const response = await fetch(`${t("fetch")}voitures`, {
+            // Cria a voiture primeiro
+            const voitureResponse = await fetch('http://localhost:5000/api/voitures', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
