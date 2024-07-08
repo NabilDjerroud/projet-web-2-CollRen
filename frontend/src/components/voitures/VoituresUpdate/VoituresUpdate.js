@@ -22,7 +22,18 @@ function VoitureUpdate({ t }) {
     const [selectedCarburant, setSelectedCarburant] = useState('');
     const [corps, setCorps] = useState([]);
     const [selectedCorp, setSelectedCorp] = useState('');
+    const [images, setImages] = useState([]);
+    const [updateFlag, setUpdateFlag] = useState(false); // Nouvel état pour forcer la mise à jour
     const language = localStorage.getItem('langueChoisie') || 'en';
+
+    const parseJSONSafely = (str) => {
+        try {
+            return JSON.parse(str);
+        } catch (e) {
+            console.error('Erreur de parsing JSON :', e);
+            return { en: str, fr: str };
+        }
+    };
 
     useEffect(() => {
         const fetchVoiture = async () => {
@@ -33,14 +44,16 @@ function VoitureUpdate({ t }) {
                 }
                 const data = await response.json();
                 setDate(data.date);
-                setDescriptionEn(JSON.parse(data.description).en);
-                setDescriptionFr(JSON.parse(data.description).fr);
+                setDescriptionEn(parseJSONSafely(data.description).en);
+                setDescriptionFr(parseJSONSafely(data.description).fr);
                 setPrix(data.prix);
                 setSelectedModele(data.modele_id);
                 setSelectedTransmission(data.transmission_id);
                 setSelectedMotopropulseur(data.motopropulseur_id);
                 setSelectedCarburant(data.carburant_id);
                 setSelectedCorp(data.corp_id);
+
+                console.log("Voiture data:", data); // Log para depuração
             } catch (error) {
                 console.error('Erreur lors de la récupération de la voiture :', error);
             }
@@ -57,7 +70,7 @@ function VoitureUpdate({ t }) {
                 ]);
 
                 if (!modelesRes.ok || !transmissionsRes.ok || !motopropulseursRes.ok || !carburantsRes.ok || !corpsRes.ok) {
-                    throw new Error('HTTP error! Some fetch requests failed.');
+                    throw new Error('Erreur HTTP ! Certaines requêtes ont échoué.');
                 }
 
                 const [modelesData, transmissionsData, motopropulseursData, carburantsData, corpsData] = await Promise.all([
@@ -68,43 +81,109 @@ function VoitureUpdate({ t }) {
                     corpsRes.json()
                 ]);
 
-                const parseJSONSafely = (str) => {
-                    try {
-                        return JSON.parse(str);
-                    } catch (e) {
-                        console.error('JSON parse error:', e);
-                        return { en: str, fr: str };
-                    }
-                };
+                setModeles(modelesData);
 
-                setModeles(modelesData.map(modele => ({
-                    ...modele,
-                    type: parseJSONSafely(modele.type)
-                })));
-                setTransmissions(transmissionsData.map(transmission => ({
-                    ...transmission,
-                    type: parseJSONSafely(transmission.type)
-                })));
-                setMotopropulseurs(motopropulseursData.map(motopropulseur => ({
-                    ...motopropulseur,
-                    type: parseJSONSafely(motopropulseur.type)
-                })));
-                setCarburants(carburantsData.map(carburant => ({
-                    ...carburant,
-                    type: parseJSONSafely(carburant.type)
-                })));
-                setCorps(corpsData.map(corp => ({
-                    ...corp,
-                    type: parseJSONSafely(corp.type)
-                })));
+                const updatedTransmissions = transmissionsData.map(item => ({
+                    ...item,
+                    type: parseJSONSafely(item.type)
+                }));
+
+                const updatedMotopropulseurs = motopropulseursData.map(item => ({
+                    ...item,
+                    type: parseJSONSafely(item.type)
+                }));
+
+                const updatedCarburants = carburantsData.map(item => ({
+                    ...item,
+                    type: parseJSONSafely(item.type)
+                }));
+
+                const updatedCorps = corpsData.map(item => ({
+                    ...item,
+                    type: parseJSONSafely(item.type)
+                }));
+
+                setTransmissions(updatedTransmissions);
+                setMotopropulseurs(updatedMotopropulseurs);
+                setCarburants(updatedCarburants);
+                setCorps(updatedCorps);
+
+                console.log("Modeles data:", modelesData); // Log para depuração
+                console.log("Transmissions data:", updatedTransmissions); // Log para depuração
+                console.log("Motopropulseurs data:", updatedMotopropulseurs); // Log para depuração
+                console.log("Carburants data:", updatedCarburants); // Log para depuração
+                console.log("Corps data:", updatedCorps); // Log para depuração
             } catch (error) {
-                console.error('Error fetching options:', error);
+                console.error('Erreur lors de la récupération des options :', error);
+            }
+        };
+
+        const fetchImages = async () => {
+            try {
+                const response = await fetch(`http://localhost:5000/api/images?voiture_id=${id}`);
+                if (!response.ok) {
+                    throw new Error(`Erreur HTTP ! statut : ${response.status}`);
+                }
+                const data = await response.json();
+                setImages(data);
+                console.log("Images data:", data); // Log para depuração
+            } catch (error) {
+                console.error('Erreur lors de la récupération des images :', error);
             }
         };
 
         fetchVoiture();
         fetchOptions();
-    }, [id]);
+        fetchImages();
+    }, [id, updateFlag]); // Ajout de updateFlag comme dépendance
+
+    const handleDeleteImage = async (imageId) => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/images/${imageId}`, {
+                method: 'DELETE',
+            });
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP ! statut : ${response.status}`);
+            }
+
+            const updatedImages = images.filter(image => image.id !== imageId);
+            setImages(updatedImages);
+
+            alert('Image supprimée avec succès!');
+        } catch (error) {
+            console.error('Erreur lors de la suppression de l\'image :', error);
+            alert('Erreur lors de la suppression de l\'image. Veuillez réessayer.');
+        }
+    };
+
+    const handleSetEstPrincipale = async (imageId, newEstPrincipale) => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/images/${imageId}/est_principale`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ est_principale: newEstPrincipale })
+            });
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP ! statut : ${response.status}`);
+            }
+
+            // Mettre à jour l'état local après la modification
+            const updatedImages = images.map(image =>
+                image.id === imageId ? { ...image, est_principale: newEstPrincipale } : { ...image, est_principale: false }
+            );
+            setImages(updatedImages);
+
+            // Forcer la mise à jour de la page
+            setUpdateFlag(!updateFlag);
+
+            alert('Image mise à jour avec succès!');
+        } catch (error) {
+            console.error('Erreur lors de la mise à jour de l\'image :', error);
+            alert('Erreur lors de la mise à jour de l\'image. Veuillez réessayer.');
+        }
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -156,7 +235,7 @@ function VoitureUpdate({ t }) {
                             <input
                                 type="number"
                                 placeholder={t("voitureCreate_date_placeholder")}
-                                mandatory={true}
+                                required={true}
                                 onChange={(e) => setDate(e.target.value)}
                                 value={date}
                                 name="date"
@@ -167,21 +246,21 @@ function VoitureUpdate({ t }) {
                             label={t("voitureCreate_description_label_en")}
                             content={descriptionEn}
                             whenChanged={setDescriptionEn}
-                            mandatory={true}
+                            required={true}
                             placeholder={t("voitureCreate_description_placeholder_en")}
                         />
                         <ChampTextArea
                             label={t("voitureCreate_description_label_fr")}
                             content={descriptionFr}
                             whenChanged={setDescriptionFr}
-                            mandatory={true}
+                            required={true}
                             placeholder={t("voitureCreate_description_placeholder_fr")}
                         />
                         <ChampText
                             label={t("voitureCreate_prix_label")}
                             type="number"
                             placeholder={t("voitureCreate_prix_placeholder")}
-                            mandatory={true}
+                            required={true}
                             onChange={(e) => setPrix(e.target.value)}
                             value={prix}
                             name="prix"
@@ -199,7 +278,7 @@ function VoitureUpdate({ t }) {
                                 <option value="">{t("voitureCreate_select_modele")}</option>
                                 {modeles.map((modele) => (
                                     <option key={modele.id} value={modele.id}>
-                                        {modele.type[language]}
+                                        {modele.type}
                                     </option>
                                 ))}
                             </select>
@@ -283,6 +362,32 @@ function VoitureUpdate({ t }) {
                             {t("btnSubmit")}
                         </Bouton>
                     </form>
+                </div>
+                <div className="w-full mx-[4rem] mt-12 rounded-lg p-3 bg-[#21283B]">
+                    <h3 className="text-[#F5F5F5]">{t("voitureUpdate_images_titre")}</h3>
+                    <div className="grid grid-cols-3 gap-4">
+                        {images.length > 0 ? (
+                            images.map(image => (
+                                <div key={image.id} className="relative">
+                                    <img src={`/imgs/${image.chemin}`} alt="voiture" className="w-full h-auto" />
+                                    <Bouton
+                                        onClick={() => handleDeleteImage(image.id)}
+                                        className="absolute top-2 right-2 bg-red-600 text-white p-1 rounded"
+                                    >
+                                        {t("btnDeleter")}
+                                    </Bouton>
+                                    <Bouton
+                                        onClick={() => handleSetEstPrincipale(image.id, !image.est_principale)}
+                                        className={`absolute bottom-2 left-2 ${image.est_principale ? 'bg-green-600' : 'bg-gray-600'} text-white p-1 rounded`}
+                                    >
+                                        {image.est_principale ? t("btnPrincipale") : t("btnNonPrincipale")}
+                                    </Bouton>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="text-white">{t("voitureUpdate_no_images")}</p>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

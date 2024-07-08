@@ -42,6 +42,7 @@ import Politique from '../site/Politique/Politique';
 import Footer from '../partials/Footer/Footer';
 import Contact from '../site/Contact/Contact';
 import Catalogue from '../site/Catalogue/Catalogue';
+import { AnimatePresence } from "framer-motion";
 
 
 export const AppContext = React.createContext();
@@ -155,6 +156,7 @@ function App() {
                     {btnTraduction}
                 </div>
                 <Entete t={t} />
+                <AnimatePresence mode="wait">
                 <Routes>
                     <Route path='/' element={<Accueil t={t} />} />
                     <Route path='/apropos' element={<APropos t={t} />} />
@@ -273,6 +275,7 @@ function App() {
                     <Route path='/catalogue' element={<Catalogue t={t} />} />
 
                 </Routes>
+                </AnimatePresence>
                 <Footer t={t} />
             </Router>
         </AppContext.Provider>

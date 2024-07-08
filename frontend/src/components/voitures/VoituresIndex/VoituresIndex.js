@@ -9,7 +9,6 @@ function VoitureIndex({ t, changeLanguage }) {
     const [language, setLanguage] = useState(localStorage.getItem('langueChoisie'));
 
     useEffect(() => {
-
         const fetchVoitures = async () => {
             try {
                 const response = await fetch(`${t("fetch")}voitures`);
@@ -37,6 +36,9 @@ function VoitureIndex({ t, changeLanguage }) {
                 }));
 
                 setVoitures(updatedData);
+
+                // Fetch images for each voiture
+                await fetchImagesForVoitures(updatedData);
             } catch (error) {
                 console.error('Error fetching voitures:', error);
             }
@@ -64,6 +66,22 @@ function VoitureIndex({ t, changeLanguage }) {
         setLanguage(storedLanguage);
     }, [changeLanguage]);
 
+    const fetchImagesForVoitures = async (voitures) => {
+        try {
+            const fetchImagePromises = voitures.map(async (voiture) => {
+                const response = await fetch(`http://localhost:5000/api/images?voiture_id=${voiture.id}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const images = await response.json();
+            });
+
+            await Promise.all(fetchImagePromises);
+        } catch (error) {
+            console.error('Error fetching images:', error);
+        }
+    };
+
     const handleDeleteVoiture = async (id) => {
         try {
             const response = await fetch(`${t("fetch")}voitures/${id}`, {
@@ -88,20 +106,21 @@ function VoitureIndex({ t, changeLanguage }) {
         return modele ? modele.constructeur.type : '';
     };
 
+
     return (
         <main className="flex">
             <div>
                 <MenuDashboardAdmin t={t} />
             </div>
 
-            <div className="w-[70%] mx-[4rem] mt-24">
-                <h1 className='text-[#21283B]'>{t("voitureIndex_titre")}</h1>
+            <div className="w-[45%] mx-[1rem] mt-24">
+                <h1 className='text-[#182036]'>{t("voitureIndex_titre")}</h1>
 
                 <Link to={"/voiture-create"}>
                     <p className='my-[1rem]'>+ {t("voitureIndex_create")}</p>
                 </Link>
 
-                <table className="w-full divide-y divide-gray-200 bg-[#21283B] my-[2rem] rounded-lg">
+                <table className="divide-y divide-gray-200 bg-[#21283B] my-[2rem] rounded-lg">
                     <thead>
                         <tr>
                             <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">Date</th>
@@ -119,16 +138,16 @@ function VoitureIndex({ t, changeLanguage }) {
                     <tbody className="bg-[#21283B] divide-y divide-gray-200">
                         {voitures.map(voiture => (
                             <tr key={voiture.id}>
-                                <td className="px-6 py-4 whitespace-nowrap text-white">{voiture.date}</td>
-                                <td className="px-6 py-4 whitespace-nowrap text-white">{voiture.description[language]}</td>
-                                <td className="px-6 py-4 whitespace-nowrap text-white">{voiture.prix}</td>
-                                <td className="px-6 py-4 whitespace-nowrap text-white">{voiture.modele.type}</td>
-                                <td className="px-6 py-4 whitespace-nowrap text-white">{getConstructeurType(voiture.modele_id)}</td>
-                                <td className="px-6 py-4 whitespace-nowrap text-white">{voiture.transmission.type[language]}</td>
-                                <td className="px-6 py-4 whitespace-nowrap text-white">{voiture.motopropulseur.type[language]}</td>
-                                <td className="px-6 py-4 whitespace-nowrap text-white">{voiture.carburant.type[language]}</td>
-                                <td className="px-6 py-4 whitespace-nowrap text-white">{voiture.corp.type[language]}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">
+                                <td className="px-2 py-2 whitespace-nowrap text-white">{voiture.date}</td>
+                                <td className="px-2 py-2 whitespace-nowrap text-white">{voiture.description[language]}</td>
+                                <td className="px-2 py-2 whitespace-nowrap text-white">{voiture.prix}</td>
+                                <td className="px-2 py-2 whitespace-nowrap text-white">{voiture.modele.type}</td>
+                                <td className="px-2 py-2 whitespace-nowrap text-white">{getConstructeurType(voiture.modele_id)}</td>
+                                <td className="px-2 py-2 whitespace-nowrap text-white">{voiture.transmission.type[language]}</td>
+                                <td className="px-2 py-2 whitespace-nowrap text-white">{voiture.motopropulseur.type[language]}</td>
+                                <td className="px-2 py-2 whitespace-nowrap text-white">{voiture.carburant.type[language]}</td>
+                                <td className="px-2 py-2 whitespace-nowrap text-white">{voiture.corp.type[language]}</td>
+                                <td className="px-2 py-2 whitespace-nowrap">
                                     <Link to={`/voiture-update/${voiture.id}`} className="gap-x-[1rem] bg-[#F96C25] hover:bg-[#868E9B] text-white font-bold py-2 px-4 rounded-full">
                                         {t("btnEditer")}
                                     </Link>
