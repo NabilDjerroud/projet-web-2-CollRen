@@ -8,30 +8,53 @@ import AfficherResultats from './AfficheResultat.js';
 
 function BarreRecherche(props) {
     let t = props.t;
-    let language = props.language;
     let results = []
-    let arrayVoitures = [];
     let affichage;
-    
+    let updatedData;
 
+
+    const [language, setLanguage] = useState(localStorage.getItem('langueChoisie'));
     const [arrayResultatRecherche, setArrayResultatRecherche] = useState([]);
+    const [arrayVoitures, setArrayVoitures] = useState([]);
 
-    async function setDataVoitures() {
-        const fetchVoitures = async () => {
+
+    useEffect(() => {
+        const setDataVoitures = async () => {
             try {
                 const response = await fetch(`${t("fetch")}voitures`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                arrayVoitures = await response.json();
+                const data = await response.json();
+
+                const parseJSONSafely = (str) => {
+                    try {
+                        return JSON.parse(str);
+                    } catch (e) {
+                        console.error('JSON parse error:', e);
+                        return { en: str, fr: str };
+                    }
+                };
+
+                updatedData = data.map(item => ({
+                    ...item,
+                    carburant: { ...item.carburant, type: parseJSONSafely(item.carburant.type) },
+                    corp: { ...item.corp, type: parseJSONSafely(item.corp.type) },
+                    transmission: { ...item.transmission, type: parseJSONSafely(item.transmission.type) },
+                    modele: { ...item.modele, type: parseJSONSafely(item.modele.type) },
+                    motopropulseur: { ...item.motopropulseur, type: parseJSONSafely(item.motopropulseur.type) }
+                }));
+
+                setArrayVoitures(updatedData);
+
 
             } catch (error) {
                 console.error('Error fetching voitures:', error);
             }
         };
-        fetchVoitures();
-    };
-    setDataVoitures();
+        setDataVoitures();
+    }, [language]);
+
 
     function trimString(s) {
         var l = 0, r = s.length - 1;
@@ -54,20 +77,28 @@ function BarreRecherche(props) {
     }
 
     function searchFor(ArrOfObjects, toSearch, objetPrincipal) {
+
         toSearch = trimString(toSearch).toLowerCase(); // trim & lower case it
-        ArrOfObjects.map((objects) => {
+        ArrOfObjects.map((objet) => {
 
-            for (var i = 0; i < objects.length; i++) {
-                for (var value in objects[i]) {
-                    if (objects[i][value].toLowerCase().indexOf(toSearch) != -1) {
 
-                        if (!itemExists(results, objects[i])) {
-                            // Si ce résultat n'est pas déjà là, ajoute-le
-                            results.indexOf(objetPrincipal) === -1 ? results.push(objetPrincipal) : console.log("This item already exists")
-                        }
-                    }
+            if (objet.fr.toLowerCase().indexOf(toSearch) != -1) {
+
+                if (!itemExists(results, objet.fr)) {
+                    // Si ce résultat n'est pas déjà là, ajoute-le
+                    results.indexOf(objetPrincipal) === -1 ? results.push(objetPrincipal) : console.log("This item already exists")
                 }
             }
+
+            if (objet.en.toLowerCase().indexOf(toSearch) != -1) {
+
+                if (!itemExists(results, objet.en)) {
+                    // Si ce résultat n'est pas déjà là, ajoute-le
+                    results.indexOf(objetPrincipal) === -1 ? results.push(objetPrincipal) : console.log("This item already exists")
+                }
+            }
+
+
         })
         return results;
     }
@@ -75,20 +106,19 @@ function BarreRecherche(props) {
     const handleInputChange = async (e) => {
         e.preventDefault();
         let termeRecherche = e.target[0].value;
-        console.log(termeRecherche);
         if (termeRecherche == []) return []
         let ObjetContientRecherche;
 
         for (let i = 0; i < arrayVoitures.length; i++) {
             // Créer un array d'objet pour chacune des catégories dans lesquelles effectuer la recherche
-            const elementCarburant = [JSON.parse(arrayVoitures[i].carburant.type)];
-            const elementCorp = [JSON.parse(arrayVoitures[i].corp.type)];
-            const elementModele = [JSON.parse(arrayVoitures[i].modele.type)];
-            const elementMotopropulseur = [JSON.parse(arrayVoitures[i].motopropulseur.type)];
-            const elementTransmission = [JSON.parse(arrayVoitures[i].transmission.type)];
+            const elementCarburant = arrayVoitures[i].carburant.type;
+            const elementCorp = arrayVoitures[i].corp.type;
+            const elementModele = arrayVoitures[i].modele.type;
+            const elementMotopropulseur = arrayVoitures[i].motopropulseur.type;
+            const elementTransmission = arrayVoitures[i].transmission.type;
 
             // Mettre toutes les arrays d'objet dans un tableau pour y faire un map
-            const arrayOfElementToSearchIn = [elementCarburant, elementModele, elementMotopropulseur, elementTransmission]
+            const arrayOfElementToSearchIn = [elementCarburant, elementCorp, elementModele, elementMotopropulseur, elementTransmission]
 
             // Enregistrer les objets dans lesquels la recherche à trouver une concordance
             ObjetContientRecherche = searchFor(arrayOfElementToSearchIn, termeRecherche, arrayVoitures[i])
@@ -102,13 +132,13 @@ function BarreRecherche(props) {
 
     // 1. Vérification: est-ce le résultat attendu ? --> oui à date
     if (arrayResultatRecherche !== undefined) {
-        console.log(arrayResultatRecherche)
+
 
         affichage = <AfficherResultats t={t} voitures={arrayResultatRecherche} language={language} ></AfficherResultats>
 
-        
+
     } else {
-        console.log('undefined')
+        // console.log('=>Faux => arrayResultatRecherche !== undefined')
     }
 
     // 2. Créer le html de l'affichage des résultats
@@ -117,13 +147,11 @@ function BarreRecherche(props) {
     // 3. À chaque changement de "arrayResultatRecherche" useEffect pour ajuster l'affichage des résultats
 
     useEffect(() => {
-      console.log('first')
-    
-      return () => {
-    console.log('return')
-      }
+
+        return () => {
+        }
     }, [arrayResultatRecherche])
-    
+
 
 
     return (
@@ -135,7 +163,7 @@ function BarreRecherche(props) {
                     <Bouton type="submit">{t("barreRecheche.titre")}</Bouton>
                 </div>
             </form>
-            {affichage? affichage : ''}
+            {affichage ? affichage : ''}
         </div>
     );
 }
