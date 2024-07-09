@@ -150,7 +150,7 @@ function VoitureCreate({ t }) {
             <div className='flex flex-col w-[40%] mx-[3rem] mt-24 mb-[4rem]'>
                 <h2 className="mx-[4rem]">{t("voitureCreate_titre")}</h2>
                 <div className="w-full mx-[4rem] mt-12 bg-[#F96C25] rounded-lg">
-                    <form onSubmit={handleSubmit} className="p-3 bg-[#21283B] rounded-lg" enctype='multipart/form-data'>
+                    <form onSubmit={handleSubmit} className="p-3 bg-[#21283B] rounded-lg" encType='multipart/form-data'>
                         <div>
                             <label className='text-[#f5f5f5]'>{t("voitureCreate_date_label")}</label>
                             <input
