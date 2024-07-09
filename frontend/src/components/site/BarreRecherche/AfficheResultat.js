@@ -2,24 +2,24 @@ import React from 'react';
 import UneVoiture from './UneVoiture';
 
 function AfficherResultats(props) {
-    console.log(props);
     let t = props.t
     let voitures = props.voitures;
     let language = props.language;
+    console.log(voitures);
     
     
     let blockTableRow;
 
     function tableauDuResultatRecherche(array) {
-        let listeDesVehicule = array.map((voiture, index) => {
-            return <UneVoiture key={index} voiture={voiture} t={t} language={language}></UneVoiture>
+        let listeDesVehicule = array.map((voiture) => {
+            return <UneVoiture key={voiture.id} voiture={voiture} t={t} language={language}></UneVoiture>
 
         })
         return listeDesVehicule;
     }
 
     blockTableRow = tableauDuResultatRecherche(voitures);
-    console.log(blockTableRow);
+    // console.log(blockTableRow);
     return (
         <div>
         <table className="divide-y divide-gray-200 bg-[#21283B] my-[2rem] rounded-lg">
