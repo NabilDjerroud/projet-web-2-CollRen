@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Tuile from '../Tuile/Tuile';
 
-function Catalogue({ t }) {
+function Catalogue({ t, changeLanguage }) {
     const [voitures, setVoitures] = useState([]);
     const [language, setLanguage] = useState(localStorage.getItem('langueChoisie'));
 
@@ -49,8 +49,8 @@ function Catalogue({ t }) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     const images = await response.json();
-                    const principaleImage = images.find(image => image.est_principale) || images[0];
-                    return { ...voiture, principaleImage };
+                    const principaleImage = images.find(image => image.est_principale === 1 && image.voiture_id === voiture.id);
+                    return { ...voiture, images: images, principaleImage };
                 });
 
                 const voituresWithImages = await Promise.all(fetchImagePromises);
@@ -61,7 +61,12 @@ function Catalogue({ t }) {
         };
 
         fetchVoitures();
-    }, [language]);
+    }, [t, language]);
+
+    useEffect(() => {
+        const storedLanguage = localStorage.getItem('langueChoisie');
+        setLanguage(storedLanguage);
+    }, [changeLanguage]);
 
     return (
         <div className="flex flex-wrap gap-4">
