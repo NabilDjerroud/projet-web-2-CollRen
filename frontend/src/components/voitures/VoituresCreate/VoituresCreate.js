@@ -31,7 +31,7 @@ function VoitureCreate({ t }) {
                     fetch(`${t("fetch")}modeles`),
                     fetch(`${t("fetch")}transmissions`),
                     fetch(`${t("fetch")}motopropulseurs`),
-                    fetch(`${ t("fetch") }carburants`),
+                    fetch(`${t("fetch")}carburants`),
                     fetch(`${t("fetch")}corps`)
                 ]);
 
@@ -95,14 +95,14 @@ function VoitureCreate({ t }) {
 
         try {
             // Cria a voiture primeiro
-            const voitureResponse = await fetch('http://localhost:5000/api/voitures', {
+            const voitureResponse = await fetch(`${t("fetch")}api/voitures`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     date,
-                    description:description,
+                    description: description,
                     prix,
                     modele_id: selectedModele,
                     transmission_id: selectedTransmission,
@@ -118,17 +118,17 @@ function VoitureCreate({ t }) {
 
             const voitureData = await voitureResponse.json();
 
-             // Envoye les images
+            // Envoye les images
             const formData = new FormData();
             images.forEach((image) => {
                 formData.append('voiture_imgs', image);
             });
-            
-            const imageResponse = await fetch(`http://localhost:5000/api/images?voiture_id=${voitureData.id}`, {
+
+            const imageResponse = await fetch(`${t("fetch")}images?voiture_id=${voitureData.id}`, {
                 method: 'POST',
                 body: formData
             });
-            
+
             if (!imageResponse.ok) {
                 throw new Error(`Erreur HTTP lors du téléversement des images ! statut : ${imageResponse.status}`);
             }
