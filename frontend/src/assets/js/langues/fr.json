@@ -103,6 +103,8 @@
       "constructeurIndex_create": "Crèe un nouveau constructeur",
       "selectConstructeur": "Choisir un constructeur",
 
+      "catalog.title":"Catalogue des voitures", 
+
       
       "corpsIndex_titre": "Corps",
       "corpsUpdate_titre": "Corps - éditer",

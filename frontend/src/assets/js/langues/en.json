@@ -105,6 +105,9 @@
       "selectConstructeur": "Select a brand",
 
       
+      "catalog.title":"Cars catalog", 
+
+
       "corpsIndex_titre": "Body styles",
       "corpsUpdate_titre": "Body style - edit",
       "corpsCreate_titre": "Body style - create",

@@ -23,6 +23,7 @@ function Tuile({ voiture, language }) {
                 <p className="text-gray-700">{voiture.corp.type[language]}</p>
             </div>
         </div>
+
     );
 }
 
