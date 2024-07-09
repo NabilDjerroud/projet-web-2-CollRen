@@ -6,16 +6,12 @@ import ChampText from '../../partialsFormulaire/ChampText/ChampText.js';
 import './Recherche.css'
 
 function BarreRecherche({ t }) {
-    var results = {};
-    results.positif = []
-    results.negatif = []
-
+    let results = []
     let arrayVoitures = [];
 
     const [arrayResultatRecherche, setArrayResultatRecherche] = useState([]);
 
     async function setDataVoitures() {
-
         const fetchVoitures = async () => {
             try {
                 const response = await fetch(`${t("fetch")}voitures`);
@@ -53,10 +49,8 @@ function BarreRecherche({ t }) {
     }
 
     function searchFor(ArrOfObjects, toSearch, objetPrincipal) {
-
         toSearch = trimString(toSearch).toLowerCase(); // trim & lower case it
         ArrOfObjects.map((objects) => {
-
 
             for (var i = 0; i < objects.length; i++) {
                 for (var value in objects[i]) {
@@ -64,21 +58,14 @@ function BarreRecherche({ t }) {
 
                         if (!itemExists(results, objects[i])) {
                             // Si ce résultat n'est pas déjà là, ajoute-le
-                            results.positif.indexOf(objetPrincipal) === -1 ? results.positif.push(objetPrincipal) : console.log("This item already exists")
-                        } else {
-                            results.negatif.push(objetPrincipal);
-
+                            results.indexOf(objetPrincipal) === -1 ? results.push(objetPrincipal) : console.log("This item already exists")
                         }
                     }
                 }
             }
         })
-
         return results;
     }
-
-
-
 
     const handleInputChange = async (e) => {
         e.preventDefault();
@@ -86,50 +73,39 @@ function BarreRecherche({ t }) {
         console.log(termeRecherche);
         if (termeRecherche == []) return []
         let ObjetContientRecherche;
-        let arrayOfResults = [];
-
 
         for (let i = 0; i < arrayVoitures.length; i++) {
+            // Créer un array d'objet pour chacune des catégories dans lesquelles effectuer la recherche
             const elementCarburant = [JSON.parse(arrayVoitures[i].carburant.type)];
-            let elementCorp = [JSON.parse(arrayVoitures[i].corp.type)];
+            const elementCorp = [JSON.parse(arrayVoitures[i].corp.type)];
             const elementModele = [JSON.parse(arrayVoitures[i].modele.type)];
             const elementMotopropulseur = [JSON.parse(arrayVoitures[i].motopropulseur.type)];
             const elementTransmission = [JSON.parse(arrayVoitures[i].transmission.type)];
 
+            // Mettre toutes les arrays d'objet dans un tableau pour y faire un map
             const arrayOfElementToSearchIn = [elementCarburant, elementModele, elementMotopropulseur, elementTransmission]
 
-            // filterIfIsThere(elementCarburant, termeRecherche)  ||
-            /*filterIfIsThere(elementCorp, termeRecherche) ||
-            filterIfIsThere(elementTransmission, termeRecherche) ||
-            filterIfIsThere(elementMotopropulseur, termeRecherche) ||
-            filterIfIsThere(elementModele, termeRecherche) */
-            ObjetContientRecherche = searchFor(arrayOfElementToSearchIn, termeRecherche, arrayVoitures[i])
-
-
-
-
+            // Enregistrer les objets dans lesquels la recherche à trouver une concordance
+            setArrayResultatRecherche(searchFor(arrayOfElementToSearchIn, termeRecherche, arrayVoitures[i]))
         }
-
-        if (ObjetContientRecherche.positif !== undefined) {
-            console.log(ObjetContientRecherche.positif)
-        } else {
-            console.log('undefined')
-        }
+        
 
 
-
-
-        setArrayResultatRecherche(arrayOfResults);
-
-
-        return arrayResultatRecherche;
+        return;
     };
 
     // Faire apparaître les résultats sous la barre de recherche après l'entré de 2 caratères minimum
 
+    // 1. Vérification: est-ce le résultat attendu ? --> oui à date
+    if (arrayResultatRecherche !== undefined) {
+        console.log(arrayResultatRecherche)
+    } else {
+        console.log('undefined')
+    }
+
+    
 
     return (
-
         <div className="form-container">
             <h1 className="text-4xl font-titre font-bold">{t("barreRecheche.titre")}</h1>
             <form onSubmit={handleInputChange} className='form-inner'>
@@ -139,9 +115,6 @@ function BarreRecherche({ t }) {
                 </div>
             </form>
         </div>
-
-
     );
 }
-
 export default BarreRecherche;
