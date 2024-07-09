@@ -4,6 +4,7 @@ import MenuDashboardAdmin from '../../dashboards/MenuDashboardAdmin/MenuDashboar
 import ChampText from '../../partialsFormulaire/ChampText/ChampText';
 import ChampTextArea from '../../partialsFormulaire/ChampTextArea/ChampTextArea';
 import Bouton from '../../partialsFormulaire/Bouton/Bouton';
+import { useRef } from 'react';
 
 function VoitureUpdate({ t }) {
     const navigate = useNavigate();
@@ -25,6 +26,8 @@ function VoitureUpdate({ t }) {
     const [images, setImages] = useState([]);
     const [updateFlag, setUpdateFlag] = useState(false); // Nouvel état pour forcer la mise à jour
     const language = localStorage.getItem('langueChoisie') || 'en';
+
+    const fileInputRef = useRef(null);
 
     const parseJSONSafely = (str) => {
         try {
@@ -53,7 +56,6 @@ function VoitureUpdate({ t }) {
                 setSelectedCarburant(data.carburant_id);
                 setSelectedCorp(data.corp_id);
 
-                console.log("Voiture data:", data); // Log para depuração
             } catch (error) {
                 console.error('Erreur lors de la récupération de la voiture :', error);
             }
@@ -108,11 +110,6 @@ function VoitureUpdate({ t }) {
                 setCarburants(updatedCarburants);
                 setCorps(updatedCorps);
 
-                console.log("Modeles data:", modelesData); // Log para depuração
-                console.log("Transmissions data:", updatedTransmissions); // Log para depuração
-                console.log("Motopropulseurs data:", updatedMotopropulseurs); // Log para depuração
-                console.log("Carburants data:", updatedCarburants); // Log para depuração
-                console.log("Corps data:", updatedCorps); // Log para depuração
             } catch (error) {
                 console.error('Erreur lors de la récupération des options :', error);
             }
@@ -125,8 +122,9 @@ function VoitureUpdate({ t }) {
                     throw new Error(`Erreur HTTP ! statut : ${response.status}`);
                 }
                 const data = await response.json();
-                setImages(data);
-                console.log("Images data:", data); // Log para depuração
+                // Filtrar as imagens pelo voiture_id
+                const filteredImages = data.filter(image => image.voiture_id === parseInt(id, 10));
+                setImages(filteredImages);
             } catch (error) {
                 console.error('Erreur lors de la récupération des images :', error);
             }
@@ -219,6 +217,45 @@ function VoitureUpdate({ t }) {
             alert('Erreur lors de la mise à jour de la voiture. Veuillez réessayer.');
         }
     };
+
+
+    const handleUploadImage = async () => {
+        const files = fileInputRef.current.files;
+
+        
+        
+        const formData = new FormData();
+        for (let i = 0; i < files.length; i++) {
+            formData.append('voiture_imgs', files[i]);
+        }
+        // formData.append('voiture_id', id);
+
+        for (var pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+        }
+
+        
+        try {
+            const response = await fetch(`http://localhost:5000/api/images?voiture_id=${id}`, {
+                method: 'POST',
+                body: formData
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP ! statut : ${response.status}`);
+            }
+    
+            // Forçar a atualização da lista de imagens
+            setUpdateFlag(!updateFlag);
+    
+            alert('Images uploadées avec succès!');
+        } catch (error) {
+            console.error('Erreur lors de l\'upload des images :', error);
+            alert('Erreur lors de l\'upload des images. Veuillez réessayer.');
+        }
+    };
+
+     
 
     return (
         <div className="flex">
@@ -387,6 +424,21 @@ function VoitureUpdate({ t }) {
                         ) : (
                             <p className="text-white">{t("voitureUpdate_no_images")}</p>
                         )}
+                    </div>
+
+                    <div className="mt-4">
+                        <input
+                            type="file"
+                            multiple
+                            ref={fileInputRef}
+                            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+                        />
+                        <Bouton
+                            onClick={handleUploadImage}
+                            className="mt-2 inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-blue-600 text-white hover:bg-blue-600"
+                        >
+                            {t("btnUpload")}
+                        </Bouton>
                     </div>
                 </div>
             </div>
