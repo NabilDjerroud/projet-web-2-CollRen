@@ -36,7 +36,7 @@ function UserCreate({ t }) {
 
         console.log(newUser);
 
-        fetch(`${t("fetch")}utilisateurs`, {
+        fetch(`http://localhost:5000/api/utilisateurs`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -8,6 +8,9 @@
       "navItem.home": "Home",
       "navItem.signup": "Sign up",
 
+
+      "login":"Login",
+      "logout":"Logout",
       "login.titre": "Welcome back!",
       "login.nomUtilisateur": "Username", 
       "login.mdp": "Password",
@@ -102,6 +105,9 @@
       "selectConstructeur": "Select a brand",
 
       
+      "catalog.title":"Cars catalog", 
+
+
       "corpsIndex_titre": "Body styles",
       "corpsUpdate_titre": "Body style - edit",
       "corpsCreate_titre": "Body style - create",

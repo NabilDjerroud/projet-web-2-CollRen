@@ -106,11 +106,17 @@ const DashboardClient = ({ t }) => {
   if (!clientData) return <div>Loading...</div>;
 
   return (
-    <div className='w-[50%] mx-4'>
-      <h1>{t('dashC_salutation')}, {formData.prenom}!</h1>
+    <div className='w-full mx-auto max-w-screen-lg px-4'>
+  <h1 className='text-2xl mb-4'>{t('dashC_salutation')}, {formData.prenom}!</h1>
 
+  <div className='flex flex-col md:flex-row items-center'>
+    <div className='md:w-2/4 mb-4 md:mb-0'>
+    <img src='/imgs/bazou_logo.png' alt='logo Beaux Bazou' className='w-44 h-44 rounded-full mb-2 md:mb-0 md:mr-4 self-center' />
+    <p className='text-center'>{formData.prenom} {formData.nom}</p>
+    </div>
+    <div className='md:w-2/4'>
       <form onSubmit={handleFormSubmit}>
-        <div>
+        <div className='mb-4'>
           <ChampText
             label={t('dashC_prenom')}
             type="text"
@@ -119,7 +125,7 @@ const DashboardClient = ({ t }) => {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className='mb-4'>
           <ChampText
             label={t('dashC_nom')}
             type="text"
@@ -128,7 +134,7 @@ const DashboardClient = ({ t }) => {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className='mb-4'>
           <ChampText
             label={t('dashC_anniversaire')}
             type="date"
@@ -137,7 +143,7 @@ const DashboardClient = ({ t }) => {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className='mb-4'>
           <ChampText
             label={t('dashC_adresse')}
             type="text"
@@ -146,7 +152,7 @@ const DashboardClient = ({ t }) => {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className='mb-4'>
           <ChampText
             label={t('dashC_codePostal')}
             type="text"
@@ -155,7 +161,7 @@ const DashboardClient = ({ t }) => {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className='mb-4'>
           <ChampText
             label={t('dashC_telephone')}
             type="text"
@@ -164,7 +170,7 @@ const DashboardClient = ({ t }) => {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className='mb-4'>
           <ChampText
             label={t('dashC_cellulaire')}
             type="text"
@@ -173,7 +179,7 @@ const DashboardClient = ({ t }) => {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className='mb-4'>
           <ChampText
             label={t('dashC_courriel')}
             type="email"
@@ -182,7 +188,7 @@ const DashboardClient = ({ t }) => {
             onChange={handleInputChange}
           />
         </div>
-        <div>
+        <div className='mb-4'>
           <ChampText
             label={t('dashC_nom_utilisateur')}
             type="text"
@@ -193,8 +199,11 @@ const DashboardClient = ({ t }) => {
         </div>
         <Bouton type="submit">{t('Update')}</Bouton>
       </form>
-      <Bouton onClick={handleLogout}>{t('Logout')}</Bouton>
+      <Bouton onClick={handleLogout} className='mt-4 md:mt-0 md:ml-4'>{t('Logout')}</Bouton>
     </div>
+  </div>
+</div>
+
   );
 };
 

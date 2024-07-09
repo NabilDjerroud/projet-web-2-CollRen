@@ -45,13 +45,18 @@ import Catalogue from '../site/Catalogue/Catalogue';
 import { AnimatePresence } from "framer-motion";
 
 
+
+
 export const AppContext = React.createContext();
 const lngs = [
     { code: "en", native: "EN" },
     { code: "fr", native: "FR" },
 ];
 
+
+
 function App() {
+    const [language, setLanguage] = useState('en');
     const { t, i18n } = useTranslation();
     const [user, setUser] = useState({ isLogged: false, usager: {} });
 
@@ -86,13 +91,16 @@ function App() {
 
     const handleTrans = (code) => {
         i18n.changeLanguage(code);
+        setLanguage(code);
         localStorage.setItem('langueChoisie', code);
         sessionStorage.setItem('langueChoisie', code);
     };
 
-    const btnTraduction = lngs.map((lng, i) => (
-        <Bouton key={'langue_' + i} onClick={() => handleTrans(lng.code)}>{lng.native}</Bouton>
-    ));
+    const btnTraduction = lngs
+        .filter(lng => lng.code !== language)
+        .map((lng, i) => (
+            <Bouton key={'langue_' + i} onClick={() => handleTrans(lng.code)}>{lng.native}</Bouton>
+        ));
 
     // Functions to handle login
 
@@ -115,6 +123,8 @@ function App() {
         };
 
         const response = await fetch(`${t("fetch")}utilisateurs/login`, data);
+        // const response = await fetch(`http://localhost:5000/api/utilisateurs/login`, data);
+        // const response = await fetch(`http://localhost:5000/api/utilisateurs/login`, data);
 
         if (response.ok) {
             const token = await response.json();
@@ -148,11 +158,8 @@ function App() {
 
 
     return (
-        <AppContext.Provider value={{ user, logout }}>
+        <AppContext.Provider value={{ user, logout, language, handleTrans}}>
             <Router>
-                <div className='flex justify-end'>
-                    {btnTraduction}
-                </div>
                 <Entete t={t} />
                 <AnimatePresence mode="wait">
                     <Routes>
@@ -260,8 +267,8 @@ function App() {
                         </Route>
 
 
-                        <Route path='/login' element={<Login t={t} user={user} handleLogin={login} />} />
-                        <Route path='/usercreate' element={<UserCreate t={t} />} />
+                    <Route path='/login' element={<Login t={t} user={user} handleLogin={login} handleLogout={logout} />} />
+                    <Route path='/usercreate' element={<UserCreate t={t} />} />
 
                         <Route path="/privilege-create" element={<PrivilegeCreate t={t} />} />
                         <Route path="/privileges" element={<PrivilegeIndex t={t} changeLanguage={handleTrans} />} />

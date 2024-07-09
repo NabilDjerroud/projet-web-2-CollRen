@@ -12,6 +12,8 @@
 
      "btnChoisir": "Choisir",
      
+     "login":"Se Connecter",
+     "logout":"Se Déconnecter",
      "login.titre": "Bienvenue à nouveau!", 
      "login.courriel": "Courriel", 
      "login.mdp": "Mot de passe",
@@ -100,6 +102,8 @@
       "constructeurType_label": "Entrez le type",
       "constructeurIndex_create": "Crèe un nouveau constructeur",
       "selectConstructeur": "Choisir un constructeur",
+
+      "catalog.title":"Catalogue des voitures", 
 
       
       "corpsIndex_titre": "Corps",
