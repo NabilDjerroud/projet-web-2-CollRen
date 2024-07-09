@@ -86,12 +86,11 @@ function BarreRecherche({ t }) {
             const arrayOfElementToSearchIn = [elementCarburant, elementModele, elementMotopropulseur, elementTransmission]
 
             // Enregistrer les objets dans lesquels la recherche à trouver une concordance
-            setArrayResultatRecherche(searchFor(arrayOfElementToSearchIn, termeRecherche, arrayVoitures[i]))
+            ObjetContientRecherche = searchFor(arrayOfElementToSearchIn, termeRecherche, arrayVoitures[i])
         }
-        
 
+        setArrayResultatRecherche(ObjetContientRecherche);
 
-        return;
     };
 
     // Faire apparaître les résultats sous la barre de recherche après l'entré de 2 caratères minimum
@@ -103,7 +102,10 @@ function BarreRecherche({ t }) {
         console.log('undefined')
     }
 
+
+    // 2. À chaque changement de "arrayResultatRecherche" useEffect pour ajuster l'affichage des résultats
     
+
 
     return (
         <div className="form-container">
