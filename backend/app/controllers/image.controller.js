@@ -5,8 +5,8 @@ const Op = db.Sequelize.Op;
 // Créer et enregistrer de nouvelles images
 exports.create = (req, res) => {
     console.log("estou no create image");
-    console.log(req.body);
-    console.log(req.files);
+    console.log("req. body", req.body);
+    console.log("req.files",req.files);
 
     // Mappage des données des fichiers pour les stocker dans la base de données
     const imagesData = req.files.map(file => ({

@@ -125,7 +125,7 @@
       "carburantCreate_titre": "Fuel - create",
       "carburantType_label": "Enter a new type of fuel",
       "carburantIndex_create": "Create a new type of fuel",
-      "fetch": "http://localhost:5001/api/",
+      "fetch": "http://localhost:5000/api/",
        
       "voitureIndex_titre": "Car list",
       "voitureUpdate_titre": "Car - edit",
@@ -158,7 +158,10 @@
       "voitureCreate_corps_label": "Body style",
       "voitureCreate_select_corps": "Select a body style",
       "voitureCreate_carburant_label": "Fuel",
-      "voitureCreate_select_carburant": "Select a fuel"
+      "voitureCreate_select_carburant": "Select a fuel",
+      "voitureUpdate_images_titre": "Images",
+      "btnNonPrincipale": "Main image?",
+      "btnPrincipale": "Not main image?"
   
       
     }
