@@ -68,6 +68,23 @@ function Catalogue({ t, changeLanguage }) {
         setLanguage(storedLanguage);
     }, [changeLanguage]);
 
+    useEffect(() => {
+        const fetchVoitures = async () => {
+            try {
+                const response = await fetch("http://localhost:5000/api/voitures");
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                setVoitures(data);
+            } catch (error) {
+                console.error('Error fetching voitures:', error);
+            }
+        };
+
+        fetchVoitures();
+    }, []);
+
     return (
         <div className="flex flex-wrap gap-4">
             {voitures.map(voiture => (
