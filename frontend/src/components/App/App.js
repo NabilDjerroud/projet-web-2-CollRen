@@ -53,7 +53,10 @@ const lngs = [
     { code: "fr", native: "FR" },
 ];
 
+
+
 function App() {
+    const [language, setLanguage] = useState('en');
     const { t, i18n } = useTranslation();
     const [user, setUser] = useState({ isLogged: false, usager: {} });
 
@@ -88,13 +91,16 @@ function App() {
 
     const handleTrans = (code) => {
         i18n.changeLanguage(code);
+        setLanguage(code);
         localStorage.setItem('langueChoisie', code);
         sessionStorage.setItem('langueChoisie', code);
     };
 
-    const btnTraduction = lngs.map((lng, i) => (
-        <Bouton key={'langue_' + i} onClick={() => handleTrans(lng.code)}>{lng.native}</Bouton>
-    ));
+    const btnTraduction = lngs
+        .filter(lng => lng.code !== language)
+        .map((lng, i) => (
+            <Bouton key={'langue_' + i} onClick={() => handleTrans(lng.code)}>{lng.native}</Bouton>
+        ));
 
     // Functions to handle login
 
@@ -152,11 +158,8 @@ function App() {
 
 
     return (
-        <AppContext.Provider value={{ user, logout }}>
+        <AppContext.Provider value={{ user, logout, language, handleTrans}}>
             <Router>
-                <div className='flex justify-end'>
-                    {btnTraduction}
-                </div>
                 <Entete t={t} />
                 <AnimatePresence mode="wait">
                     <Routes>

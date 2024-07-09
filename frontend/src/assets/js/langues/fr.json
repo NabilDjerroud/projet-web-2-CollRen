@@ -12,6 +12,8 @@
 
      "btnChoisir": "Choisir",
      
+     "login":"Se Connecter",
+     "logout":"Se Déconnecter",
      "login.titre": "Bienvenue à nouveau!", 
      "login.courriel": "Courriel", 
      "login.mdp": "Mot de passe",

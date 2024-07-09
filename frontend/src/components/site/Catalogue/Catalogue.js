@@ -71,7 +71,7 @@ function Catalogue({ t, changeLanguage }) {
     useEffect(() => {
         const fetchVoitures = async () => {
             try {
-                const response = await fetch("http://localhost:5000/api/voitures");
+                const response = await fetch(`${t("fetch")}voitures`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
