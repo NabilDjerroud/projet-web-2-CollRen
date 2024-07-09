@@ -4,7 +4,8 @@ module.exports = {
     // PASSWORD: "root",
     // DB: "bobazou",
 
-    PORT: 3308,
+    // PORT: 3308,
+    PORT: 3306,
     PASSWORD: "",
     DB: "vehiculeoccasion",
 
