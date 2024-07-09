@@ -23,7 +23,7 @@ exports.findAll = (req, res) => {
     const title = req.query.title;
     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
-    Ville.findAll({ where: condition })
+    Ville.findAll({ include: [{ model: db.provinces }] })
         .then(data => {
             res.send(data);
         })
