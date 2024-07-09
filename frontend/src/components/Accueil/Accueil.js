@@ -3,7 +3,12 @@ import Footer from "../partials/Footer/Footer";
 import "./Accueil.css";
 import BarreRecherche from "../site/BarreRecherche/BarreRecherche";
 
+
+
+
 function Accueil({ t }) {
+    const language = localStorage.getItem('langueChoisie') || 'en';
+
     return (
         <div className="accueil-container">
             <div className="main-content">
@@ -26,7 +31,7 @@ function Accueil({ t }) {
 
                         {/* Insertion de la barre de recherche ici */}
 
-                        <BarreRecherche t={t} />
+                        <BarreRecherche t={t} language={language} />
 
 
                         <h2 className="text-3xl font-bold text-center text-gray-800">Vos préférences pour le véhicule ?</h2>

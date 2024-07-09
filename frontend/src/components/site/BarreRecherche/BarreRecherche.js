@@ -3,11 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import Bouton from '../../partialsFormulaire/Bouton/Bouton';
 import ChampText from '../../partialsFormulaire/ChampText/ChampText.js';
-import './Recherche.css'
+import './Recherche.css';
+import AfficherResultats from './AfficheResultat.js';
 
-function BarreRecherche({ t }) {
+function BarreRecherche(props) {
+    let t = props.t;
+    let language = props.language;
     let results = []
     let arrayVoitures = [];
+    let affichage;
+    
 
     const [arrayResultatRecherche, setArrayResultatRecherche] = useState([]);
 
@@ -98,12 +103,26 @@ function BarreRecherche({ t }) {
     // 1. Vérification: est-ce le résultat attendu ? --> oui à date
     if (arrayResultatRecherche !== undefined) {
         console.log(arrayResultatRecherche)
+
+        affichage = <AfficherResultats t={t} voitures={arrayResultatRecherche} language={language} ></AfficherResultats>
+
+        
     } else {
         console.log('undefined')
     }
 
+    // 2. Créer le html de l'affichage des résultats
 
-    // 2. À chaque changement de "arrayResultatRecherche" useEffect pour ajuster l'affichage des résultats
+
+    // 3. À chaque changement de "arrayResultatRecherche" useEffect pour ajuster l'affichage des résultats
+
+    useEffect(() => {
+      console.log('first')
+    
+      return () => {
+    console.log('return')
+      }
+    }, [arrayResultatRecherche])
     
 
 
@@ -116,6 +135,7 @@ function BarreRecherche({ t }) {
                     <Bouton type="submit">{t("barreRecheche.titre")}</Bouton>
                 </div>
             </form>
+            {affichage? affichage : ''}
         </div>
     );
 }
