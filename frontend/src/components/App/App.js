@@ -114,8 +114,7 @@ function App() {
             body: JSON.stringify(body)
         };
 
-        // const response = await fetch(`${t("fetch")}utilisateurs/login`, data);
-        const response = await fetch(`http://localhost:5000/api/utilisateurs/login`, data);
+        const response = await fetch(`${t("fetch")}utilisateurs/login`, data);
 
         if (response.ok) {
             const token = await response.json();
@@ -156,124 +155,124 @@ function App() {
                 </div>
                 <Entete t={t} />
                 <AnimatePresence mode="wait">
-                <Routes>
-                    <Route path='/' element={<Accueil t={t} />} />
-                    <Route path='/apropos' element={<APropos t={t} />} />
+                    <Routes>
+                        <Route path='/' element={<Accueil t={t} />} />
+                        <Route path='/apropos' element={<APropos t={t} />} />
 
-                    <Route path='/admin' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/admin' element={<DashboardAdmin t={t} />} />
-                    </Route>
+                        <Route path='/admin' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/admin' element={<DashboardAdmin t={t} />} />
+                        </Route>
 
-                    <Route path='/model' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/model' element={<ModeleIndex t={t} />} />
-                    </Route>
-                    <Route path='/model-edit' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/model-edit/:id' element={<ModeleUpdate t={t} />} />
-                    </Route>
+                        <Route path='/model' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/model' element={<ModeleIndex t={t} />} />
+                        </Route>
+                        <Route path='/model-edit' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/model-edit/:id' element={<ModeleUpdate t={t} />} />
+                        </Route>
 
-                    <Route path='/model-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/model-create' element={<ModeleCreate t={t} />} />
-                    </Route>
-                    <Route path='/constructeur' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/constructeur' element={<ConstructeurIndex t={t} />} />
-                    </Route>
+                        <Route path='/model-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/model-create' element={<ModeleCreate t={t} />} />
+                        </Route>
+                        <Route path='/constructeur' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/constructeur' element={<ConstructeurIndex t={t} />} />
+                        </Route>
 
-                    <Route path='/constructeur-edit/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/constructeur-edit/:id' element={<ConstructeurUpdate t={t} />} />
-                    </Route>
+                        <Route path='/constructeur-edit/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/constructeur-edit/:id' element={<ConstructeurUpdate t={t} />} />
+                        </Route>
 
-                    <Route path='/constructeur-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/constructeur-create' element={<ConstructeurCreate t={t} />} />
-                    </Route>
+                        <Route path='/constructeur-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/constructeur-create' element={<ConstructeurCreate t={t} />} />
+                        </Route>
 
-                    <Route path='/corps' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/corps' element={<CorpsIndex t={t} changeLanguage={handleTrans} />} />
-                    </Route>
+                        <Route path='/corps' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/corps' element={<CorpsIndex t={t} changeLanguage={handleTrans} />} />
+                        </Route>
 
-                    <Route path='/corps-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/corps-create' element={<CorpsCreate t={t} changeLanguage={handleTrans} />} />
-                    </Route>
+                        <Route path='/corps-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/corps-create' element={<CorpsCreate t={t} changeLanguage={handleTrans} />} />
+                        </Route>
 
-                    <Route path='/corps-update/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/corps-update/:id' element={<CorpsUpdate t={t} />} />
-                    </Route>
+                        <Route path='/corps-update/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/corps-update/:id' element={<CorpsUpdate t={t} />} />
+                        </Route>
 
-                    <Route path='/transmission' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/transmission' element={<TransmissionIndex t={t} changeLanguage={handleTrans} />} />
-                    </Route>
+                        <Route path='/transmission' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/transmission' element={<TransmissionIndex t={t} changeLanguage={handleTrans} />} />
+                        </Route>
 
-                    <Route path='/transmission-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/transmission-create' element={<TransmissionCreate t={t} changeLanguage={handleTrans} />} />
-                    </Route>
+                        <Route path='/transmission-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/transmission-create' element={<TransmissionCreate t={t} changeLanguage={handleTrans} />} />
+                        </Route>
 
-                    <Route path='/transmission-update/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/transmission-update/:id' element={<TransmissionUpdate t={t} />} />
-                    </Route>
+                        <Route path='/transmission-update/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/transmission-update/:id' element={<TransmissionUpdate t={t} />} />
+                        </Route>
 
-                    <Route path='/motopropulseur' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/motopropulseur' element={<MotopropulseurIndex t={t} changeLanguage={handleTrans} />} />
-                    </Route>
+                        <Route path='/motopropulseur' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/motopropulseur' element={<MotopropulseurIndex t={t} changeLanguage={handleTrans} />} />
+                        </Route>
 
-                    <Route path='/motopropulseur-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/motopropulseur-create' element={<MotopropulseurCreate t={t} changeLanguage={handleTrans} />} />
-                    </Route>
+                        <Route path='/motopropulseur-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/motopropulseur-create' element={<MotopropulseurCreate t={t} changeLanguage={handleTrans} />} />
+                        </Route>
 
-                    <Route path='/motopropulseur-update/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/motopropulseur-update/:id' element={<MotopropulseurUpdate t={t} />} />
-                    </Route>
+                        <Route path='/motopropulseur-update/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/motopropulseur-update/:id' element={<MotopropulseurUpdate t={t} />} />
+                        </Route>
 
-                    <Route path='/carburant' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/carburant' element={<CarburantIndex t={t} changeLanguage={handleTrans} />} />
-                    </Route>
+                        <Route path='/carburant' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/carburant' element={<CarburantIndex t={t} changeLanguage={handleTrans} />} />
+                        </Route>
 
-                    <Route path='/carburant-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/carburant-create' element={<CarburantCreate t={t} changeLanguage={handleTrans} />} />
-                    </Route>
+                        <Route path='/carburant-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/carburant-create' element={<CarburantCreate t={t} changeLanguage={handleTrans} />} />
+                        </Route>
 
-                    <Route path='/carburant-update/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/carburant-update/:id' element={<CarburantUpdate t={t} />} />
-                    </Route>
+                        <Route path='/carburant-update/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/carburant-update/:id' element={<CarburantUpdate t={t} />} />
+                        </Route>
 
-                    <Route path='/voitures' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/voitures' element={<VoituresIndex t={t} changeLanguage={handleTrans} />} />
-                    </Route>
+                        <Route path='/voitures' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/voitures' element={<VoituresIndex t={t} changeLanguage={handleTrans} />} />
+                        </Route>
 
-                    <Route path='/voiture-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/voiture-create' element={<VoituresCreate t={t} changeLanguage={handleTrans} />} />
-                    </Route>
+                        <Route path='/voiture-create' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/voiture-create' element={<VoituresCreate t={t} changeLanguage={handleTrans} />} />
+                        </Route>
 
-                    <Route path='/voiture-update/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/voiture-update/:id' element={<VoituresUpdate t={t} changeLanguage={handleTrans} />} />
-                    </Route>
-                    
-
-
-                    <Route path='/client' element={<PrivateRoute requiredPrivilege={[1, 2, 3]} />}>
-                        <Route index element={<DashboardClient t={t} />} />
-                    </Route>
-
-                    <Route path='/user' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path='/user' element={<UserIndex t={t} />} />
-                    </Route>
-
-                    <Route path='/user/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
-                        <Route path="/user/:id" element={<UserShow t={t} />} />
-                    </Route>
+                        <Route path='/voiture-update/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/voiture-update/:id' element={<VoituresUpdate t={t} changeLanguage={handleTrans} />} />
+                        </Route>
 
 
-                    <Route path='/login' element={<Login t={t} user={user} handleLogin={login} />} />
-                    <Route path='/usercreate' element={<UserCreate t={t} />} />
 
-                    <Route path="/privilege-create" element={<PrivilegeCreate t={t} />} />
-                    <Route path="/privileges" element={<PrivilegeIndex t={t} changeLanguage={handleTrans} />} />
-                    <Route path="/privilege-edit/:id" element={<PrivilegeEdit t={t} changeLanguage={handleTrans} />} />
+                        <Route path='/client' element={<PrivateRoute requiredPrivilege={[1, 2, 3]} />}>
+                            <Route index element={<DashboardClient t={t} />} />
+                        </Route>
 
-                    <Route path='/politique' element={<Politique t={t} />} />
-                    <Route path='/contact' element={<Contact t={t} />} />
+                        <Route path='/user' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path='/user' element={<UserIndex t={t} />} />
+                        </Route>
 
-                    <Route path='/catalogue' element={<Catalogue t={t} />} />
+                        <Route path='/user/:id' element={<PrivateRoute requiredPrivilege={[1, 2]} />}>
+                            <Route path="/user/:id" element={<UserShow t={t} />} />
+                        </Route>
 
-                </Routes>
+
+                        <Route path='/login' element={<Login t={t} user={user} handleLogin={login} />} />
+                        <Route path='/usercreate' element={<UserCreate t={t} />} />
+
+                        <Route path="/privilege-create" element={<PrivilegeCreate t={t} />} />
+                        <Route path="/privileges" element={<PrivilegeIndex t={t} changeLanguage={handleTrans} />} />
+                        <Route path="/privilege-edit/:id" element={<PrivilegeEdit t={t} changeLanguage={handleTrans} />} />
+
+                        <Route path='/politique' element={<Politique t={t} />} />
+                        <Route path='/contact' element={<Contact t={t} />} />
+
+                        <Route path='/catalogue' element={<Catalogue t={t} />} />
+
+                    </Routes>
                 </AnimatePresence>
                 <Footer t={t} />
             </Router>

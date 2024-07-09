@@ -9,6 +9,8 @@
      "btnEditer": "Éditer",
      "btnDeleter": "Éffacer",
      "btnSubmit": "Soumettre",
+
+     "btnChoisir": "Choisir",
      
      "login.titre": "Bienvenue à nouveau!", 
      "login.courriel": "Courriel", 

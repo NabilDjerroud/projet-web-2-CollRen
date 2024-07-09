@@ -69,7 +69,7 @@ function VoitureIndex({ t, changeLanguage }) {
     const fetchImagesForVoitures = async (voitures) => {
         try {
             const fetchImagePromises = voitures.map(async (voiture) => {
-                const response = await fetch(`http://localhost:5000/api/images?voiture_id=${voiture.id}`);
+                const response = await fetch(`${t("fetch")}images?voiture_id=${voiture.id}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -125,13 +125,13 @@ function VoitureIndex({ t, changeLanguage }) {
                         <tr>
                             <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">Date</th>
                             <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">Description</th>
-                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Prix" )}</th>
-                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Modele" )}</th>
-                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Constructeur" )}</th>
-                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Transmission" )}</th>
-                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Motopropulseur" )}</th>
-                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Carburant" )}</th>
-                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Corps" )}</th>
+                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Prix")}</th>
+                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Modele")}</th>
+                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Constructeur")}</th>
+                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Transmission")}</th>
+                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Motopropulseur")}</th>
+                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Carburant")}</th>
+                            <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">{t("voituretableau_Corps")}</th>
                             <th className="px-6 py-3 text-left text-xs font-large text-gray-500 uppercase tracking-wider">Action</th>
                         </tr>
                     </thead>

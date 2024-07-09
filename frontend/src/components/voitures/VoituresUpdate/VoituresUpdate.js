@@ -63,9 +63,9 @@ function VoitureUpdate({ t }) {
             try {
                 const [modelesRes, transmissionsRes, motopropulseursRes, carburantsRes, corpsRes] = await Promise.all([
                     fetch(`${t("fetch")}modeles`),
-                    fetch(`${ t("fetch") }transmissions`),
+                    fetch(`${t("fetch")}transmissions`),
                     fetch(`${t("fetch")}motopropulseurs`),
-                    fetch(`${ t("fetch") }carburants`),
+                    fetch(`${t("fetch")}carburants`),
                     fetch(`${t("fetch")}corps`)
                 ]);
 
@@ -120,7 +120,7 @@ function VoitureUpdate({ t }) {
 
         const fetchImages = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/images?voiture_id=${id}`);
+                const response = await fetch(`${t("fetch")}images?voiture_id=${id}`);
                 if (!response.ok) {
                     throw new Error(`Erreur HTTP ! statut : ${response.status}`);
                 }
@@ -139,7 +139,7 @@ function VoitureUpdate({ t }) {
 
     const handleDeleteImage = async (imageId) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/images/${imageId}`, {
+            const response = await fetch(`${t("fetch")}images/${imageId}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {
@@ -158,7 +158,7 @@ function VoitureUpdate({ t }) {
 
     const handleSetEstPrincipale = async (imageId, newEstPrincipale) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/images/${imageId}/est_principale`, {
+            const response = await fetch(`${t("fetch")}images/${imageId}/est_principale`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
