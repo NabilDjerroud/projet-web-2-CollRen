@@ -270,7 +270,7 @@ function App() {
                         <Route path='/politique' element={<Politique t={t} />} />
                         <Route path='/contact' element={<Contact t={t} />} />
 
-                        <Route path='/catalogue' element={<Catalogue t={t} />} />
+                        <Route path='/catalogue' element={<Catalogue t={t} changeLanguage={handleTrans}/>} />
 
                     </Routes>
                 </AnimatePresence>
