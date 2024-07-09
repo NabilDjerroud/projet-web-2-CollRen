@@ -1,20 +1,25 @@
 import React from 'react';
 
-// const Tuile = ({ image, manufacturer, model, price, fuelType, transmission }) => {
+function Tuile({ voiture, language }) {
+    const principaleImage = voiture.images.find(image => image.est_principale === 1 && image.voiture_id === voiture.id);
 
-    function Tuile(){
-
-    
     return (
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
-            <img className="w-full h-48 object-cover" src="" alt='' />
+        <div className="border border-gray-300 rounded-lg overflow-hidden w-72 bg-white shadow-md">
+            {principaleImage && (
+                <img 
+                    src={`/imgs/${principaleImage.chemin}`} 
+                    alt={voiture.description[language]} 
+                    className="w-full h-48 object-cover"
+                />
+            )}
             <div className="p-4">
-                <h2 className="text-xl font-bold">Mazda 3</h2>
-                <p className="text-gray-700">Prix: 9000$</p>
-                <div className="mt-2">
-                    <p className="text-gray-500">Essence</p>
-                    <p className="text-gray-500">Automatique</p>
-                </div>
+                <h2 className="text-xl font-bold text-gray-900">{voiture.modele.type}</h2>
+                <p className="text-gray-700">{voiture.description[language]}</p>
+                <p className="text-gray-700">{voiture.prix}</p>
+                <p className="text-gray-700">{voiture.transmission.type[language]}</p>
+                <p className="text-gray-700">{voiture.motopropulseur.type[language]}</p>
+                <p className="text-gray-700">{voiture.carburant.type[language]}</p>
+                <p className="text-gray-700">{voiture.corp.type[language]}</p>
             </div>
         </div>
     );
